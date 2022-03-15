@@ -1,38 +1,28 @@
 import "./styles/main.scss";
-import { Component, StrictMode } from "react";
+import { StrictMode } from "react";
 import ReactDom from "react-dom";
-import style from "./styles/main.module.css";
+import "./styles/main.module.css";
+import Header from "src/components/header/header";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Products from "./components/products";
+import About from "./components/about";
+import Home from "./components/home";
+import pageLinks from "./routesLinks";
 
-interface AppProps {
-  nothing: boolean;
+function AppContainer() {
+  return (
+    <StrictMode>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path={pageLinks.home} element={<Home />} />
+          <Route path={pageLinks.products} element={<Products />} />
+          <Route path={pageLinks.about} element={<About />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </StrictMode>
+  );
 }
 
-interface AppState {
-  title: string;
-}
-
-class AppContainer extends Component<AppProps, AppState> {
-  ["constructor"]: typeof AppContainer;
-
-  constructor(props: AppProps) {
-    super(props);
-    // test class-dead-code
-    const goExlcude = true;
-    if (!goExlcude) {
-      console.warn("class-dead-code doesn't work");
-    }
-  }
-
-  render() {
-    return (
-      <StrictMode>
-        <div className="test-block" />
-        <div className={["test-block", style.background].join(" ")}>
-          <h2>Hello world</h2>
-        </div>
-      </StrictMode>
-    );
-  }
-}
-
-ReactDom.render(<AppContainer nothing={false} />, document.getElementById("app"));
+ReactDom.render(<AppContainer />, document.getElementById("app"));

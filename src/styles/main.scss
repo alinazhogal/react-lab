@@ -3,29 +3,14 @@
 @import "fontface";
 
 body {
-  color: $basicColor;
+  background-color: $background;
   font-family: "OpenSans-Regular", sans-serif;
+  padding: 0;
+  margin: 0;
+  color: #fff;
 }
 
 h2 {
-  font-size: 50px;
-  display: block;
-  background-color: white;
-}
-
-::placeholder {
-  /*test for autoprefixer in postcss*/
-  color: antiquewhite;
-}
-
-.test-block {
-  border: 4px dotted black;
-  /* stylelint-disable-next-line plugin/no-unsupported-browser-features*/
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.test-block + .test-block {
-  margin-top: 20px;
+  width: 100%;
+  text-align: center;
 }
