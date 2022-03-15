@@ -1,5 +1,4 @@
 import "./styles/main.scss";
-import imgCamera from "images/camera.svg";
 import { Component, StrictMode } from "react";
 import ReactDom from "react-dom";
 import style from "./styles/main.module.css";
@@ -30,13 +29,6 @@ class AppContainer extends Component<AppProps, AppState> {
         <div className="test-block" />
         <div className={["test-block", style.background].join(" ")}>
           <h2>Hello world</h2>
-        </div>
-        {/*  or it can be
-          <img src='/src/images/testSmall.png' alt="smallImage"></img>
-        */}
-        <div className={["test-block", style.svgBackground].join(" ")}>
-          <h2>Test-block for assets-module (svg-url-loader)</h2>
-          <img src={imgCamera} alt="small_SVG_Image" />
         </div>
       </StrictMode>
     );
