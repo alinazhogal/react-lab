@@ -11,9 +11,11 @@ header {
     align-items: center;
     width: 1040px;
 
-    span {
+    .logo {
       font-weight: 800;
       font-size: 20px;
+      text-decoration: none;
+      color: #fff;
     }
 
     ul {
@@ -40,5 +42,23 @@ header {
         border-bottom: 2px solid $accent-color;
       }
     }
+    @media screen and (max-width: 620px) {
+      .logo {
+        font-size: 16px;
+      }
+
+      ul {
+        width: 220px;
+      }
+    }
+  }
+
+  hr {
+    height: 1px;
+    background-color: #3d3c49;
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    border: none;
   }
 }
