@@ -4,6 +4,7 @@ header {
   display: flex;
   justify-content: center;
   height: 80px;
+  border-bottom: 1px solid #3d3c49;
 
   .header-container {
     display: flex;
@@ -51,14 +52,5 @@ header {
         width: 220px;
       }
     }
-  }
-
-  hr {
-    height: 1px;
-    background-color: #3d3c49;
-    position: absolute;
-    top: 80px;
-    width: 100%;
-    border: none;
   }
 }

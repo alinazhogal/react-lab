@@ -12,7 +12,6 @@ function Header() {
         </NavLink>
         <NavBar />
       </div>
-      <hr />
     </header>
   );
 }
