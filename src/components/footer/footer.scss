@@ -1,0 +1,26 @@
+footer {
+  width: 100%;
+  padding: 0 18px;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  background-color: #343334;
+
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1040px;
+
+    .games-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 400px;
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}

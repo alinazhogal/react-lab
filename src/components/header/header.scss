@@ -13,6 +13,7 @@ header {
 
     span {
       font-weight: 800;
+      font-size: 20px;
     }
 
     ul {
@@ -20,8 +21,24 @@ header {
       margin: 0;
       list-style-type: none;
       display: flex;
-      width: 200px;
+      width: 300px;
       justify-content: space-between;
+
+      a {
+        text-decoration: none;
+        color: #fff;
+        border-bottom: 2px solid transparent;
+
+        &:hover {
+          color: $accent-color;
+          transition: 300ms ease-out;
+        }
+      }
+
+      .active-link {
+        transition: none;
+        border-bottom: 2px solid $accent-color;
+      }
     }
   }
 }

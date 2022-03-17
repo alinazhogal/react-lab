@@ -1,17 +1,25 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import pageLinks from "../../routesLinks";
 
 function NavBar() {
   return (
     <ul className="navbar">
       <li>
-        <Link to={pageLinks.home}>Home</Link>
+        <NavLink to={pageLinks.home} className={({ isActive }) => (isActive ? "active-link" : "")}>
+          {" "}
+          Home
+        </NavLink>
       </li>
       <li>
-        <Link to={pageLinks.products}>Products</Link>
+        <NavLink to={pageLinks.products} className={({ isActive }) => (isActive ? "active-link" : "")}>
+          Products
+        </NavLink>
       </li>
       <li>
-        <Link to={pageLinks.about}> About</Link>
+        <NavLink to={pageLinks.about} className={({ isActive }) => (isActive ? "active-link" : "")}>
+          {" "}
+          About
+        </NavLink>
       </li>
     </ul>
   );
