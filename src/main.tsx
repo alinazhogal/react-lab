@@ -22,13 +22,22 @@ class MainApp extends Component<unknown, { hasError: boolean }> {
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error(error, info);
+  }
 
-    alert("Error occured. You'll be redirected to home page");
+  redirect() {
     window.location.assign("/home");
   }
 
   render() {
-    if (this.state.hasError) return <h4>Redirecting to home page...</h4>;
+    if (this.state.hasError)
+      return (
+        <div className="error">
+          <h3>Something went wrong</h3>
+          <button type="button" onClick={this.redirect}>
+            Return to home page
+          </button>
+        </div>
+      );
     return (
       <StrictMode>
         <BrowserRouter>
