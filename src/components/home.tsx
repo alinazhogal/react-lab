@@ -1,4 +1,12 @@
+import Categories from "./categories/categories";
+import Games from "./games/games";
+
 function Home() {
-  return <h2>Home Page</h2>;
+  return (
+    <>
+      <Categories />
+      <Games />
+    </>
+  );
 }
 export default Home;

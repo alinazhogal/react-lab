@@ -2,13 +2,13 @@ import { Component, StrictMode, ErrorInfo } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./styles/main.scss";
-import "./styles/main.module.css";
 import Header from "src/components/header/header";
 import Products from "./components/products/products";
 import About from "./components/about";
 import Home from "./components/home";
 import pageLinks from "./routesLinks";
 import Footer from "./components/footer/footer";
+import Button from "./elements/button";
 
 class MainApp extends Component<unknown, { hasError: boolean }> {
   constructor(props: unknown) {
@@ -33,9 +33,7 @@ class MainApp extends Component<unknown, { hasError: boolean }> {
       return (
         <div className="error">
           <h3>Something went wrong</h3>
-          <button type="button" onClick={this.redirect}>
-            Return to home page
-          </button>
+          <Button onClick={this.redirect} title="Return to home page" />
         </div>
       );
     return (

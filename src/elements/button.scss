@@ -1,0 +1,13 @@
+button {
+  padding: 12px 24px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: $accent-color;
+  color: white;
+  transition: 300ms ease-out;
+
+  &:hover {
+    background-color: #cb31a7;
+  }
+}
