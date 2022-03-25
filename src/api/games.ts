@@ -10,13 +10,20 @@ export interface Game {
   date: string;
 }
 
-export async function getGames(): Promise<Game[]> {
+export async function getTopGames(): Promise<Game[]> {
   const response = await api.get<Game[]>("/api/getTopProducts");
-  return response.data.sort((a, b) => {
-    if (a.date < b.date) return 1;
-    if (a.date > b.date) return -1;
-    return 0;
-  });
+  return response.data
+    .sort((a, b) => {
+      if (a.date < b.date) return 1;
+      if (a.date > b.date) return -1;
+      return 0;
+    })
+    .slice(0, 3);
+}
+
+export async function getSearchedGames(searchReq: string): Promise<Game[]> {
+  const response = await api.get<Game[]>(`/api/search/${searchReq}`);
+  return response.data;
 }
 
 export function getGamesResponse(helper: MockServerHelper) {
@@ -48,6 +55,25 @@ export function getGamesResponse(helper: MockServerHelper) {
         "In Minecraft, players explore a blocky, procedurally generated 3D world with virtually infinite terrain, and may discover and extract raw materials, craft tools and items, and build structures, earthworks and simple machines. Depending on game mode, players can fight computer-controlled mobs, as well as cooperate with or compete against other players in the same world.",
       price: 19,
       date: "2019-07-05",
+    },
+    {
+      id: helper.getUniqueIdInt(),
+      name: "Dota",
+      image:
+        "https://upload.wikimedia.org/wikipedia/ru/thumb/8/8e/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_Dota_2.jpg/266px-%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_Dota_2.jpg",
+      description:
+        "In Minecraft, players explore a blocky, procedurally generated 3D world with virtually infinite terrain, and may discover and extract raw materials, craft tools and items, and build structures, earthworks and simple machines. Depending on game mode, players can fight computer-controlled mobs, as well as cooperate with or compete against other players in the same world.",
+      price: 30,
+      date: "2016-07-05",
+    },
+    {
+      id: helper.getUniqueIdInt(),
+      name: "World of Warcraft",
+      image: "https://dic.academic.ru/pictures/wiki/files/119/world_of_warcraft_cover.jpg",
+      description:
+        "In Minecraft, players explore a blocky, procedurally generated 3D world with virtually infinite terrain, and may discover and extract raw materials, craft tools and items, and build structures, earthworks and simple machines. Depending on game mode, players can fight computer-controlled mobs, as well as cooperate with or compete against other players in the same world.",
+      price: 16,
+      date: "2018-07-05",
     },
   ];
 }

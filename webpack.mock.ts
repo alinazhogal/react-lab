@@ -17,6 +17,10 @@ export default webpackMockServer.add((app, helper) => {
     res.json(getGamesResponse(helper));
   });
 
+  app.get("/api/search/:text", ({ params: { text } }, res) => {
+    res.json(getGamesResponse(helper).filter((game) => game.name.toLowerCase().includes(text.toLowerCase())));
+  });
+
   app.post("/testPostMock", (req, res) => {
     res.json({ body: req.body || null, success: true });
   });

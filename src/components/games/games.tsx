@@ -22,7 +22,7 @@ function Games({ games }: Props) {
       <div className="section-container">
         <h2>Games</h2>
         <div className="games" />
-        {gamesArr}
+        {gamesArr.length ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}
       </div>
     </section>
   );
