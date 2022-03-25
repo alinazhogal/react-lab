@@ -1,14 +1,17 @@
 import "./search.scss";
+import searchIcon from "../assets/images/search.svg";
 
 interface Props {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  loading: boolean;
 }
 
-function Search({ value, onChange }: Props) {
+function Search({ value, onChange, loading }: Props) {
   return (
     <div className="search-div">
-      <img src="" alt="" />
+      {!loading && <img src={searchIcon} alt="" />}
+      {loading && <div className="lds-dual-ring" />}
       <input type="search" placeholder="Search..." className="search" value={value} onChange={onChange} />
     </div>
   );

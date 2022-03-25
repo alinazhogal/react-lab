@@ -7,12 +7,14 @@ import Games from "./games/games";
 
 function Home() {
   const [inputValue, setInputValue] = useState<string>("");
-
+  const [loading, setLoading] = useState<boolean>(false);
   const [games, setGames] = useState<Game[]>([]);
 
   const fetchData = async (value?: string) => {
+    setLoading(true);
     const data = !value ? await getTopGames() : await getSearchedGames(value);
     setGames(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -26,7 +28,7 @@ function Home() {
 
   return (
     <>
-      <Search value={inputValue} onChange={(e) => handleChange(e)} />
+      <Search value={inputValue} onChange={(e) => handleChange(e)} loading={loading} />
       <Categories />
       <Games games={games} />
     </>

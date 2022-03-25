@@ -10,6 +10,11 @@ export interface Game {
   date: string;
 }
 
+function wait(milliseconds = 300) {
+  // eslint-disable-next-line no-promise-executor-return
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
 export async function getTopGames(): Promise<Game[]> {
   const response = await api.get<Game[]>("/api/getTopProducts");
   return response.data
@@ -23,6 +28,7 @@ export async function getTopGames(): Promise<Game[]> {
 
 export async function getSearchedGames(searchReq: string): Promise<Game[]> {
   const response = await api.get<Game[]>(`/api/search/${searchReq}`);
+  await wait(300);
   return response.data;
 }
 

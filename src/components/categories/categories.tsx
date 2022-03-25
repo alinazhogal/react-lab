@@ -11,7 +11,7 @@ function Categories() {
         <h2>Categories</h2>
         <div className="categories">
           <CategoryCard title="PC" img={desktop} link={`${pageLinks.products}/pc`} />
-          <CategoryCard title="Playstation 5" img={playstation} link={`${pageLinks.products}/plaustation`} />
+          <CategoryCard title="Playstation 5" img={playstation} link={`${pageLinks.products}/playstation`} />
           <CategoryCard title="Xbox One" img={xbox} link={`${pageLinks.products}/xbox`} />
         </div>
       </div>

@@ -1,13 +1,52 @@
 .search-div {
   width: 800px;
   margin: 40px auto 0;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+  }
+
+  .lds-dual-ring {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+  }
+
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+    border: 2px solid #fff;
+    border-color: $basicColor transparent $basicColor transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
   input {
     width: 800px;
     height: 40px;
     border-radius: 10px;
     border: none;
-    padding: 0 12px;
+    padding: 0 12px 0 44px;
     font-weight: 600;
 
     &:focus {
