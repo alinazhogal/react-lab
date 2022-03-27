@@ -1,9 +1,10 @@
-import { getTopGames, getSearchedGames, Game } from "@/api/games";
+import { getTopGames, getSearchedGames } from "@/api/games";
 import Search from "@/elements/search";
 import { useEffect, useState } from "react";
 import debounce from "../helpers/debounce";
 import Categories from "./categories/categories";
 import Games from "./games/games";
+import { Game } from "./games/games.types";
 
 function Home() {
   const [inputValue, setInputValue] = useState<string>("");
@@ -30,7 +31,7 @@ function Home() {
     <>
       <Search value={inputValue} onChange={(e) => handleChange(e)} loading={loading} />
       <Categories />
-      <Games games={games} />
+      <Games games={games} loading={loading} />
     </>
   );
 }

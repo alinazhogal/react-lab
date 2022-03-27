@@ -1,53 +1,87 @@
-.game-card {
-  display: flex;
-  width: 900px;
-  height: 300px;
-  margin: 40px auto;
-  background-color: $basicColor;
-  border-radius: 20px;
-  align-items: center;
+a {
+  text-decoration: none;
+  color: #fff;
 
-  .game-img {
+  .game-card {
+    display: flex;
+    width: 900px;
     height: 300px;
-    width: 200px;
-    border-radius: 20px 0 0 20px;
-    object-fit: cover;
+    margin: 40px auto;
+    background-color: $basicColor;
+    border-radius: 20px;
+    align-items: center;
+
+    .game-img {
+      height: 300px;
+      width: 200px;
+      border-radius: 20px 0 0 20px;
+      object-fit: cover;
+    }
+
+    .game-info {
+      margin-left: 40px;
+
+      .main-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        h3 {
+          font-size: 22px;
+        }
+
+        .platform img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      p {
+        font-size: 14px;
+        width: 600px;
+        margin-bottom: 20px;
+      }
+
+      .price-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h4 {
+          font-size: 26px;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}
+
+section {
+  .lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
   }
 
-  .game-info {
-    margin-left: 40px;
-
-    .main-info {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-
-      h3 {
-        font-size: 22px;
-      }
-
-      .platform img {
-        width: 24px;
-        height: 24px;
-      }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
     }
 
-    p {
-      font-size: 14px;
-      width: 600px;
-      margin-bottom: 20px;
-    }
-
-    .price-info {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      h4 {
-        font-size: 26px;
-        font-weight: normal;
-      }
+    100% {
+      transform: rotate(360deg);
     }
   }
 }

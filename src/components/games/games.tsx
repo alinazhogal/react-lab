@@ -1,11 +1,12 @@
-import { Game } from "../../api/games";
+import { Game } from "./games.types";
 import GameCard from "./gameCard";
 
-interface Props {
+interface GamesProps {
   games: Game[];
+  loading: boolean;
 }
 
-function Games({ games }: Props) {
+function Games({ games, loading }: GamesProps) {
   const gamesArr = games.map((game) => (
     <GameCard
       key={game.id}
@@ -15,14 +16,19 @@ function Games({ games }: Props) {
       description={game.description}
       price={game.price}
       date={game.date}
+      link={game.link}
     />
   ));
   return (
     <section>
       <div className="section-container">
         <h2>Games</h2>
-        <div className="games" />
-        {gamesArr.length ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}
+        {loading && <div className="lds-dual-ring" />}
+        {!loading && (
+          <div className="games">
+            {gamesArr.length ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}{" "}
+          </div>
+        )}
       </div>
     </section>
   );

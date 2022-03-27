@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom";
 import "./categories.scss";
 
-interface Category {
+interface CategoryProps {
   title: string;
   link: string;
   img: string;
 }
 
-function CategoryCard({ title, img, link }: Category) {
+function CategoryCard({ title, img, link }: CategoryProps) {
   return (
     <NavLink to={link}>
       <div className="category">

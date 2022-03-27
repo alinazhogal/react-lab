@@ -1,14 +1,6 @@
 import { MockServerHelper } from "webpack-mock-server/lib/mockServerHelper";
+import { Game } from "@/components/games/games.types";
 import api from ".";
-
-export interface Game {
-  id: number;
-  name: string;
-  image: string;
-  description: string;
-  price: number;
-  date: string;
-}
 
 function wait(milliseconds = 300) {
   // eslint-disable-next-line no-promise-executor-return
@@ -42,6 +34,7 @@ export function getGamesResponse(helper: MockServerHelper) {
         "In Minecraft, players explore a blocky, procedurally generated 3D world with virtually infinite terrain, and may discover and extract raw materials, craft tools and items, and build structures, earthworks and simple machines. Depending on game mode, players can fight computer-controlled mobs, as well as cooperate with or compete against other players in the same world.",
       price: 29,
       date: "2020-07-05",
+      link: "https://www.minecraft.net/ru-ru",
     },
     {
       id: helper.getUniqueIdInt(),
@@ -51,6 +44,7 @@ export function getGamesResponse(helper: MockServerHelper) {
         "In Minecraft, players explore a blocky, procedurally generated 3D world with virtually infinite terrain, and may discover and extract raw materials, craft tools and items, and build structures, earthworks and simple machines. Depending on game mode, players can fight computer-controlled mobs, as well as cooperate with or compete against other players in the same world.",
       price: 24,
       date: "2021-07-05",
+      link: "https://playoverwatch.com/ru-ru/",
     },
     {
       id: helper.getUniqueIdInt(),
@@ -61,6 +55,7 @@ export function getGamesResponse(helper: MockServerHelper) {
         "In Minecraft, players explore a blocky, procedurally generated 3D world with virtually infinite terrain, and may discover and extract raw materials, craft tools and items, and build structures, earthworks and simple machines. Depending on game mode, players can fight computer-controlled mobs, as well as cooperate with or compete against other players in the same world.",
       price: 19,
       date: "2019-07-05",
+      link: "https://www.epicgames.com/fortnite/ru/home",
     },
     {
       id: helper.getUniqueIdInt(),
@@ -71,6 +66,7 @@ export function getGamesResponse(helper: MockServerHelper) {
         "In Minecraft, players explore a blocky, procedurally generated 3D world with virtually infinite terrain, and may discover and extract raw materials, craft tools and items, and build structures, earthworks and simple machines. Depending on game mode, players can fight computer-controlled mobs, as well as cooperate with or compete against other players in the same world.",
       price: 30,
       date: "2016-07-05",
+      link: "https://www.epicgames.com/fortnite/ru/home",
     },
     {
       id: helper.getUniqueIdInt(),
@@ -80,6 +76,7 @@ export function getGamesResponse(helper: MockServerHelper) {
         "In Minecraft, players explore a blocky, procedurally generated 3D world with virtually infinite terrain, and may discover and extract raw materials, craft tools and items, and build structures, earthworks and simple machines. Depending on game mode, players can fight computer-controlled mobs, as well as cooperate with or compete against other players in the same world.",
       price: 16,
       date: "2018-07-05",
+      link: "https://www.epicgames.com/fortnite/ru/home",
     },
   ];
 }
