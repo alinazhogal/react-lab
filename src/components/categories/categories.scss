@@ -2,29 +2,29 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
 
   .section-content {
-    min-width: 900px;
+    max-width: 940px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin: 0 20px;
   }
 }
 
 .categories {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 900px;
+  flex-wrap: wrap;
 
   a {
     .category {
       border: 3px solid rgb(230, 220, 220);
       width: 240px;
       height: 160px;
-      margin: 0 auto;
+      margin: 0 15px 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -47,6 +47,11 @@ section {
       &:hover {
         transition: 300ms ease-out;
         border: 3px solid $accent-color;
+      }
+    }
+    @media screen and (max-width: 500px) {
+      .category {
+        margin: 0 0 30px;
       }
     }
   }

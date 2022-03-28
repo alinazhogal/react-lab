@@ -2,15 +2,15 @@ section {
   .section-title {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     position: relative;
     width: 100%;
+    min-width: 900px;
 
     .layout {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      right: 0;
+      right: 24px;
 
       .change-layout {
         padding: 6px;
@@ -30,18 +30,30 @@ section {
       .active-layout {
         background-color: $accent-color;
       }
+
+      @media screen and (max-width: 980px) {
+        right: 52px;
+      }
+      @media screen and (max-width: 640px) {
+        display: none;
+      }
+    }
+    @media screen and (max-width: 980px) and (min-width: 640px) {
+      width: 640px;
     }
   }
 
   .games-grid {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   .games-list {
     display: flex;
+    width: 100%;
     align-items: center;
     flex-direction: column;
   }
@@ -51,7 +63,7 @@ section {
       display: flex;
       width: 900px;
       height: 300px;
-      margin: 0 auto 40px;
+      margin: 0 15px 40px;
       background-color: $basicColor;
       border-radius: 20px;
       align-items: center;
@@ -85,6 +97,30 @@ section {
       }
     }
 
+    @media screen and (max-width: 960px) {
+      .game-card-list {
+        width: 600px;
+        height: 320px;
+
+        .game-img {
+          height: 320px;
+        }
+
+        .game-info {
+          margin-left: 20px;
+
+          .main-info {
+            margin-bottom: 14px;
+          }
+
+          p {
+            width: 354px;
+            margin-bottom: 14px;
+          }
+        }
+      }
+    }
+
     .platform img {
       width: 24px;
       height: 24px;
@@ -105,10 +141,10 @@ section {
       width: 280px;
       background-color: $basicColor;
       position: relative;
-      margin-bottom: 40px;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
+      margin: 0 15px 30px;
 
       .game-img {
         width: 280px;

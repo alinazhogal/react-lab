@@ -1,6 +1,5 @@
 header {
   width: 100%;
-  padding: 0 18px;
   display: flex;
   justify-content: center;
   height: 80px;
@@ -11,6 +10,7 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 1040px;
+    margin: 0 18px;
 
     .logo {
       font-weight: 800;
