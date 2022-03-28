@@ -1,5 +1,5 @@
 .search-div {
-  width: 800px;
+  width: 600px;
   margin: 40px auto 0;
   position: relative;
 
@@ -42,7 +42,7 @@
   }
 
   input {
-    width: 800px;
+    width: 600px;
     height: 40px;
     border-radius: 10px;
     border: none;
@@ -52,6 +52,75 @@
     &:focus {
       outline: none;
       box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.results {
+  width: 600px;
+  margin: 0 auto;
+  position: relative;
+
+  .search-card {
+    width: 600px;
+    height: 102px;
+    background-color: $basicColor;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+    transition: 300ms ease-out;
+
+    img {
+      width: 70px;
+      height: 100px;
+      border-radius: 10px 0 0 10px;
+      transition: 300ms ease-out;
+      object-fit: cover;
+    }
+
+    .search-game-name {
+      margin-left: 20px;
+
+      img {
+        height: 16px;
+        width: 84px;
+        margin: 0;
+      }
+
+      h5 {
+        font-weight: normal;
+        font-size: 16px;
+        transition: 300ms ease-out;
+        width: 170px;
+      }
+    }
+
+    span {
+      font-size: 20px;
+      padding-left: 200px;
+    }
+
+    .arrow {
+      width: 21px;
+      height: 39px;
+      margin-left: 47px;
+      transition: 300ms ease-out;
+    }
+
+    &:hover {
+      transition: 300ms ease-out;
+      border: 1px solid white;
+
+      h5 {
+        text-decoration: underline;
+        transition: 300ms ease-out;
+      }
+
+      .arrow {
+        margin-left: 57px;
+      }
     }
   }
 }

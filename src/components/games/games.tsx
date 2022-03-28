@@ -26,7 +26,7 @@ function Games({ games, loading }: GamesProps) {
         {loading && <div className="lds-dual-ring" />}
         {!loading && (
           <div className="games">
-            {gamesArr.length ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}{" "}
+            {gamesArr.length ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}
           </div>
         )}
       </div>
