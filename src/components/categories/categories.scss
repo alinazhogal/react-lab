@@ -5,16 +5,12 @@ section {
   width: 100%;
 
   .section-content {
-    min-width: 1050px;
+    min-width: 900px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
   }
-}
-
-h2 {
-  margin-bottom: 30px;
 }
 
 .categories {
@@ -24,8 +20,6 @@ h2 {
   width: 900px;
 
   a {
-    text-decoration: none;
-
     .category {
       border: 3px solid rgb(230, 220, 220);
       width: 240px;

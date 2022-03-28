@@ -7,3 +7,8 @@ export interface Game {
   date: string;
   link: string;
 }
+
+export enum Layout {
+  Grid,
+  List,
+}

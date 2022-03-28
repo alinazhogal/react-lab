@@ -1,63 +1,141 @@
-a {
-  text-decoration: none;
-  color: #fff;
-
-  .game-card {
+section {
+  .section-title {
     display: flex;
-    width: 900px;
-    height: 300px;
-    margin: 40px auto;
-    background-color: $basicColor;
-    border-radius: 20px;
     align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
 
-    .game-img {
+    .layout {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+
+      .change-layout {
+        padding: 6px;
+        background-color: transparent;
+        border: 2px solid #fff;
+      }
+
+      .grid {
+        border-radius: 6px 0 0 6px;
+        border-right: none;
+      }
+
+      .list {
+        border-radius: 0 6px 6px 0;
+      }
+
+      .active-layout {
+        background-color: $accent-color;
+      }
+    }
+  }
+
+  .games-grid {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .games-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  a {
+    .game-card-list {
+      display: flex;
+      width: 900px;
       height: 300px;
-      width: 200px;
-      border-radius: 20px 0 0 20px;
-      object-fit: cover;
+      margin: 0 auto 40px;
+      background-color: $basicColor;
+      border-radius: 20px;
+      align-items: center;
+
+      .game-img {
+        height: 300px;
+        width: 200px;
+        border-radius: 20px 0 0 20px;
+        object-fit: cover;
+      }
+
+      .game-info {
+        margin-left: 40px;
+
+        .main-info {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 20px;
+
+          h3 {
+            font-size: 22px;
+          }
+        }
+
+        p {
+          font-size: 14px;
+          width: 600px;
+          margin-bottom: 20px;
+        }
+      }
     }
 
-    .game-info {
-      margin-left: 40px;
+    .platform img {
+      width: 24px;
+      height: 24px;
+    }
 
-      .main-info {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
+    .price-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-        h3 {
-          font-size: 22px;
-        }
+      h4 {
+        font-size: 26px;
+        font-weight: normal;
+      }
+    }
 
-        .platform img {
-          width: 24px;
-          height: 24px;
-        }
+    .game-card-grid {
+      width: 280px;
+      background-color: $basicColor;
+      position: relative;
+      margin-bottom: 40px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+
+      .game-img {
+        width: 280px;
+        height: 340px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
       }
 
-      p {
-        font-size: 14px;
-        width: 600px;
-        margin-bottom: 20px;
+      .platform {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        background-color: rgba(59, 59, 59, 0.8);
+        padding: 6px;
+        border-radius: 10px;
       }
 
-      .price-info {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .game-info {
+        padding: 12px;
 
-        h4 {
-          font-size: 26px;
-          font-weight: normal;
+        .name-rating {
+          margin-bottom: 16px;
         }
       }
     }
   }
-}
 
-section {
   .lds-dual-ring {
     display: inline-block;
     width: 80px;
