@@ -8,6 +8,16 @@ body {
   color: #fff;
 }
 
+#app {
+  background-image: url(../assets/images/bg.webp);
+  height: 900px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  @media screen and (max-width: 600px) {
+    height: 1400px;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -16,7 +26,7 @@ body {
 h2 {
   width: 100%;
   text-align: center;
-  margin-top: 40px;
+  margin: 40px 0;
 }
 
 .error {
@@ -32,13 +42,9 @@ h2 {
     margin-bottom: 20px;
     letter-spacing: 0.4px;
   }
+}
 
-  button {
-    padding: 12px 24px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    background-color: $accent-color;
-    color: white;
-  }
+a {
+  text-decoration: none;
+  color: #fff;
 }

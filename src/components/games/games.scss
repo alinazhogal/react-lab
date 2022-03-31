@@ -1,0 +1,201 @@
+section {
+  .section-title {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    min-width: 900px;
+
+    .layout {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 24px;
+
+      .change-layout {
+        padding: 6px;
+        background-color: transparent;
+        border: 2px solid #fff;
+      }
+
+      .grid {
+        border-radius: 6px 0 0 6px;
+        border-right: none;
+      }
+
+      .list {
+        border-radius: 0 6px 6px 0;
+      }
+
+      .active-layout {
+        background-color: $accent-color;
+      }
+
+      @media screen and (max-width: 980px) {
+        right: 52px;
+      }
+      @media screen and (max-width: 640px) {
+        display: none;
+      }
+    }
+    @media screen and (max-width: 980px) and (min-width: 640px) {
+      width: 640px;
+    }
+  }
+
+  .games-grid {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .games-list {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  a {
+    .game-card-list {
+      display: flex;
+      width: 900px;
+      height: 300px;
+      margin: 0 15px 40px;
+      background-color: $basicColor;
+      border-radius: 20px;
+      align-items: center;
+
+      .game-img {
+        height: 300px;
+        width: 200px;
+        border-radius: 20px 0 0 20px;
+        object-fit: cover;
+      }
+
+      .game-info {
+        margin-left: 40px;
+
+        .main-info {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 20px;
+
+          h3 {
+            font-size: 22px;
+          }
+        }
+
+        p {
+          font-size: 14px;
+          width: 600px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 960px) {
+      .game-card-list {
+        width: 600px;
+        height: 320px;
+
+        .game-img {
+          height: 320px;
+        }
+
+        .game-info {
+          margin-left: 20px;
+
+          .main-info {
+            margin-bottom: 14px;
+          }
+
+          p {
+            width: 354px;
+            margin-bottom: 14px;
+          }
+        }
+      }
+    }
+
+    .platform img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .price-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h4 {
+        font-size: 26px;
+        font-weight: normal;
+      }
+    }
+
+    .game-card-grid {
+      width: 280px;
+      background-color: $basicColor;
+      position: relative;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 15px 30px;
+
+      .game-img {
+        width: 280px;
+        height: 340px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .platform {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        background-color: rgba(59, 59, 59, 0.8);
+        padding: 6px;
+        border-radius: 10px;
+      }
+
+      .game-info {
+        padding: 12px;
+
+        .name-rating {
+          margin-bottom: 16px;
+        }
+      }
+    }
+  }
+
+  .lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
