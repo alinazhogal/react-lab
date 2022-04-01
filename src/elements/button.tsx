@@ -2,7 +2,8 @@ import "./button.scss";
 
 interface ButtonProps {
   title: string;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  // eslint-disable-next-line react/require-default-props
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function Button({ title, onClick }: ButtonProps) {

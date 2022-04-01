@@ -1,8 +1,8 @@
 import { useState } from "react";
 import InputText from "@/elements/inputText";
-import Button from "@/elements/button";
 import debounce from "@/helpers/debounce";
 import validate from "@/helpers/validateForm";
+import { signUp } from "@/api/users";
 
 function SignUpForm() {
   const [formValues, setFromValues] = useState({ login: "", password: "", confirmPassword: "" });
@@ -16,6 +16,10 @@ function SignUpForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    (async () => {
+      const data = await signUp(formValues);
+      console.log(data);
+    })();
   };
 
   return (
@@ -44,7 +48,9 @@ function SignUpForm() {
         onChange={(e) => handleChange(e)}
         errorMessage={formErrors.confirmPassword}
       />
-      <Button title="Submit" onClick={() => console.log(formValues)} />
+      <button type="submit" className="button-el">
+        Submit
+      </button>
     </form>
   );
 }
