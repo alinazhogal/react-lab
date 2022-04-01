@@ -1,11 +1,12 @@
-button {
-  padding: 12px 24px;
+.button-el {
+  padding: 12px 40px;
   border-radius: 20px;
   border: none;
   cursor: pointer;
   background-color: $accent-color;
   color: white;
   transition: 300ms ease-out;
+  font-size: 16px;
 
   &:hover {
     background-color: #cb31a7;

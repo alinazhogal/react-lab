@@ -7,7 +7,7 @@ interface ButtonProps {
 
 function Button({ title, onClick }: ButtonProps) {
   return (
-    <button type="button" onClick={onClick}>
+    <button type="button" onClick={onClick} className="button-el">
       {title}
     </button>
   );

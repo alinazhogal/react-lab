@@ -1,8 +1,15 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import pageLinks from "../../routesLinks";
 import arrow from "../../assets/images/arrow-down.svg";
+import Modal from "../modal/modal";
+import SignInForm from "../forms/signInForm";
+import SignUpForm from "../forms/signUpForm";
 
 function NavBar() {
+  const [isSignInOpen, setSignInOpen] = useState<boolean>(false);
+  const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
+
   return (
     <nav>
       <ul className="navbar">
@@ -38,6 +45,22 @@ function NavBar() {
             About
           </NavLink>
         </li>
+        <li>
+          <button type="button" onClick={() => setSignInOpen(true)} className="nav-button">
+            Sign in
+          </button>
+        </li>
+        <Modal isOpen={isSignInOpen} onClose={() => setSignInOpen(false)} title="Authorization">
+          <SignInForm />
+        </Modal>
+        <li>
+          <button type="button" onClick={() => setSignUpOpen(true)} className="nav-button">
+            Sign up
+          </button>
+        </li>
+        <Modal isOpen={isSignUpOpen} onClose={() => setSignUpOpen(false)} title="Registration">
+          <SignUpForm />
+        </Modal>
       </ul>
     </nav>
   );
