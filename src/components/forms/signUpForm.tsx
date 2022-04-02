@@ -1,25 +1,30 @@
 import { useState } from "react";
 import InputText from "@/elements/inputText";
 import debounce from "@/helpers/debounce";
-import validate from "@/helpers/validateForm";
+import { validate, Fields } from "@/helpers/validateForm";
 import { signUp } from "@/api/users";
 
-function SignUpForm() {
-  const [formValues, setFromValues] = useState({ login: "", password: "", confirmPassword: "" });
-  const [formErrors, setFormErrors] = useState({ ...formValues });
+function SignUpForm({ onClose }: { onClose: () => void }) {
+  const [formValues, setFromValues] = useState<Fields>({ login: "", password: "", confirmPassword: "" });
+  const [formErrors, setFormErrors] = useState<Fields>({ ...formValues });
+
+  const isError = formErrors.login || formErrors.password || formErrors.confirmPassword;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFromValues({ ...formValues, [name]: value });
-    debounce(() => setFormErrors(validate(e.target.name, e.target.value, formValues.password)));
+    debounce(() => setFormErrors(validate(e.target.name, e.target.value, formErrors, formValues.password)));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    (async () => {
-      const data = await signUp(formValues);
-      console.log(data);
-    })();
+    if (!isError) {
+      const isAuth = await signUp(formValues);
+      console.log(isAuth);
+      if (isAuth) {
+        onClose();
+      }
+    }
   };
 
   return (

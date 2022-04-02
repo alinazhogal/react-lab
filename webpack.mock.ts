@@ -59,7 +59,7 @@ export default webpackMockServer.add((app, helper) => {
     if (exists) {
       res.status(200).json({ isAuth: true });
     } else {
-      res.status(401).end();
+      res.status(400).json({ isAuth: false });
     }
   });
 

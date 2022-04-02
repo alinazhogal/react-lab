@@ -1,5 +1,12 @@
-export default function validate(fieldName: string, value: string, passwordValue = "") {
-  const errors = { login: "", password: "", confirmPassword: "" };
+export interface Fields {
+  login: string;
+  password: string;
+  confirmPassword?: string;
+  response?: string;
+}
+
+export function validate(fieldName: string, value: string, formErrors: Fields, passwordValue = "") {
+  const errors = { ...formErrors };
   const passwordRegex = "^(?=(.*[0-9]))((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.{6,20}$";
   const loginRegex = "^[a-z0-9]{4,16}$";
   // eslint-disable-next-line default-case

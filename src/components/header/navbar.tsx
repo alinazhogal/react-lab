@@ -51,7 +51,7 @@ function NavBar() {
           </button>
         </li>
         <Modal isOpen={isSignInOpen} onClose={() => setSignInOpen(false)} title="Authorization">
-          <SignInForm />
+          <SignInForm onClose={() => setSignInOpen(false)} />
         </Modal>
         <li>
           <button type="button" onClick={() => setSignUpOpen(true)} className="nav-button">
@@ -59,7 +59,7 @@ function NavBar() {
           </button>
         </li>
         <Modal isOpen={isSignUpOpen} onClose={() => setSignUpOpen(false)} title="Registration">
-          <SignUpForm />
+          <SignUpForm onClose={() => setSignUpOpen(false)} />
         </Modal>
       </ul>
     </nav>
