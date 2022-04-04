@@ -11,6 +11,7 @@ import Footer from "./components/footer/footer";
 import Button from "./elements/button";
 import Profile from "./components/profile";
 import PrivateRoute from "./components/privateRoute";
+import { getItemFromStorage, SavableKeys } from "./helpers/storage";
 
 class MainApp extends Component<
   unknown,
@@ -27,6 +28,13 @@ class MainApp extends Component<
 
   static getDerivedStateFromError() {
     return { hasError: true };
+  }
+
+  componentDidMount() {
+    const savedUser = getItemFromStorage(SavableKeys.User);
+    if (savedUser) {
+      this.setState({ ...(JSON.parse(savedUser) as { userName: string; isAuth: boolean }) });
+    }
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {

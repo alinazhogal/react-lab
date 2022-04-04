@@ -4,6 +4,7 @@ import InputText from "@/elements/inputText";
 import debounce from "@/helpers/debounce";
 import { validate, Fields } from "@/helpers/validate";
 import { signUp } from "@/api/users";
+import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
 
 function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: string) => void }) {
   const [formValues, setFormValues] = useState<Fields>({ login: "", password: "", confirmPassword: "" });
@@ -26,18 +27,19 @@ function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
         onClose();
         navigate("/profile");
         logIn(userName);
+        saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
       }
     }
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={handleSubmit}>
       <InputText
         label="Login"
         id="login"
         type="text"
         value={formValues.login}
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
         errorMessage={formErrors.login}
       />
       <InputText
@@ -45,7 +47,7 @@ function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
         id="password"
         type="password"
         value={formValues.password}
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
         errorMessage={formErrors.password}
       />
       <InputText
@@ -53,7 +55,7 @@ function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
         id="confirmPassword"
         type="password"
         value={formValues.confirmPassword}
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
         errorMessage={formErrors.confirmPassword}
       />
       <button type="submit" className="button-el">

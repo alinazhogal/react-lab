@@ -3,7 +3,8 @@ import { User } from "@/api/users";
 import webpackMockServer from "webpack-mock-server";
 import { getGamesResponse } from "./src/api/games";
 
-const testUser: User = { login: "qweqweqwe", password: "qwe123A@" };
+const testUser: User = { login: "qweqwe", password: "Qwe123" };
+
 const users = new Set<User>([testUser]);
 
 export default webpackMockServer.add((app, helper) => {
@@ -29,7 +30,6 @@ export default webpackMockServer.add((app, helper) => {
     let exists = false;
 
     users.forEach((us) => {
-      console.log({ us, user });
       if (us.login === user.login && us.password === user.password) {
         exists = true;
       }
@@ -48,7 +48,6 @@ export default webpackMockServer.add((app, helper) => {
   });
 
   app.put("/api/auth/signIn", (req, res) => {
-    console.log("REQUEST HEE!");
     const user: User = {
       login: req.body.login,
       password: req.body.password,

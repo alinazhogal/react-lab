@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import SignInForm from "./forms/signInForm";
+import SignInForm from "./modal/forms/signInForm";
 import Modal from "./modal/modal";
 
 interface PrivateRouteProps {

@@ -3,6 +3,7 @@ import InputText from "@/elements/inputText";
 import debounce from "@/helpers/debounce";
 import { validate, Fields } from "@/helpers/validate";
 import { signIn } from "@/api/users";
+import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
 
 function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: string) => void }) {
   const [formValues, setFormValues] = useState<Fields>({ login: "", password: "" });
@@ -23,6 +24,7 @@ function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
       if (isAuth) {
         onClose();
         logIn(userName);
+        saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
       } else {
         setFormErrors({ ...formErrors, response: "Invalid login or password" });
       }
@@ -32,13 +34,13 @@ function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
   return (
     <>
       <p>{formErrors.response}</p>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={handleSubmit}>
         <InputText
           label="Login"
           id="login"
           type="text"
           value={formValues.login}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           errorMessage={formErrors.login}
         />
         <InputText
@@ -46,7 +48,7 @@ function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
           id="password"
           type="password"
           value={formValues.password}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           errorMessage={formErrors.password}
         />
         <button type="submit" className="button-el">

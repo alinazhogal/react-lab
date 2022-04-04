@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { removeItemFromStorage, SavableKeys } from "@/helpers/storage";
 import pageLinks from "../../routesLinks";
 import arrow from "../../assets/images/arrow-down.svg";
 import profile from "../../assets/images/account.svg";
 import cart from "../../assets/images/cart.svg";
 import logout from "../../assets/images/log-out.svg";
 import Modal from "../modal/modal";
-import SignInForm from "../forms/signInForm";
-import SignUpForm from "../forms/signUpForm";
+import SignInForm from "../modal/forms/signInForm";
+import SignUpForm from "../modal/forms/signUpForm";
 
 export interface AuthProps {
   logIn: (arg0: string) => void;
@@ -24,6 +25,7 @@ export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInO
 
   function handleLogOut() {
     logOut();
+    removeItemFromStorage(SavableKeys.User);
     navigate("/home");
   }
 
