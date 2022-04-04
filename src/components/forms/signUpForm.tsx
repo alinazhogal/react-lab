@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputText from "@/elements/inputText";
 import debounce from "@/helpers/debounce";
 import { validate, Fields } from "@/helpers/validateForm";
 import { signUp } from "@/api/users";
 
-function SignUpForm({ onClose }: { onClose: () => void }) {
+function SignUpForm({ onClose, auth }: { onClose: () => void; auth: (arg0: string) => void }) {
   const [formValues, setFromValues] = useState<Fields>({ login: "", password: "", confirmPassword: "" });
   const [formErrors, setFormErrors] = useState<Fields>({ ...formValues });
 
+  const navigate = useNavigate();
   const isError = formErrors.login || formErrors.password || formErrors.confirmPassword;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,10 +21,11 @@ function SignUpForm({ onClose }: { onClose: () => void }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isError) {
-      const isAuth = await signUp(formValues);
-      console.log(isAuth);
+      const { isAuth, userName } = await signUp(formValues);
       if (isAuth) {
         onClose();
+        navigate("/profile");
+        auth(userName);
       }
     }
   };

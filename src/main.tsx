@@ -9,11 +9,15 @@ import Home from "./components/home";
 import pageLinks from "./routesLinks";
 import Footer from "./components/footer/footer";
 import Button from "./elements/button";
+import Profile from "./components/profile";
 
-class MainApp extends Component<unknown, { hasError: boolean }> {
+class MainApp extends Component<unknown, { hasError: boolean; userName: string; isAuth: boolean }> {
   constructor(props: unknown) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, userName: "", isAuth: false };
+
+    this.logInUser = this.logInUser.bind(this);
+    this.logOutUser = this.logOutUser.bind(this);
   }
 
   static getDerivedStateFromError() {
@@ -28,6 +32,14 @@ class MainApp extends Component<unknown, { hasError: boolean }> {
     window.location.assign("/home");
   }
 
+  logInUser(login: string) {
+    this.setState({ userName: login, isAuth: true });
+  }
+
+  logOutUser() {
+    this.setState({ isAuth: false });
+  }
+
   render() {
     if (this.state.hasError)
       return (
@@ -39,12 +51,19 @@ class MainApp extends Component<unknown, { hasError: boolean }> {
     return (
       <StrictMode>
         <BrowserRouter>
-          <Header />
+          <Header
+            auth={this.logInUser}
+            username={this.state.userName}
+            isAuth={this.state.isAuth}
+            logOut={this.logOutUser}
+          />
           <Routes>
             <Route path={pageLinks.home} element={<Home />} />
-            <Route path={pageLinks.products} element={<Products />} />
-            <Route path={`${pageLinks.products}/:category`} element={<Products />} />
+            <Route path={pageLinks.products} element={<Products />}>
+              <Route path={`${pageLinks.products}/:category`} element={<Products />} />
+            </Route>
             <Route path={pageLinks.about} element={<About />} />
+            <Route path={pageLinks.profile} element={<Profile />} />
             <Route path="*" element={<Navigate to={pageLinks.home} />} />
           </Routes>
           <Footer />

@@ -4,7 +4,7 @@ import debounce from "@/helpers/debounce";
 import { validate, Fields } from "@/helpers/validateForm";
 import { signIn } from "@/api/users";
 
-function SignInForm({ onClose }: { onClose: () => void }) {
+function SignInForm({ onClose, auth }: { onClose: () => void; auth: (arg0: string) => void }) {
   const [formValues, setFromValues] = useState<Fields>({ login: "", password: "" });
   const [formErrors, setFormErrors] = useState<Fields>({ ...formValues, response: "" });
 
@@ -19,9 +19,10 @@ function SignInForm({ onClose }: { onClose: () => void }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isError) {
-      const isAuth = await signIn(formValues);
+      const { isAuth, userName } = await signIn(formValues);
       if (isAuth) {
         onClose();
+        auth(userName);
       } else {
         setFormErrors({ ...formErrors, response: "Invalid login or password" });
       }

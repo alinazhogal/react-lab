@@ -24,8 +24,9 @@ header {
       margin: 0;
       list-style-type: none;
       display: flex;
-      width: 440px;
+      width: 470px;
       justify-content: space-between;
+      align-items: center;
 
       li {
         a {
@@ -60,7 +61,7 @@ header {
         }
       }
 
-      .nav-button {
+      button {
         border: none;
         background: none;
         color: #fff;
@@ -68,10 +69,19 @@ header {
         font-family: "OpenSans-Regular", sans-serif;
         cursor: pointer;
         letter-spacing: 0.3px;
+      }
 
-        &:hover {
-          color: $accent-color;
-          transition: 300ms ease-out;
+      .nav-button:hover {
+        color: $accent-color;
+        transition: 300ms ease-out;
+      }
+
+      .auth-button {
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-right: 6px;
         }
       }
 
