@@ -90,19 +90,19 @@ export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInO
           <>
             <li>
               <NavLink to={pageLinks.profile}>
-                <button type="button" className="auth-button">
+                <button type="button" className="auth-button" aria-label="profile page">
                   <img src={profile} alt="profile" />
                   {username}
                 </button>
               </NavLink>
             </li>
             <li>
-              <button type="button" className="auth-button">
+              <button type="button" className="auth-button" aria-label="cart page">
                 <img src={cart} alt="cart" />0
               </button>
             </li>
             <li>
-              <button type="button" className="auth-button" onClick={handleLogOut}>
+              <button type="button" className="auth-button" onClick={handleLogOut} aria-label="log out">
                 <img src={logout} alt="logout" />
               </button>
             </li>
