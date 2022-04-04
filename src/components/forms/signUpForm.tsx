@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputText from "@/elements/inputText";
 import debounce from "@/helpers/debounce";
-import { validate, Fields } from "@/helpers/validateForm";
+import { validate, Fields } from "@/helpers/validate";
 import { signUp } from "@/api/users";
 
-function SignUpForm({ onClose, auth }: { onClose: () => void; auth: (arg0: string) => void }) {
-  const [formValues, setFromValues] = useState<Fields>({ login: "", password: "", confirmPassword: "" });
+function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: string) => void }) {
+  const [formValues, setFormValues] = useState<Fields>({ login: "", password: "", confirmPassword: "" });
   const [formErrors, setFormErrors] = useState<Fields>({ ...formValues });
 
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ function SignUpForm({ onClose, auth }: { onClose: () => void; auth: (arg0: strin
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFromValues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [name]: value });
     debounce(() => setFormErrors(validate(e.target.name, e.target.value, formErrors, formValues.password)));
   };
 
@@ -25,7 +25,7 @@ function SignUpForm({ onClose, auth }: { onClose: () => void; auth: (arg0: strin
       if (isAuth) {
         onClose();
         navigate("/profile");
-        auth(userName);
+        logIn(userName);
       }
     }
   };

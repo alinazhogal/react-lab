@@ -10,12 +10,8 @@ body {
 
 #app {
   background-image: url(../assets/images/bg.webp);
-  height: 900px;
   background-size: cover;
   background-repeat: no-repeat;
-  @media screen and (max-width: 600px) {
-    height: 1400px;
-  }
 }
 
 * {
@@ -47,4 +43,11 @@ h2 {
 a {
   text-decoration: none;
   color: #fff;
+}
+
+.default-page {
+  height: 76vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }

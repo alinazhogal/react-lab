@@ -10,18 +10,19 @@ import SignInForm from "../forms/signInForm";
 import SignUpForm from "../forms/signUpForm";
 
 export interface AuthProps {
-  auth: (arg0: string) => void;
+  logIn: (arg0: string) => void;
   username: string;
   isAuth: boolean;
   logOut: () => void;
+  signInOpen: boolean;
+  setSignInOpen: (arg0: boolean) => void;
 }
 
-export function NavBar({ auth, username, isAuth, logOut }: AuthProps) {
-  const [isSignInOpen, setSignInOpen] = useState<boolean>(false);
+export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInOpen }: AuthProps) {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  function handle() {
+  function handleLogOut() {
     logOut();
     navigate("/home");
   }
@@ -69,8 +70,8 @@ export function NavBar({ auth, username, isAuth, logOut }: AuthProps) {
                 Sign in
               </button>
             </li>
-            <Modal isOpen={isSignInOpen} onClose={() => setSignInOpen(false)} title="Authorization">
-              <SignInForm onClose={() => setSignInOpen(false)} auth={(login: string) => auth(login)} />
+            <Modal isOpen={signInOpen} onClose={() => setSignInOpen(false)} title="Authorization">
+              <SignInForm onClose={() => setSignInOpen(false)} logIn={logIn} />
             </Modal>
             <li>
               <button type="button" onClick={() => setSignUpOpen(true)} className="nav-button">
@@ -78,7 +79,7 @@ export function NavBar({ auth, username, isAuth, logOut }: AuthProps) {
               </button>
             </li>
             <Modal isOpen={isSignUpOpen} onClose={() => setSignUpOpen(false)} title="Registration">
-              <SignUpForm onClose={() => setSignUpOpen(false)} auth={(login: string) => auth(login)} />
+              <SignUpForm onClose={() => setSignUpOpen(false)} logIn={logIn} />
             </Modal>
           </>
         )}
@@ -99,7 +100,7 @@ export function NavBar({ auth, username, isAuth, logOut }: AuthProps) {
               </button>
             </li>
             <li>
-              <button type="button" className="auth-button" onClick={handle}>
+              <button type="button" className="auth-button" onClick={handleLogOut}>
                 <img src={logout} alt="logout" />
               </button>
             </li>

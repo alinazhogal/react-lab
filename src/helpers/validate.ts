@@ -8,14 +8,14 @@ export interface Fields {
 export function validate(fieldName: string, value: string, formErrors: Fields, passwordValue = "") {
   const errors = { ...formErrors };
   const passwordRegex = "^(?=(.*[0-9]))((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.{6,20}$";
-  const loginRegex = "^[a-z0-9]{4,16}$";
+  const loginRegex = "^[a-z0-9]{4,12}$";
   // eslint-disable-next-line default-case
   switch (fieldName) {
     case "login":
       if (!value) {
         errors.login = "Field is required";
       } else if (!value.match(loginRegex)) {
-        errors.login = "Login should be 4 -16 characters and shouldn't include special characters";
+        errors.login = "Login should be 4 -12 characters and shouldn't include special characters";
       } else errors.login = "";
       break;
 

@@ -1,18 +1,18 @@
 import { useState } from "react";
 import InputText from "@/elements/inputText";
 import debounce from "@/helpers/debounce";
-import { validate, Fields } from "@/helpers/validateForm";
+import { validate, Fields } from "@/helpers/validate";
 import { signIn } from "@/api/users";
 
-function SignInForm({ onClose, auth }: { onClose: () => void; auth: (arg0: string) => void }) {
-  const [formValues, setFromValues] = useState<Fields>({ login: "", password: "" });
+function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: string) => void }) {
+  const [formValues, setFormValues] = useState<Fields>({ login: "", password: "" });
   const [formErrors, setFormErrors] = useState<Fields>({ ...formValues, response: "" });
 
   const isError = formErrors.login || formErrors.password;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFromValues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [name]: value });
     debounce(() => setFormErrors(validate(e.target.name, e.target.value, formErrors)));
   };
 
@@ -22,7 +22,7 @@ function SignInForm({ onClose, auth }: { onClose: () => void; auth: (arg0: strin
       const { isAuth, userName } = await signIn(formValues);
       if (isAuth) {
         onClose();
-        auth(userName);
+        logIn(userName);
       } else {
         setFormErrors({ ...formErrors, response: "Invalid login or password" });
       }

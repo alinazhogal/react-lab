@@ -1,4 +1,8 @@
 function Profile() {
-  return <h2>Authenticated Profile page</h2>;
+  return (
+    <section className="default-page">
+      <h2>Profile page</h2>
+    </section>
+  );
 }
 export default Profile;
