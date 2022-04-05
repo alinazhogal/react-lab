@@ -9,6 +9,7 @@ import logout from "../../assets/images/log-out.svg";
 import Modal from "../modal/modal";
 import SignInForm from "../modal/forms/signInForm";
 import SignUpForm from "../modal/forms/signUpForm";
+import MobileMenu from "./mobileMenu";
 
 export interface AuthProps {
   logIn: (arg0: string) => void;
@@ -32,12 +33,12 @@ export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInO
   return (
     <nav>
       <ul className="navbar">
-        <li>
-          <NavLink to={pageLinks.home} className={({ isActive }) => (isActive ? "active-link nav-home" : "nav-home")}>
+        <li className="nav-home">
+          <NavLink to={pageLinks.home} className={({ isActive }) => (isActive ? "active-link" : "")}>
             Home
           </NavLink>
         </li>
-        <li>
+        <li className="nav-prod">
           <div className="dropdown">
             <NavLink
               to={pageLinks.products}
@@ -59,8 +60,8 @@ export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInO
             </div>
           </div>
         </li>
-        <li>
-          <NavLink to={pageLinks.about} className={({ isActive }) => (isActive ? "active-link" : "")}>
+        <li className="nav-about">
+          <NavLink to={pageLinks.about} className={({ isActive }) => (isActive ? "active-link " : "")}>
             About
           </NavLink>
         </li>
@@ -108,6 +109,7 @@ export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInO
             </li>
           </>
         )}
+        <MobileMenu />
       </ul>
     </nav>
   );
