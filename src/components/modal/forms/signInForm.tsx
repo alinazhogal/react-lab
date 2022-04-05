@@ -1,6 +1,5 @@
 import { useState } from "react";
 import InputText from "@/elements/inputText";
-import debounce from "@/helpers/debounce";
 import { validate, Fields } from "@/helpers/validate";
 import { signIn } from "@/api/users";
 import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
@@ -14,7 +13,14 @@ function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-    debounce(() => setFormErrors(validate(e.target.name, e.target.value, formErrors)));
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setFormErrors(validate(e.target.name, e.target.value, formErrors));
+  };
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setFormErrors({ ...formErrors, [e.target.name]: "" });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,6 +48,8 @@ function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
           value={formValues.login}
           onChange={handleChange}
           errorMessage={formErrors.login}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
         />
         <InputText
           label="Password"
@@ -50,6 +58,8 @@ function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
           value={formValues.password}
           onChange={handleChange}
           errorMessage={formErrors.password}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
         />
         <button type="submit" className="button-el">
           Submit

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputText from "@/elements/inputText";
-import debounce from "@/helpers/debounce";
 import { validate, Fields } from "@/helpers/validate";
 import { signUp } from "@/api/users";
 import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
@@ -13,10 +12,17 @@ function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
   const navigate = useNavigate();
   const isError = formErrors.login || formErrors.password || formErrors.confirmPassword;
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setFormErrors(validate(e.target.name, e.target.value, formErrors, formValues.password));
+  };
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setFormErrors({ ...formErrors, [e.target.name]: "" });
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-    debounce(() => setFormErrors(validate(e.target.name, e.target.value, formErrors, formValues.password)));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,6 +47,8 @@ function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
         value={formValues.login}
         onChange={handleChange}
         errorMessage={formErrors.login}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
       />
       <InputText
         label="Password"
@@ -49,6 +57,8 @@ function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
         value={formValues.password}
         onChange={handleChange}
         errorMessage={formErrors.password}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
       />
       <InputText
         label="Confirm password"
@@ -57,6 +67,8 @@ function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
         value={formValues.confirmPassword}
         onChange={handleChange}
         errorMessage={formErrors.confirmPassword}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
       />
       <button type="submit" className="button-el">
         Submit

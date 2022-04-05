@@ -5,13 +5,24 @@ interface InputProps {
   value: string | undefined;
   errorMessage: string | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-function InputText({ id, label, type, value, errorMessage, onChange }: InputProps) {
+function InputText({ id, label, type, value, errorMessage, onChange, onBlur, onFocus }: InputProps) {
   return (
     <div className="input-div">
       <label htmlFor={id}>{label}</label>
-      <input type={type} id={id} value={value} name={id} onChange={onChange} required />
+      <input
+        type={type}
+        id={id}
+        value={value}
+        name={id}
+        onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        required
+      />
       <span>{errorMessage}</span>
     </div>
   );
