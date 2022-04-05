@@ -77,6 +77,21 @@
       margin-top: 10px;
     }
   }
+  @media screen and (max-width: 600px) {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+
+    .modal-title {
+      justify-content: center;
+    }
+  }
 }
 
 .modal-overlay {

@@ -33,7 +33,7 @@ export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInO
     <nav>
       <ul className="navbar">
         <li>
-          <NavLink to={pageLinks.home} className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink to={pageLinks.home} className={({ isActive }) => (isActive ? "active-link nav-home" : "nav-home")}>
             Home
           </NavLink>
         </li>

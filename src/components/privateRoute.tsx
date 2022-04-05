@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Home from "./home";
 import SignInForm from "./modal/forms/signInForm";
 import Modal from "./modal/modal";
 
@@ -21,7 +22,7 @@ export default function PrivateRoute({ isAuth, children, logIn, setSignInOpen }:
     children
   ) : (
     <>
-      {children}
+      <Home />
       <Modal isOpen onClose={() => onClose()} title="Authorization">
         <SignInForm onClose={() => setSignInOpen(false)} logIn={logIn} />
       </Modal>

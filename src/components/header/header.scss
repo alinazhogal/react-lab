@@ -37,10 +37,17 @@ header {
             transition: 300ms ease-out;
           }
         }
+        @media screen and (max-width: 740px) {
+          .nav-home {
+            display: none;
+          }
+        }
 
         .dropdown {
           position: relative;
           display: inline-block;
+          border-bottom: 2px solid transparent;
+          border-top: 2px solid transparent;
 
           .dropdown-content {
             display: none;
@@ -122,9 +129,10 @@ header {
       .logo {
         font-size: 16px;
       }
-
+    }
+    @media screen and (max-width: 720px) {
       ul {
-        width: 330px;
+        width: 360px;
       }
     }
   }
