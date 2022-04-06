@@ -31,7 +31,6 @@ function SignInForm({ onClose }: { onClose: () => void }) {
       const { isAuth, userName } = await signIn(formValues);
       if (isAuth) {
         onClose();
-        // logIn(userName);
         dispatch({ type: "setIsAuth", payload: true });
         dispatch({ type: "setUsername", payload: userName });
         saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));

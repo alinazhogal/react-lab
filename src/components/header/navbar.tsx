@@ -12,16 +12,7 @@ import SignInForm from "../modal/forms/signInForm";
 import SignUpForm from "../modal/forms/signUpForm";
 import MobileMenu from "./mobileMenu";
 
-export interface AuthProps {
-  logIn: (arg0: string) => void;
-  username: string;
-  isAuth: boolean;
-  logOut: () => void;
-  signInOpen: boolean | undefined;
-  setSignInOpen: (arg0: boolean) => void;
-}
-
-export function NavBar() {
+export default function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const { state, dispatch } = useContext(AuthContext);

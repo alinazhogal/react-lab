@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import pageLinks from "../../routesLinks";
-import { NavBar } from "./navbar";
+import NavBar from "./navbar";
 import "./header.scss";
 
 function Header() {
