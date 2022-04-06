@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import InputText from "@/elements/inputText";
 import { validate, Fields } from "@/helpers/validate";
 import { signIn } from "@/api/users";
 import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
+import { AuthContext } from "@/context";
 
-function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: string) => void }) {
+function SignInForm({ onClose }: { onClose: () => void }) {
   const [formValues, setFormValues] = useState<Fields>({ login: "", password: "" });
   const [formErrors, setFormErrors] = useState<Fields>({ ...formValues, response: "" });
+  const { dispatch } = useContext(AuthContext);
 
   const isError = formErrors.login || formErrors.password;
 
@@ -29,7 +31,9 @@ function SignInForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
       const { isAuth, userName } = await signIn(formValues);
       if (isAuth) {
         onClose();
-        logIn(userName);
+        // logIn(userName);
+        dispatch({ type: "setIsAuth", payload: true });
+        dispatch({ type: "setUsername", payload: userName });
         saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
       } else {
         setFormErrors({ ...formErrors, response: "Invalid login or password" });

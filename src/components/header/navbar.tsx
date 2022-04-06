@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { removeItemFromStorage, SavableKeys } from "@/helpers/storage";
+import { AuthContext } from "@/context";
 import pageLinks from "../../routesLinks";
 import arrow from "../../assets/images/arrow-down.svg";
 import profile from "../../assets/images/account.svg";
@@ -16,16 +17,17 @@ export interface AuthProps {
   username: string;
   isAuth: boolean;
   logOut: () => void;
-  signInOpen: boolean;
+  signInOpen: boolean | undefined;
   setSignInOpen: (arg0: boolean) => void;
 }
 
-export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInOpen }: AuthProps) {
+export function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { state, dispatch } = useContext(AuthContext);
 
   function handleLogOut() {
-    logOut();
+    dispatch({ type: "setIsAuth", payload: false });
     removeItemFromStorage(SavableKeys.User);
     navigate("/home");
   }
@@ -66,15 +68,23 @@ export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInO
           </NavLink>
         </li>
 
-        {!isAuth && (
+        {!state.isAuth && (
           <>
             <li>
-              <button type="button" onClick={() => setSignInOpen(true)} className="nav-button">
+              <button
+                type="button"
+                onClick={() => dispatch({ type: "setSignInOpen", payload: true })}
+                className="nav-button"
+              >
                 Sign in
               </button>
             </li>
-            <Modal isOpen={signInOpen} onClose={() => setSignInOpen(false)} title="Authorization">
-              <SignInForm onClose={() => setSignInOpen(false)} logIn={logIn} />
+            <Modal
+              isOpen={state.signInOpen}
+              onClose={() => dispatch({ type: "setSignInOpen", payload: false })}
+              title="Authorization"
+            >
+              <SignInForm onClose={() => dispatch({ type: "setSignInOpen", payload: false })} />
             </Modal>
             <li>
               <button type="button" onClick={() => setSignUpOpen(true)} className="nav-button">
@@ -82,18 +92,18 @@ export function NavBar({ logIn, username, isAuth, logOut, signInOpen, setSignInO
               </button>
             </li>
             <Modal isOpen={isSignUpOpen} onClose={() => setSignUpOpen(false)} title="Registration">
-              <SignUpForm onClose={() => setSignUpOpen(false)} logIn={logIn} />
+              <SignUpForm onClose={() => setSignUpOpen(false)} />
             </Modal>
           </>
         )}
 
-        {isAuth && (
+        {state.isAuth && (
           <>
             <li>
               <NavLink to={pageLinks.profile}>
                 <button type="button" className="auth-button" aria-label="profile page">
                   <img src={profile} alt="profile" />
-                  {username}
+                  {state.userName}
                 </button>
               </NavLink>
             </li>
