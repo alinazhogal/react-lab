@@ -9,19 +9,48 @@ import Home from "./components/home";
 import pageLinks from "./routesLinks";
 import Footer from "./components/footer/footer";
 import Button from "./elements/button";
+import Profile from "./components/profile";
+import PrivateRoute from "./components/privateRoute";
+import { getItemFromStorage, SavableKeys } from "./helpers/storage";
 
-class MainApp extends Component<unknown, { hasError: boolean }> {
+class MainApp extends Component<
+  unknown,
+  { hasError: boolean; userName: string; isAuth: boolean; signInOpen: boolean }
+> {
   constructor(props: unknown) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, userName: "", isAuth: false, signInOpen: false };
+
+    this.logInUser = this.logInUser.bind(this);
+    this.logOutUser = this.logOutUser.bind(this);
+    this.setModalState = this.setModalState.bind(this);
   }
 
   static getDerivedStateFromError() {
     return { hasError: true };
   }
 
+  componentDidMount() {
+    const savedUser = getItemFromStorage(SavableKeys.User);
+    if (savedUser) {
+      this.setState({ ...(JSON.parse(savedUser) as { userName: string; isAuth: boolean }) });
+    }
+  }
+
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error(error, info);
+  }
+
+  setModalState(state: boolean) {
+    this.setState({ signInOpen: state });
+  }
+
+  logInUser(login: string) {
+    this.setState({ userName: login, isAuth: true });
+  }
+
+  logOutUser() {
+    this.setState({ isAuth: false });
   }
 
   redirect() {
@@ -39,12 +68,42 @@ class MainApp extends Component<unknown, { hasError: boolean }> {
     return (
       <StrictMode>
         <BrowserRouter>
-          <Header />
+          <Header
+            logIn={this.logInUser}
+            username={this.state.userName}
+            isAuth={this.state.isAuth}
+            logOut={this.logOutUser}
+            setSignInOpen={this.setModalState}
+            signInOpen={this.state.signInOpen}
+          />
           <Routes>
             <Route path={pageLinks.home} element={<Home />} />
-            <Route path={pageLinks.products} element={<Products />} />
-            <Route path={`${pageLinks.products}/:category`} element={<Products />} />
-            <Route path={pageLinks.about} element={<About />} />
+            <Route
+              path={pageLinks.products}
+              element={
+                <PrivateRoute isAuth={this.state.isAuth} logIn={this.logInUser} setSignInOpen={this.setModalState}>
+                  <Products />
+                </PrivateRoute>
+              }
+            >
+              <Route path={`${pageLinks.products}/:category`} element={<Products />} />
+            </Route>
+            <Route
+              path={pageLinks.about}
+              element={
+                <PrivateRoute isAuth={this.state.isAuth} logIn={this.logInUser} setSignInOpen={this.setModalState}>
+                  <About />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={pageLinks.profile}
+              element={
+                <PrivateRoute isAuth={this.state.isAuth} logIn={this.logInUser} setSignInOpen={this.setModalState}>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
             <Route path="*" element={<Navigate to={pageLinks.home} />} />
           </Routes>
           <Footer />
