@@ -3,7 +3,7 @@ import "./modal.scss";
 import close from "../../assets/images/close.svg";
 
 interface ModalProps {
-  isOpen: boolean;
+  isOpen?: boolean;
   onClose: () => void;
   children: React.ReactNode;
   title: string;

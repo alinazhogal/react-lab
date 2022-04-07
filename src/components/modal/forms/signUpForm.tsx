@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputText from "@/elements/inputText";
 import { validate, Fields } from "@/helpers/validate";
 import { signUp } from "@/api/users";
 import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
+import { AuthContext } from "@/context";
 
-function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: string) => void }) {
+function SignUpForm({ onClose }: { onClose: () => void }) {
   const [formValues, setFormValues] = useState<Fields>({ login: "", password: "", confirmPassword: "" });
   const [formErrors, setFormErrors] = useState<Fields>({ ...formValues });
 
   const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
+
   const isError = formErrors.login || formErrors.password || formErrors.confirmPassword;
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -32,7 +35,8 @@ function SignUpForm({ onClose, logIn }: { onClose: () => void; logIn: (arg0: str
       if (isAuth) {
         onClose();
         navigate("/profile");
-        logIn(userName);
+        dispatch({ type: "setIsAuth", payload: true });
+        dispatch({ type: "setUsername", payload: userName });
         saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
       }
     }

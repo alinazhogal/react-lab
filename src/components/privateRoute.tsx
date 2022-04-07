@@ -1,30 +1,26 @@
+import { AuthContext } from "@/context";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Home from "./home";
 import SignInForm from "./modal/forms/signInForm";
 import Modal from "./modal/modal";
 
-interface PrivateRouteProps {
-  isAuth: boolean;
-  children: JSX.Element;
-  logIn: (arg0: string) => void;
-  setSignInOpen: (arg0: boolean) => void;
-}
-
-export default function PrivateRoute({ isAuth, children, logIn, setSignInOpen }: PrivateRouteProps) {
+export default function PrivateRoute({ children }: { children: JSX.Element }) {
   const navigate = useNavigate();
+  const { state, dispatch } = useContext(AuthContext);
 
   function onClose() {
-    setSignInOpen(false);
+    dispatch({ type: "setSignInOpen", payload: false });
     navigate("/home");
   }
 
-  return isAuth ? (
+  return state.isAuth ? (
     children
   ) : (
     <>
       <Home />
       <Modal isOpen onClose={() => onClose()} title="Authorization">
-        <SignInForm onClose={() => setSignInOpen(false)} logIn={logIn} />
+        <SignInForm onClose={() => dispatch({ type: "setSignInOpen", payload: false })} />
       </Modal>
     </>
   );
