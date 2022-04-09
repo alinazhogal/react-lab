@@ -1,14 +1,17 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import InputText from "@/elements/inputText";
 import { validate, Fields } from "@/helpers/validate";
-import { signIn } from "@/api/users";
-import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
-import { AuthContext } from "@/context";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux";
+import { logIn } from "@/redux/actions/authActions";
+import setSignInOpen from "@/redux/actions/modalActions";
 
-function SignInForm({ onClose }: { onClose: () => void }) {
+function SignInForm() {
   const [formValues, setFormValues] = useState<Fields>({ login: "", password: "" });
   const [formErrors, setFormErrors] = useState<Fields>({ ...formValues, response: "" });
-  const { dispatch } = useContext(AuthContext);
+  // const { dispatch } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth);
 
   const isError = formErrors.login || formErrors.password;
 
@@ -25,18 +28,24 @@ function SignInForm({ onClose }: { onClose: () => void }) {
     setFormErrors({ ...formErrors, [e.target.name]: "" });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isError) {
-      const { isAuth, userName } = await signIn(formValues);
-      if (isAuth) {
-        onClose();
-        dispatch({ type: "setIsAuth", payload: true });
-        dispatch({ type: "setUsername", payload: userName });
-        saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
+      dispatch(logIn(formValues));
+      if (user.isAuth) {
+        dispatch(setSignInOpen(false));
       } else {
         setFormErrors({ ...formErrors, response: "Invalid login or password" });
       }
+      // const { isAuth, userName } = await signIn(formValues);
+      // if (isAuth) {
+      //   onClose();
+      //   dispatch({ type: "setIsAuth", payload: true });
+      //   dispatch({ type: "setUsername", payload: userName });
+      //   saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
+      // } else {
+      //   setFormErrors({ ...formErrors, response: "Invalid login or password" });
+      // }
     }
   };
 

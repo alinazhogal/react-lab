@@ -1,7 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { removeItemFromStorage, SavableKeys } from "@/helpers/storage";
-import { AuthContext } from "@/context";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "@/redux/actions/authActions";
+import { RootState } from "@/redux";
+import setSignInOpen from "@/redux/actions/modalActions";
 import pageLinks from "../../routesLinks";
 import arrow from "../../assets/images/arrow-down.svg";
 import profile from "../../assets/images/account.svg";
@@ -15,12 +18,23 @@ import MobileMenu from "./mobileMenu";
 export default function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { state, dispatch } = useContext(AuthContext);
+
+  const dispatch = useDispatch();
+  const isSignInOpen = useSelector((state: RootState) => state.modal.isOpen);
+  const user = useSelector((state: RootState) => state.auth);
 
   function handleLogOut() {
-    dispatch({ type: "setIsAuth", payload: false });
+    dispatch(logOut());
     removeItemFromStorage(SavableKeys.User);
     navigate("/home");
+  }
+
+  function onSignInOpen() {
+    dispatch(setSignInOpen(true));
+  }
+
+  function onSignInClose() {
+    dispatch(setSignInOpen(false));
   }
 
   return (
@@ -59,23 +73,15 @@ export default function NavBar() {
           </NavLink>
         </li>
 
-        {!state.isAuth && (
+        {!user.isAuth && (
           <>
             <li>
-              <button
-                type="button"
-                onClick={() => dispatch({ type: "setSignInOpen", payload: true })}
-                className="nav-button"
-              >
+              <button type="button" onClick={onSignInOpen} className="nav-button">
                 Sign in
               </button>
             </li>
-            <Modal
-              isOpen={state.signInOpen}
-              onClose={() => dispatch({ type: "setSignInOpen", payload: false })}
-              title="Authorization"
-            >
-              <SignInForm onClose={() => dispatch({ type: "setSignInOpen", payload: false })} />
+            <Modal isOpen={isSignInOpen} onClose={() => onSignInClose()} title="Authorization">
+              <SignInForm />
             </Modal>
             <li>
               <button type="button" onClick={() => setSignUpOpen(true)} className="nav-button">
@@ -88,13 +94,13 @@ export default function NavBar() {
           </>
         )}
 
-        {state.isAuth && (
+        {user.isAuth && (
           <>
             <li>
               <NavLink to={pageLinks.profile}>
                 <button type="button" className="auth-button" aria-label="profile page">
                   <img src={profile} alt="profile" />
-                  {state.userName}
+                  {user.username}
                 </button>
               </NavLink>
             </li>

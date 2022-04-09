@@ -1,17 +1,16 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputText from "@/elements/inputText";
 import { validate, Fields } from "@/helpers/validate";
-import { signUp } from "@/api/users";
-import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
-import { AuthContext } from "@/context";
+import { useDispatch } from "react-redux";
+import { SignUp } from "@/redux/actions/authActions";
 
 function SignUpForm({ onClose }: { onClose: () => void }) {
   const [formValues, setFormValues] = useState<Fields>({ login: "", password: "", confirmPassword: "" });
   const [formErrors, setFormErrors] = useState<Fields>({ ...formValues });
 
   const navigate = useNavigate();
-  const { dispatch } = useContext(AuthContext);
+  const dispatch = useDispatch();
 
   const isError = formErrors.login || formErrors.password || formErrors.confirmPassword;
 
@@ -28,17 +27,18 @@ function SignUpForm({ onClose }: { onClose: () => void }) {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isError) {
-      const { isAuth, userName } = await signUp(formValues);
-      if (isAuth) {
-        onClose();
-        navigate("/profile");
-        dispatch({ type: "setIsAuth", payload: true });
-        dispatch({ type: "setUsername", payload: userName });
-        saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
-      }
+      // const { isAuth, userName } = await signUp(formValues);
+      dispatch(SignUp(formValues));
+      // if (isAuth) {
+      onClose();
+      navigate("/profile");
+      // dispatch({ type: "setIsAuth", payload: true });
+      // dispatch({ type: "setUsername", payload: userName });
+      // saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
+      // }
     }
   };
 
