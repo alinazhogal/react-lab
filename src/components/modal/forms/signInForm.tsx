@@ -1,17 +1,14 @@
 import { useState } from "react";
 import InputText from "@/elements/inputText";
 import { validate, Fields } from "@/helpers/validate";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux";
+import { useDispatch } from "react-redux";
 import { logIn } from "@/redux/actions/authActions";
-import setSignInOpen from "@/redux/actions/modalActions";
 
 function SignInForm() {
   const [formValues, setFormValues] = useState<Fields>({ login: "", password: "" });
   const [formErrors, setFormErrors] = useState<Fields>({ ...formValues, response: "" });
-  // const { dispatch } = useContext(AuthContext);
+
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.auth);
 
   const isError = formErrors.login || formErrors.password;
 
@@ -25,27 +22,13 @@ function SignInForm() {
   };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    setFormErrors({ ...formErrors, [e.target.name]: "" });
+    setFormErrors({ ...formErrors, [e.target.name]: "", response: "" });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isError) {
-      dispatch(logIn(formValues));
-      if (user.isAuth) {
-        dispatch(setSignInOpen(false));
-      } else {
-        setFormErrors({ ...formErrors, response: "Invalid login or password" });
-      }
-      // const { isAuth, userName } = await signIn(formValues);
-      // if (isAuth) {
-      //   onClose();
-      //   dispatch({ type: "setIsAuth", payload: true });
-      //   dispatch({ type: "setUsername", payload: userName });
-      //   saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
-      // } else {
-      //   setFormErrors({ ...formErrors, response: "Invalid login or password" });
-      // }
+      dispatch(logIn(formValues, () => setFormErrors({ ...formErrors, response: "Invalid login or password" })));
     }
   };
 

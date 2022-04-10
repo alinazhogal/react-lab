@@ -1,9 +1,9 @@
 export enum ActionsType {
-  SET_SIGNIN_OPEN,
-  LOGIN,
-  LOGOUT,
-  SIGNUP,
-  LOGIN_ERROR,
+  SET_SIGNIN_OPEN = "SET_SIGNIN_OPEN",
+  LOGIN = "LOGIN",
+  LOGOUT = "LOGOUT",
+  SIGNUP = "SIGNUP",
+  RESTORE_USER = "RESTORE_USER",
 }
 
 export type ModalState = {
@@ -34,6 +34,7 @@ export interface Logout {
   type: ActionsType.LOGOUT;
 }
 
-export interface LoginError {
-  type: ActionsType.LOGIN_ERROR;
+export interface RestoreUser {
+  type: ActionsType.RESTORE_USER;
+  payload: { isAuth: boolean; username: string };
 }

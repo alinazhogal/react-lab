@@ -14,11 +14,23 @@ import Profile from "./components/profile";
 import PrivateRoute from "./components/privateRoute";
 import AuthProvider from "./context";
 import { store } from "./redux";
+import { getItemFromStorage, SavableKeys } from "./helpers/storage";
+import { ActionsType } from "./redux/types";
 
 class MainApp extends Component<unknown, { hasError: boolean }> {
   constructor(props: unknown) {
     super(props);
     this.state = { hasError: false };
+  }
+
+  componentDidMount() {
+    const savedUser = getItemFromStorage(SavableKeys.User);
+    if (savedUser) {
+      store.dispatch({
+        type: ActionsType.RESTORE_USER,
+        payload: { ...(JSON.parse(savedUser) as { username: string; isAuth: boolean }) },
+      });
+    }
   }
 
   static getDerivedStateFromError() {

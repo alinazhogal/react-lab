@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import InputText from "@/elements/inputText";
 import { validate, Fields } from "@/helpers/validate";
 import { useDispatch } from "react-redux";
-import { SignUp } from "@/redux/actions/authActions";
+import { register } from "@/redux/actions/authActions";
 
 function SignUpForm({ onClose }: { onClose: () => void }) {
   const [formValues, setFormValues] = useState<Fields>({ login: "", password: "", confirmPassword: "" });
@@ -30,15 +30,9 @@ function SignUpForm({ onClose }: { onClose: () => void }) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isError) {
-      // const { isAuth, userName } = await signUp(formValues);
-      dispatch(SignUp(formValues));
-      // if (isAuth) {
+      dispatch(register(formValues));
       onClose();
       navigate("/profile");
-      // dispatch({ type: "setIsAuth", payload: true });
-      // dispatch({ type: "setUsername", payload: userName });
-      // saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, userName }));
-      // }
     }
   };
 

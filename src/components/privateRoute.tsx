@@ -8,13 +8,8 @@ import Modal from "./modal/modal";
 
 export default function PrivateRoute({ children }: { children: JSX.Element }) {
   const navigate = useNavigate();
-  // const { state, dispatch } = useContext(AuthContext);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth);
-
-  // function onClose() {
-  //   dispatch({ type: "setSignInOpen", payload: false });
-  // }
 
   function onSignInClose() {
     dispatch(setSignInOpen(false));
@@ -32,5 +27,3 @@ export default function PrivateRoute({ children }: { children: JSX.Element }) {
     </>
   );
 }
-
-// onClose={() => dispatch({ type: "setSignInOpen", payload: false })}
