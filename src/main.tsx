@@ -12,7 +12,6 @@ import Footer from "./components/footer/footer";
 import Button from "./elements/button";
 import Profile from "./components/profile";
 import PrivateRoute from "./components/privateRoute";
-import AuthProvider from "./context";
 import { store } from "./redux";
 import { getItemFromStorage, SavableKeys } from "./helpers/storage";
 import { ActionsType } from "./redux/types";
@@ -56,42 +55,40 @@ class MainApp extends Component<unknown, { hasError: boolean }> {
     return (
       <StrictMode>
         <Provider store={store}>
-          <AuthProvider>
-            <BrowserRouter>
-              <Header />
-              <Routes>
-                <Route path={pageLinks.home} element={<Home />} />
-                <Route
-                  path={pageLinks.products}
-                  element={
-                    <PrivateRoute>
-                      <Products />
-                    </PrivateRoute>
-                  }
-                >
-                  <Route path={`${pageLinks.products}/:category`} element={<Products />} />
-                </Route>
-                <Route
-                  path={pageLinks.about}
-                  element={
-                    <PrivateRoute>
-                      <About />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path={pageLinks.profile}
-                  element={
-                    <PrivateRoute>
-                      <Profile />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path="*" element={<Navigate to={pageLinks.home} />} />
-              </Routes>
-              <Footer />
-            </BrowserRouter>
-          </AuthProvider>
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route path={pageLinks.home} element={<Home />} />
+              <Route
+                path={pageLinks.products}
+                element={
+                  <PrivateRoute>
+                    <Products />
+                  </PrivateRoute>
+                }
+              >
+                <Route path={`${pageLinks.products}/:category`} element={<Products />} />
+              </Route>
+              <Route
+                path={pageLinks.about}
+                element={
+                  <PrivateRoute>
+                    <About />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path={pageLinks.profile}
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to={pageLinks.home} />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
         </Provider>
       </StrictMode>
     );
