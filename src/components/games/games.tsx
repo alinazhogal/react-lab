@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { Game, Layout } from "./games.types";
 import GameCard from "./gameCard";
 import list from "../../assets/images/list.svg";
