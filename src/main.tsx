@@ -1,8 +1,9 @@
-import { Component, StrictMode, ErrorInfo } from "react";
+import { Component, ErrorInfo, StrictMode } from "react";
 import ReactDom from "react-dom";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./styles/main.scss";
 import Header from "src/components/header/header";
+import { Provider } from "react-redux";
 import Products from "./components/products/products";
 import About from "./components/about";
 import Home from "./components/home";
@@ -11,12 +12,24 @@ import Footer from "./components/footer/footer";
 import Button from "./elements/button";
 import Profile from "./components/profile";
 import PrivateRoute from "./components/privateRoute";
-import AuthProvider from "./context";
+import { store } from "./redux";
+import { getItemFromStorage, SavableKeys } from "./helpers/storage";
+import { ActionsType } from "./redux/types";
 
 class MainApp extends Component<unknown, { hasError: boolean }> {
   constructor(props: unknown) {
     super(props);
     this.state = { hasError: false };
+  }
+
+  componentDidMount() {
+    const savedUser = getItemFromStorage(SavableKeys.User);
+    if (savedUser) {
+      store.dispatch({
+        type: ActionsType.RESTORE_USER,
+        payload: { ...(JSON.parse(savedUser) as { username: string; isAuth: boolean }) },
+      });
+    }
   }
 
   static getDerivedStateFromError() {
@@ -41,7 +54,7 @@ class MainApp extends Component<unknown, { hasError: boolean }> {
       );
     return (
       <StrictMode>
-        <AuthProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Header />
             <Routes>
@@ -76,7 +89,7 @@ class MainApp extends Component<unknown, { hasError: boolean }> {
             </Routes>
             <Footer />
           </BrowserRouter>
-        </AuthProvider>
+        </Provider>
       </StrictMode>
     );
   }

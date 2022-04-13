@@ -1,42 +1,34 @@
-import { getTopGames, getSearchedGames } from "@/api/games";
 import { Search, SearchResults } from "@/elements/search";
+import { RootState } from "@/redux";
+import { getGames, getSearched } from "@/redux/actions/gamesAction";
+import { ActionsType } from "@/redux/types";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import debounce from "../helpers/debounce";
 import Categories from "./categories/categories";
 import Games from "./games/games";
-import { Game } from "./games/games.types";
 
 function Home() {
   const [inputValue, setInputValue] = useState<string>("");
-  const [topGames, setTopGames] = useState<Game[]>([]);
-  const [gamesLoading, setGamesLoading] = useState<boolean>(false);
-  const [searchedGames, setSearchedGames] = useState<Game[]>();
-  const [searchLoading, setSearchLoading] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+  const { games, isTopLoading, searchedGames, isSearchLoading } = useSelector((state: RootState) => state.games);
 
   useEffect(() => {
-    (async () => {
-      setGamesLoading(true);
-      const data = await getTopGames();
-      setTopGames(data);
-      setGamesLoading(false);
-    })();
+    dispatch(getGames());
   }, []);
 
-  const fetchData = async (value: string) => {
+  const fetchData = (value: string) => {
     if (value) {
-      setSearchedGames(undefined);
-      setSearchLoading(true);
-      const data = await getSearchedGames(value);
-      setSearchedGames(data);
-      setSearchLoading(false);
+      dispatch(getSearched(value));
     }
   };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setInputValue(e.target.value);
     if (!e.target.value) {
-      setSearchedGames(undefined);
-      setSearchLoading(false);
+      dispatch({ type: ActionsType.GET_SEARCHED_GAMES, payload: undefined });
+      dispatch({ type: ActionsType.SET_SEARCH_LOADING, payload: false });
     } else {
       debounce(() => fetchData(e.target.value));
     }
@@ -44,10 +36,10 @@ function Home() {
 
   return (
     <>
-      <Search value={inputValue} onChange={(e) => handleChange(e)} loading={searchLoading} />
+      <Search value={inputValue} onChange={(e) => handleChange(e)} loading={isSearchLoading} />
       {searchedGames !== undefined && inputValue && <SearchResults results={searchedGames} />}
       <Categories />
-      <Games games={topGames} loading={gamesLoading} />
+      <Games games={games} loading={isTopLoading} />
     </>
   );
 }

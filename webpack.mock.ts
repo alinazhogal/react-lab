@@ -44,7 +44,7 @@ export default webpackMockServer.add((app, helper) => {
       password: req.body.password,
     };
     users.add(user);
-    res.status(201).json({ isAuth: true, userName: user.login });
+    res.status(201).json({ isAuth: true, username: user.login });
   });
 
   app.put("/api/auth/signIn", (req, res) => {
@@ -56,7 +56,7 @@ export default webpackMockServer.add((app, helper) => {
     const exists = checkIsUserExist(user);
 
     if (exists) {
-      res.status(200).json({ isAuth: true, userName: user.login });
+      res.status(200).json({ isAuth: true, username: user.login });
     } else {
       res.status(400).json({ isAuth: false });
     }
