@@ -1,0 +1,27 @@
+.profile-content {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+  margin-bottom: 40px;
+
+  .side-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .picture {
+      background-color: rgb(158, 158, 158);
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 16px;
+
+      h4 {
+        text-transform: uppercase;
+        font-weight: normal;
+      }
+    }
+  }
+}

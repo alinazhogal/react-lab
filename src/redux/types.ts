@@ -6,6 +6,9 @@ export enum ActionsType {
   LOGOUT = "LOGOUT",
   SIGNUP = "SIGNUP",
   RESTORE_USER = "RESTORE_USER",
+  CHANGE_PASSWORD = "CHANGE_PASSWORD",
+  SAVE_PROFILE = "SAVE_PROFILE",
+  GET_PROFILE = "GET_PROFILE",
   GET_TOP_GAMES = "GET_TOP_GAMES",
   GET_SEARCHED_GAMES = "GET_SEARCHED_GAMES",
   SET_SEARCH_LOADING = "SET_SEARCH_LOADING",
@@ -23,12 +26,15 @@ export interface SetSignInOpen {
 
 export interface AuthState {
   username: string;
-  isAuth: boolean;
+  isAuth?: boolean;
+  description?: string;
+  phone?: string;
+  address?: string;
 }
 
 export interface Login {
   type: ActionsType.LOGIN;
-  payload: string;
+  payload: { username: string; address: string; phone: string; description: string };
 }
 
 export interface SignUp {
@@ -43,6 +49,10 @@ export interface Logout {
 export interface RestoreUser {
   type: ActionsType.RESTORE_USER;
   payload: { isAuth: boolean; username: string };
+}
+
+export interface ChangePassword {
+  type: ActionsType.CHANGE_PASSWORD;
 }
 
 export interface GamesState {

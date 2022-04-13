@@ -3,7 +3,7 @@ import { User } from "@/api/users";
 import webpackMockServer from "webpack-mock-server";
 import { getGamesResponse } from "./src/api/games";
 
-const testUser: User = { login: "qweqwe", password: "Qwe123" };
+const testUser: User = { login: "qweqwe", password: "Qwe123", phone: "", description: "", address: "" };
 
 const users = new Set<User>([testUser]);
 
@@ -60,6 +60,17 @@ export default webpackMockServer.add((app, helper) => {
     } else {
       res.status(400).json({ isAuth: false });
     }
+  });
+
+  app.post("/api/auth/changePassword", (req, res) => {
+    const user: User = {
+      login: req.body.login,
+      password: req.body.password,
+    };
+    users.forEach((el) => (el.login === user.login ? users.delete(el) : el));
+    // users.delete({ login: user.login, password: user.password });
+    users.add(user);
+    res.status(200).end();
   });
 
   app.post("/testPostMock", (req, res) => {

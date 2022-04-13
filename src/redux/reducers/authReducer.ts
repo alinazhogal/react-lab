@@ -1,18 +1,29 @@
-import { ActionsType, AuthState, RestoreUser, Login, Logout, SignUp } from "../types";
+import { ActionsType, AuthState, RestoreUser, Login, Logout, SignUp, ChangePassword } from "../types";
 
-const initialState = { isAuth: false, username: "" };
+const initialState = { isAuth: false, username: "", phone: "", description: "", address: "" };
 
-// eslint-disable-next-line default-param-last
-const modalReducer = (state: AuthState = initialState, action: Login | Logout | SignUp | RestoreUser) => {
+const modalReducer = (
+  // eslint-disable-next-line default-param-last
+  state: AuthState = initialState,
+  action: Login | Logout | SignUp | RestoreUser | ChangePassword
+) => {
   switch (action.type) {
     case ActionsType.LOGIN:
-      return { isAuth: true, username: action.payload };
+      return {
+        isAuth: true,
+        username: action.payload.username,
+        phone: action.payload.phone,
+        address: action.payload.address,
+        description: action.payload.description,
+      };
     case ActionsType.LOGOUT:
-      return { isAuth: false, username: "" };
+      return { isAuth: false, username: "", phone: "", description: "", address: "" };
     case ActionsType.SIGNUP:
-      return { isAuth: true, username: action.payload };
+      return { ...state, isAuth: true, username: action.payload };
     case ActionsType.RESTORE_USER:
-      return { isAuth: action.payload.isAuth, username: action.payload.username };
+      return { ...state, isAuth: action.payload.isAuth, username: action.payload.username };
+    case ActionsType.CHANGE_PASSWORD:
+      return state;
     default:
       return state;
   }

@@ -1,12 +1,13 @@
+/* eslint-disable react/require-default-props */
 interface InputProps {
   id: string;
   label: string;
   type: string;
   value: string | undefined;
-  errorMessage: string | undefined;
+  errorMessage?: string | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 function InputText({ id, label, type, value, errorMessage, onChange, onBlur, onFocus }: InputProps) {
