@@ -55,6 +55,16 @@ export interface ChangePassword {
   type: ActionsType.CHANGE_PASSWORD;
 }
 
+export interface SaveProfile {
+  type: ActionsType.SAVE_PROFILE;
+  payload: { username: string; address: string; phone: string; description: string };
+}
+
+export interface GetProfile {
+  type: ActionsType.GET_PROFILE;
+  payload: { username: string; address: string; phone: string; description: string };
+}
+
 export interface GamesState {
   games: Game[];
   searchedGames: Game[] | undefined;
