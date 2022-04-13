@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputText from "@/elements/inputText";
-import { validate, Fields } from "@/helpers/validate";
+import { AuthFields, validateAuth } from "@/helpers/validate";
 import { useDispatch } from "react-redux";
 import { register } from "@/redux/actions/authActions";
 
 function SignUpForm({ onClose }: { onClose: () => void }) {
-  const [formValues, setFormValues] = useState<Fields>({ login: "", password: "", confirmPassword: "" });
-  const [formErrors, setFormErrors] = useState<Fields>({ ...formValues });
+  const [formValues, setFormValues] = useState({ login: "", password: "", confirmPassword: "" });
+  const [formErrors, setFormErrors] = useState<AuthFields>({ ...formValues });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function SignUpForm({ onClose }: { onClose: () => void }) {
   const isError = formErrors.login || formErrors.password || formErrors.confirmPassword;
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setFormErrors(validate(e.target.name, e.target.value, formErrors, formValues.password));
+    setFormErrors(validateAuth(e.target.name, e.target.value, formErrors, formValues.password));
   };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {

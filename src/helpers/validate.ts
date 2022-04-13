@@ -1,40 +1,73 @@
-export interface Fields {
-  login: string;
+export interface AuthFields {
+  login?: string;
   password: string;
   confirmPassword?: string;
   response?: string;
 }
 
-export function validate(fieldName: string, value: string, formErrors: Fields, passwordValue = "") {
-  const errors = { ...formErrors };
-  const passwordRegex = "^(?=(.*[0-9]))((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.{6,20}$";
+export interface ProfileFields {
+  username: string;
+  description: string;
+  phone: string;
+  address: string;
+}
+
+export function checkEmpty(value: string) {
+  if (!value) {
+    return "Field is required";
+  }
+  return "";
+}
+
+export function validateLogin(value: string) {
   const loginRegex = "^[a-z0-9]{4,12}$";
-  // eslint-disable-next-line default-case
+  if (!value.match(loginRegex)) {
+    return "Login should be 4 -12 characters and shouldn't include special characters";
+  }
+  return "";
+}
+
+export function validatePassword(value: string) {
+  const passwordRegex = "^(?=(.*[0-9]))((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.{6,20}$";
+  if (!value.match(passwordRegex)) {
+    return "Password should be 6-20 characters and should include at least 1 capital and 1 lowercase letter and 1 number";
+  }
+  return "";
+}
+
+export function validateConfirmPassword(value: string, passwordValue: string | undefined) {
+  if (value !== passwordValue) {
+    return "Passwords don't match";
+  }
+  return "";
+}
+
+export function validateAuth(fieldName: string, value: string, formErrors: AuthFields, passwordValue?: string) {
+  const errors = { ...formErrors };
   switch (fieldName) {
     case "login":
-      if (!value) {
-        errors.login = "Field is required";
-      } else if (!value.match(loginRegex)) {
-        errors.login = "Login should be 4 -12 characters and shouldn't include special characters";
-      } else errors.login = "";
+      errors.login = checkEmpty(value) || validateLogin(value);
       break;
-
     case "password":
-      if (!value) {
-        errors.password = "Field is required";
-      } else if (!value.match(passwordRegex)) {
-        errors.password =
-          "Password should be 6-20 characters and should include at least 1 capital and 1 lowercase letter and 1 number";
-      } else errors.password = "";
+      errors.password = checkEmpty(value) || validatePassword(value);
       break;
-
     case "confirmPassword":
-      if (!value) {
-        errors.confirmPassword = "Field is required";
-      } else if (value !== passwordValue) {
-        errors.confirmPassword = "Passwords don't match";
-      } else errors.confirmPassword = "";
+      errors.confirmPassword = checkEmpty(value) || validateConfirmPassword(value, passwordValue);
+      break;
+    default:
+      return errors;
   }
+  return errors;
+}
 
+export function validateProfile(fieldName: string, value: string, formErrors: ProfileFields) {
+  const errors = { ...formErrors };
+  switch (fieldName) {
+    case "username":
+      errors.username = checkEmpty(value) || validateLogin(value);
+      break;
+    default:
+      errors[fieldName as keyof ProfileFields] = checkEmpty(value);
+  }
   return errors;
 }

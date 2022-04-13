@@ -1,12 +1,12 @@
 import { useState } from "react";
 import InputText from "@/elements/inputText";
-import { validate, Fields } from "@/helpers/validate";
+import { AuthFields, validateAuth } from "@/helpers/validate";
 import { useDispatch } from "react-redux";
 import { logIn } from "@/redux/actions/authActions";
 
 function SignInForm() {
-  const [formValues, setFormValues] = useState<Fields>({ login: "", password: "" });
-  const [formErrors, setFormErrors] = useState<Fields>({ ...formValues, response: "" });
+  const [formValues, setFormValues] = useState({ login: "", password: "" });
+  const [formErrors, setFormErrors] = useState<AuthFields>({ ...formValues, response: "" });
 
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ function SignInForm() {
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setFormErrors(validate(e.target.name, e.target.value, formErrors));
+    setFormErrors(validateAuth(e.target.name, e.target.value, formErrors));
   };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
