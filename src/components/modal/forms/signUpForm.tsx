@@ -8,7 +8,6 @@ import { register } from "@/redux/actions/authActions";
 function SignUpForm({ onClose }: { onClose: () => void }) {
   const [formValues, setFormValues] = useState({ login: "", password: "", confirmPassword: "" });
   const [formErrors, setFormErrors] = useState<AuthFields>({ ...formValues });
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -30,9 +29,12 @@ function SignUpForm({ onClose }: { onClose: () => void }) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isError) {
-      dispatch(register(formValues));
-      onClose();
-      navigate("/profile");
+      dispatch(
+        register(formValues, () => {
+          navigate("/profile");
+          onClose();
+        })
+      );
     }
   };
 

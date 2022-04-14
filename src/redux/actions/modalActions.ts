@@ -1,8 +1,8 @@
 import { ActionsType } from "../types";
 
-const setSignInOpen = (isOpen: boolean) => ({
+const setSignInOpen = (isOpen: boolean, callbackLink?: string) => ({
   type: ActionsType.SET_SIGNIN_OPEN,
-  payload: isOpen,
+  payload: { isOpen, callbackLink },
 });
 
 export default setSignInOpen;

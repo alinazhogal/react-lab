@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, NavLinkProps, useNavigate } from "react-router-dom";
 import { removeItemFromStorage, SavableKeys } from "@/helpers/storage";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "@/redux/actions/authActions";
@@ -15,6 +15,43 @@ import SignInForm from "../modal/forms/signInForm";
 import SignUpForm from "../modal/forms/signUpForm";
 import MobileMenu from "./mobileMenu";
 
+function PrivateLink({
+  children,
+  activeCn,
+  passiveCn,
+  ...navLinkProps
+}: NavLinkProps & {
+  // eslint-disable-next-line react/require-default-props
+  activeCn?: string;
+  passiveCn: string;
+}) {
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+
+  function handleLinkClick(link: string) {
+    dispatch(setSignInOpen(true, link));
+  }
+
+  if (!isAuth) {
+    return (
+      <NavLink
+        {...navLinkProps}
+        className={passiveCn}
+        to="#"
+        onClick={() => handleLinkClick(navLinkProps.to as string)}
+      >
+        {children}
+      </NavLink>
+    );
+  }
+
+  return (
+    <NavLink {...navLinkProps} className={({ isActive }) => (isActive && activeCn ? activeCn : passiveCn)}>
+      {children}
+    </NavLink>
+  );
+}
+
 export default function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -26,7 +63,7 @@ export default function NavBar() {
   function handleLogOut() {
     dispatch(logOut());
     removeItemFromStorage(SavableKeys.User);
-    navigate("/home");
+    navigate(pageLinks.home);
   }
 
   function onSignInOpen() {
@@ -47,30 +84,27 @@ export default function NavBar() {
         </li>
         <li className="nav-prod">
           <div className="dropdown">
-            <NavLink
-              to={pageLinks.products}
-              className={({ isActive }) => (isActive ? "active-link dropbtn" : "dropbtn")}
-            >
+            <PrivateLink to={pageLinks.products} activeCn="active-link dropbtn" passiveCn="dropbtn">
               Products
               <img src={arrow} alt="arrow" className="arrow" />
-            </NavLink>
+            </PrivateLink>
             <div className="dropdown-content">
-              <NavLink to={`${pageLinks.products}/pc`} className="product-link">
+              <PrivateLink to={`${pageLinks.products}/pc`} passiveCn="product-link">
                 PC
-              </NavLink>
-              <NavLink to={`${pageLinks.products}/playstation`} className="product-link">
+              </PrivateLink>
+              <PrivateLink to={`${pageLinks.products}/playstation`} passiveCn="product-link">
                 Playstation 5
-              </NavLink>
-              <NavLink to={`${pageLinks.products}/xbox`} className="product-link">
+              </PrivateLink>
+              <PrivateLink to={`${pageLinks.products}/xbox`} passiveCn="product-link">
                 Xbox One
-              </NavLink>
+              </PrivateLink>
             </div>
           </div>
         </li>
         <li className="nav-about">
-          <NavLink to={pageLinks.about} className={({ isActive }) => (isActive ? "active-link " : "")}>
+          <PrivateLink to={pageLinks.about} activeCn="active-link" passiveCn="">
             About
-          </NavLink>
+          </PrivateLink>{" "}
         </li>
 
         {!user.isAuth && (

@@ -17,11 +17,12 @@ export enum ActionsType {
 
 export interface ModalState {
   isOpen: boolean;
+  callbackLink: string | undefined;
 }
 
 export interface SetSignInOpen {
   type: ActionsType.SET_SIGNIN_OPEN;
-  payload: boolean;
+  payload: { isOpen: boolean; callbackLink: string };
 }
 
 export interface AuthState {
@@ -35,7 +36,7 @@ export interface AuthState {
 
 export interface Login {
   type: ActionsType.LOGIN;
-  payload: { username: string };
+  payload: string;
 }
 
 export interface SignUp {
@@ -63,7 +64,7 @@ export interface SaveProfile {
     address: string;
     phone: string;
     description: string;
-    photo: string | undefined;
+    photo: string;
   };
 }
 
@@ -74,7 +75,7 @@ export interface GetProfile {
     address: string;
     phone: string;
     description: string;
-    photo: string | undefined;
+    photo: string;
   };
 }
 

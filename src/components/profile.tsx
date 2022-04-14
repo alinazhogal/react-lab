@@ -21,7 +21,6 @@ function Profile() {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(true);
   const dispatch = useDispatch();
-
   const isError = formErrors.username || formErrors.address || formErrors.phone || formErrors.description;
 
   useEffect(() => {

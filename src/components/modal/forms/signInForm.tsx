@@ -1,15 +1,17 @@
 import { useState } from "react";
 import InputText from "@/elements/inputText";
 import { AuthFields, validateAuth } from "@/helpers/validate";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "@/redux/actions/authActions";
+import { useNavigate } from "react-router-dom";
+import { RootState } from "@/redux";
 
 function SignInForm() {
   const [formValues, setFormValues] = useState({ login: "", password: "" });
   const [formErrors, setFormErrors] = useState<AuthFields>({ ...formValues, response: "" });
-
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const callbackLink = useSelector((state: RootState) => state.modal.callbackLink);
   const isError = formErrors.login || formErrors.password;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +30,17 @@ function SignInForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isError) {
-      dispatch(logIn(formValues, () => setFormErrors({ ...formErrors, response: "Invalid login or password" })));
+      dispatch(
+        logIn(
+          formValues,
+          () => {
+            if (callbackLink) {
+              navigate(callbackLink);
+            }
+          },
+          () => setFormErrors({ ...formErrors, response: "Invalid login or password" })
+        )
+      );
     }
   };
 

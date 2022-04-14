@@ -1,3 +1,4 @@
+import { getItemFromStorage, SavableKeys } from "@/helpers/storage";
 import {
   ActionsType,
   AuthState,
@@ -10,7 +11,22 @@ import {
   SaveProfile,
 } from "../types";
 
-const initialState = { isAuth: false, username: "", phone: "", description: "", address: "", photo: "" };
+const restoredUser = getItemFromStorage(SavableKeys.User);
+const user = restoredUser
+  ? JSON.parse(restoredUser)
+  : {
+      isAuth: "",
+      username: "",
+    };
+
+const initialState = {
+  isAuth: user.isAuth,
+  username: user.username,
+  phone: "",
+  description: "",
+  address: "",
+  photo: "",
+};
 
 const modalReducer = (
   // eslint-disable-next-line default-param-last
@@ -19,7 +35,7 @@ const modalReducer = (
 ) => {
   switch (action.type) {
     case ActionsType.LOGIN:
-      return { isAuth: true, username: action.payload.username };
+      return { ...state, isAuth: true, username: action.payload };
     case ActionsType.LOGOUT:
       return { isAuth: false, username: "", phone: "", description: "", address: "", photo: "" };
     case ActionsType.SIGNUP:

@@ -7,12 +7,13 @@ export const logOut = () => ({
   type: ActionsType.LOGOUT,
 });
 
-export function logIn(values: User, errorCallback: () => void) {
-  return async (dispatch: (arg0: { type: ActionsType; payload?: string | boolean | AuthState }) => void) => {
+export function logIn(values: User, successCallback: () => void, errorCallback: () => void) {
+  return async (dispatch: (arg0: { type: ActionsType; payload: string | boolean }) => void) => {
     try {
       const { isAuth, username } = await signIn(values);
       if (isAuth) {
-        dispatch({ type: ActionsType.LOGIN, payload: { username: values.login } });
+        dispatch({ type: ActionsType.LOGIN, payload: values.login });
+        successCallback();
         dispatch({ type: ActionsType.SET_SIGNIN_OPEN, payload: false });
         saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, username }));
       }
@@ -25,11 +26,12 @@ export function logIn(values: User, errorCallback: () => void) {
   };
 }
 
-export function register(values: User) {
+export function register(values: User, cb: () => void) {
   return async (dispatch: (arg0: { type: ActionsType; payload: string }) => void) => {
     const { isAuth, username } = await signUp(values);
     dispatch({ type: ActionsType.SIGNUP, payload: username });
     saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, username }));
+    cb();
   };
 }
 
@@ -48,9 +50,18 @@ export function saveProfileInfo(values: User) {
   };
 }
 
-export function getProfileInfo(user: string) {
+export function getProfileInfo(username: string) {
   return async (dispatch: (arg0: { type: ActionsType; payload: AuthState }) => void) => {
-    const { login, phone, address, description, photo } = await getProfile(user);
-    dispatch({ type: ActionsType.GET_PROFILE, payload: { username: login, phone, description, address, photo } });
+    const { login, phone, address, description, photo } = await getProfile(username);
+    dispatch({
+      type: ActionsType.GET_PROFILE,
+      payload: {
+        username: login,
+        phone: phone || "",
+        description: description || "",
+        address: address || "",
+        photo: photo || "",
+      },
+    });
   };
 }
