@@ -19,6 +19,7 @@ function Profile() {
     description: "",
   });
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(true);
   const dispatch = useDispatch();
 
   const isError = formErrors.username || formErrors.address || formErrors.phone || formErrors.description;
@@ -27,9 +28,22 @@ function Profile() {
     dispatch(getProfileInfo(user.username));
   }, []);
 
+  useEffect(() => {
+    setFormValues({ ...user });
+  }, [user]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    const updatedValues = { ...formValues, [name]: value };
+    setFormValues({ ...updatedValues });
+    if (
+      updatedValues.username === user.username &&
+      updatedValues.address === user.address &&
+      updatedValues.phone === user.phone &&
+      updatedValues.description === user.description
+    ) {
+      setDisabled(true);
+    } else setDisabled(false);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,6 +54,22 @@ function Profile() {
     setFormErrors({ ...formErrors, [e.target.name]: "" });
   };
 
+  const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    const { files } = e.target;
+    if (files) {
+      reader.onloadend = () => {
+        const updatedValues = { ...formValues, photo: reader.result as string };
+        setFormValues({ ...updatedValues });
+        if (updatedValues.photo === user.photo) {
+          setDisabled(true);
+        } else setDisabled(false);
+      };
+      reader.readAsDataURL(files[0]);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isError) {
@@ -48,6 +78,7 @@ function Profile() {
           ? { login: user.username, newLogin: formValues.username }
           : { login: user.username };
       dispatch(saveProfileInfo({ ...formValues, ...isNewLogin }));
+      setDisabled(true);
     }
   };
 
@@ -58,8 +89,15 @@ function Profile() {
         <div className="profile-content">
           <div className="side-info">
             <div className="picture">
-              <h4>No picture</h4>
+              {formValues.photo ? <img src={formValues.photo} alt="profile avatar" /> : <h4>No picture</h4>}
             </div>
+            <div className="file-container" role="button">
+              <label htmlFor="file" className="file-button">
+                Change photo
+                <input type="file" name="file" id="file" accept="image/*" onChange={onUpload} />
+              </label>
+            </div>
+
             <Button title="Change password" onClick={() => setModalOpen(true)} />
             <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} title="Change password">
               <ChangePasswordForm onClose={() => setModalOpen(false)} />
@@ -97,7 +135,7 @@ function Profile() {
               onFocus={handleFocus}
             />
             <div className="input-div">
-              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control*/}
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label htmlFor="desc">Profile description</label>
               <textarea
                 id="desc"
@@ -110,7 +148,7 @@ function Profile() {
               />
               <span>{formErrors.description}</span>
             </div>
-            <button type="submit" className="button-el">
+            <button type="submit" className={disabled ? "button-el disabled" : "button-el"} disabled={disabled}>
               Save changes
             </button>
           </form>

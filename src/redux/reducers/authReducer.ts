@@ -10,7 +10,7 @@ import {
   SaveProfile,
 } from "../types";
 
-const initialState = { isAuth: false, username: "", phone: "", description: "", address: "" };
+const initialState = { isAuth: false, username: "", phone: "", description: "", address: "", photo: "" };
 
 const modalReducer = (
   // eslint-disable-next-line default-param-last
@@ -19,15 +19,9 @@ const modalReducer = (
 ) => {
   switch (action.type) {
     case ActionsType.LOGIN:
-      return {
-        isAuth: true,
-        username: action.payload.username,
-        phone: action.payload.phone,
-        address: action.payload.address,
-        description: action.payload.description,
-      };
+      return { isAuth: true, username: action.payload.username };
     case ActionsType.LOGOUT:
-      return { isAuth: false, username: "", phone: "", description: "", address: "" };
+      return { isAuth: false, username: "", phone: "", description: "", address: "", photo: "" };
     case ActionsType.SIGNUP:
       return { ...state, isAuth: true, username: action.payload };
     case ActionsType.RESTORE_USER:
@@ -41,6 +35,7 @@ const modalReducer = (
         phone: action.payload.phone,
         address: action.payload.address,
         description: action.payload.description,
+        photo: action.payload.photo,
       };
     case ActionsType.GET_PROFILE:
       return {
@@ -49,6 +44,7 @@ const modalReducer = (
         phone: action.payload.phone,
         address: action.payload.address,
         description: action.payload.description,
+        photo: action.payload.photo,
       };
     default:
       return state;

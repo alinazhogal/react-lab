@@ -8,6 +8,7 @@ export interface User {
   phone?: string;
   description?: string;
   address?: string;
+  photo?: string;
 }
 
 export async function signUp(values: User) {

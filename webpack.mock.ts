@@ -9,6 +9,7 @@ const testUser: User = {
   phone: "5678999",
   description: "ejdjdkdkdkdk",
   address: "Minsk",
+  photo: "",
 };
 
 const users = {
@@ -48,7 +49,6 @@ export default webpackMockServer.add((app, helper) => {
       login: req.body.login,
       password: req.body.password,
     };
-
     if (users[user.login]) {
       if (users[user.login].login === user.login && users[user.login].password === user.password) {
         res.status(200).json({
@@ -80,6 +80,7 @@ export default webpackMockServer.add((app, helper) => {
       phone: req.body.phone,
       address: req.body.address,
       description: req.body.description,
+      photo: req.body.photo,
     };
     if (user.newLogin) {
       users[user.newLogin] = {
@@ -88,14 +89,17 @@ export default webpackMockServer.add((app, helper) => {
         phone: user.phone,
         address: user.address,
         description: user.description,
+        photo: user.photo,
       };
       delete users[user.oldLogin];
     } else {
       users[user.oldLogin] = {
         ...users[user.oldLogin],
+        login: user.oldLogin,
         phone: user.phone,
         address: user.address,
         description: user.description,
+        photo: user.photo,
       };
     }
     res.status(200).end();

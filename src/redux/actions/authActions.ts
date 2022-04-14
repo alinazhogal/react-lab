@@ -10,9 +10,9 @@ export const logOut = () => ({
 export function logIn(values: User, errorCallback: () => void) {
   return async (dispatch: (arg0: { type: ActionsType; payload?: string | boolean | AuthState }) => void) => {
     try {
-      const { isAuth, username, phone, address, description } = await signIn(values);
+      const { isAuth, username } = await signIn(values);
       if (isAuth) {
-        dispatch({ type: ActionsType.LOGIN, payload: { username: values.login, phone, description, address } });
+        dispatch({ type: ActionsType.LOGIN, payload: { username: values.login } });
         dispatch({ type: ActionsType.SET_SIGNIN_OPEN, payload: false });
         saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, username }));
       }
@@ -43,13 +43,14 @@ export function changePassword(values: User) {
 export function saveProfileInfo(values: User) {
   return async (dispatch: (arg0: { type: ActionsType; payload: AuthState }) => void) => {
     await saveProfile(values);
+    saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth: true, username: values.newLogin || values.login }));
     dispatch({ type: ActionsType.SAVE_PROFILE, payload: { ...values, username: values.newLogin || values.login } });
   };
 }
 
 export function getProfileInfo(user: string) {
   return async (dispatch: (arg0: { type: ActionsType; payload: AuthState }) => void) => {
-    const { login, phone, address, description } = await getProfile(user);
-    dispatch({ type: ActionsType.SAVE_PROFILE, payload: { username: login, phone, description, address } });
+    const { login, phone, address, description, photo } = await getProfile(user);
+    dispatch({ type: ActionsType.GET_PROFILE, payload: { username: login, phone, description, address, photo } });
   };
 }

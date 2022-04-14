@@ -30,11 +30,12 @@ export interface AuthState {
   description?: string;
   phone?: string;
   address?: string;
+  photo?: string;
 }
 
 export interface Login {
   type: ActionsType.LOGIN;
-  payload: { username: string; address: string; phone: string; description: string };
+  payload: { username: string };
 }
 
 export interface SignUp {
@@ -57,12 +58,24 @@ export interface ChangePassword {
 
 export interface SaveProfile {
   type: ActionsType.SAVE_PROFILE;
-  payload: { username: string; address: string; phone: string; description: string };
+  payload: {
+    username: string;
+    address: string;
+    phone: string;
+    description: string;
+    photo: string | undefined;
+  };
 }
 
 export interface GetProfile {
   type: ActionsType.GET_PROFILE;
-  payload: { username: string; address: string; phone: string; description: string };
+  payload: {
+    username: string;
+    address: string;
+    phone: string;
+    description: string;
+    photo: string | undefined;
+  };
 }
 
 export interface GamesState {
