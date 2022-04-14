@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, NavLinkProps, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { removeItemFromStorage, SavableKeys } from "@/helpers/storage";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "@/redux/actions/authActions";
@@ -14,43 +14,7 @@ import Modal from "../modal/modal";
 import SignInForm from "../modal/forms/signInForm";
 import SignUpForm from "../modal/forms/signUpForm";
 import MobileMenu from "./mobileMenu";
-
-function PrivateLink({
-  children,
-  activeCn,
-  passiveCn,
-  ...navLinkProps
-}: NavLinkProps & {
-  // eslint-disable-next-line react/require-default-props
-  activeCn?: string;
-  passiveCn: string;
-}) {
-  const dispatch = useDispatch();
-  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
-
-  function handleLinkClick(link: string) {
-    dispatch(setSignInOpen(true, link));
-  }
-
-  if (!isAuth) {
-    return (
-      <NavLink
-        {...navLinkProps}
-        className={passiveCn}
-        to="#"
-        onClick={() => handleLinkClick(navLinkProps.to as string)}
-      >
-        {children}
-      </NavLink>
-    );
-  }
-
-  return (
-    <NavLink {...navLinkProps} className={({ isActive }) => (isActive && activeCn ? activeCn : passiveCn)}>
-      {children}
-    </NavLink>
-  );
-}
+import PrivateLink from "./privateLink";
 
 export default function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
