@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes as DOMRoutes } from "react-route
 import About from "./components/about";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
-import Home from "./components/home";
+import Home from "./components/home/home";
 import Products from "./components/products/products";
 import Profile from "./components/profile";
 import { RootState } from "./redux";

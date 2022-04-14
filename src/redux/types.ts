@@ -1,4 +1,4 @@
-import { Game } from "@/components/games/games.types";
+import { Game } from "@/components/home/games/games.types";
 
 export enum ActionsType {
   SET_SIGNIN_OPEN = "SET_SIGNIN_OPEN",

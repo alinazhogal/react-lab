@@ -1,8 +1,8 @@
 import { Game, Layout } from "./games.types";
 import "./games.scss";
-import Button from "../../elements/button";
-import stars from "../../assets/images/stars.svg";
-import xbox from "../../assets/images/xbox.png";
+import Button from "../../../elements/button";
+import stars from "../../../assets/images/stars.svg";
+import xbox from "../../../assets/images/xbox.png";
 
 function GameCard({ name, image, description, price, link, layout }: Game & { layout: Layout }) {
   function click(e: React.MouseEvent<HTMLButtonElement>) {

@@ -1,5 +1,5 @@
 import { getSearchedGames, getTopGames } from "@/api/games";
-import { Game } from "@/components/games/games.types";
+import { Game } from "@/components/home/games/games.types";
 import { ActionsType } from "../types";
 
 export function getGames() {

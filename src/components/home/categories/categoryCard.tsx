@@ -1,4 +1,4 @@
-import PrivateLink from "../header/privateLink";
+import PrivateLink from "../../header/privateLink";
 import "./categories.scss";
 
 interface CategoryProps {
