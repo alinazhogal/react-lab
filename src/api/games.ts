@@ -1,5 +1,5 @@
 import { MockServerHelper } from "webpack-mock-server/lib/mockServerHelper";
-import { Game } from "@/components/games/games.types";
+import { Game } from "@/components/home/games/games.types";
 import api from ".";
 
 function wait(milliseconds = 300) {

@@ -1,8 +1,8 @@
-import xbox from "../../assets/images/xbox.png";
-import playstation from "../../assets/images/playstation.png";
-import desktop from "../../assets/images/desktop-computer.png";
+import xbox from "../../../assets/images/xbox.png";
+import playstation from "../../../assets/images/playstation.png";
+import desktop from "../../../assets/images/desktop-computer.png";
 import CategoryCard from "./categoryCard";
-import pageLinks from "../../routesLinks";
+import pageLinks from "../../../routesLinks";
 
 function Categories() {
   return (

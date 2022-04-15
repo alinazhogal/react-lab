@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Game, Layout } from "./games.types";
 import GameCard from "./gameCard";
-import list from "../../assets/images/list.svg";
-import grid from "../../assets/images/grid.svg";
+import list from "../../../assets/images/list.svg";
+import grid from "../../../assets/images/grid.svg";
 
 interface GamesProps {
   games: Game[];

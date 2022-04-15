@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 interface InputProps {
   id: string;
   label: string;

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import PrivateLink from "../../header/privateLink";
 import "./categories.scss";
 
 interface CategoryProps {
@@ -9,12 +9,12 @@ interface CategoryProps {
 
 function CategoryCard({ title, img, link }: CategoryProps) {
   return (
-    <NavLink to={link}>
+    <PrivateLink to={link} passiveCn="">
       <div className="category">
         <img src={img} alt="" />
         <h4>{title}</h4>
       </div>
-    </NavLink>
+    </PrivateLink>
   );
 }
 

@@ -3,9 +3,18 @@ import { User } from "@/api/users";
 import webpackMockServer from "webpack-mock-server";
 import { getGamesResponse } from "./src/api/games";
 
-const testUser: User = { login: "qweqwe", password: "Qwe123" };
+const testUser: User = {
+  login: "qweqwe",
+  password: "Qwe123",
+  phone: "5678999",
+  description: "ejdjdkdkdkdk",
+  address: "Minsk",
+  photo: "",
+};
 
-const users = new Set<User>([testUser]);
+const users = {
+  [testUser.login]: testUser,
+};
 
 export default webpackMockServer.add((app, helper) => {
   app.get("/testMock", (_req, res) => {
@@ -26,24 +35,12 @@ export default webpackMockServer.add((app, helper) => {
     res.json(getGamesResponse(helper).filter((game) => game.name.toLowerCase().includes(text.toLowerCase())));
   });
 
-  function checkIsUserExist(user: User): boolean {
-    let exists = false;
-
-    users.forEach((us) => {
-      if (us.login === user.login && us.password === user.password) {
-        exists = true;
-      }
-    });
-
-    return exists;
-  }
-
   app.post("/api/auth/signUp", (req, res) => {
     const user: User = {
       login: req.body.login,
       password: req.body.password,
     };
-    users.add(user);
+    users[user.login] = user;
     res.status(201).json({ isAuth: true, username: user.login });
   });
 
@@ -52,14 +49,64 @@ export default webpackMockServer.add((app, helper) => {
       login: req.body.login,
       password: req.body.password,
     };
-
-    const exists = checkIsUserExist(user);
-
-    if (exists) {
-      res.status(200).json({ isAuth: true, username: user.login });
+    if (users[user.login]) {
+      if (users[user.login].login === user.login && users[user.login].password === user.password) {
+        res.status(200).json({
+          isAuth: true,
+          username: users[user.login].login,
+          address: users[user.login].address,
+          description: users[user.login].description,
+          phone: users[user.login].phone,
+        });
+      }
     } else {
       res.status(400).json({ isAuth: false });
     }
+  });
+
+  app.post("/api/changePassword", (req, res) => {
+    const user = {
+      login: req.body.login,
+      newPassword: req.body.password,
+    };
+    users[user.login].password = user.newPassword;
+    res.status(200).end();
+  });
+
+  app.post("/api/saveProfile", (req, res) => {
+    const user = {
+      oldLogin: req.body.login,
+      newLogin: req.body.newLogin,
+      phone: req.body.phone,
+      address: req.body.address,
+      description: req.body.description,
+      photo: req.body.photo,
+    };
+    if (user.newLogin) {
+      users[user.newLogin] = {
+        ...users[user.oldLogin],
+        login: user.newLogin,
+        phone: user.phone,
+        address: user.address,
+        description: user.description,
+        photo: user.photo,
+      };
+      delete users[user.oldLogin];
+    } else {
+      users[user.oldLogin] = {
+        ...users[user.oldLogin],
+        login: user.oldLogin,
+        phone: user.phone,
+        address: user.address,
+        description: user.description,
+        photo: user.photo,
+      };
+    }
+    res.status(200).end();
+  });
+
+  app.get("/api/getProfile/:login", (req, res) => {
+    res.json(users[req.params.login]);
   });
 
   app.post("/testPostMock", (req, res) => {

@@ -14,6 +14,7 @@ import Modal from "../modal/modal";
 import SignInForm from "../modal/forms/signInForm";
 import SignUpForm from "../modal/forms/signUpForm";
 import MobileMenu from "./mobileMenu";
+import PrivateLink from "./privateLink";
 
 export default function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
@@ -26,7 +27,7 @@ export default function NavBar() {
   function handleLogOut() {
     dispatch(logOut());
     removeItemFromStorage(SavableKeys.User);
-    navigate("/home");
+    navigate(pageLinks.home);
   }
 
   function onSignInOpen() {
@@ -47,30 +48,27 @@ export default function NavBar() {
         </li>
         <li className="nav-prod">
           <div className="dropdown">
-            <NavLink
-              to={pageLinks.products}
-              className={({ isActive }) => (isActive ? "active-link dropbtn" : "dropbtn")}
-            >
+            <PrivateLink to={pageLinks.products} activeCn="active-link dropbtn" passiveCn="dropbtn">
               Products
               <img src={arrow} alt="arrow" className="arrow" />
-            </NavLink>
+            </PrivateLink>
             <div className="dropdown-content">
-              <NavLink to={`${pageLinks.products}/pc`} className="product-link">
+              <PrivateLink to={`${pageLinks.products}/pc`} passiveCn="product-link">
                 PC
-              </NavLink>
-              <NavLink to={`${pageLinks.products}/playstation`} className="product-link">
+              </PrivateLink>
+              <PrivateLink to={`${pageLinks.products}/playstation`} passiveCn="product-link">
                 Playstation 5
-              </NavLink>
-              <NavLink to={`${pageLinks.products}/xbox`} className="product-link">
+              </PrivateLink>
+              <PrivateLink to={`${pageLinks.products}/xbox`} passiveCn="product-link">
                 Xbox One
-              </NavLink>
+              </PrivateLink>
             </div>
           </div>
         </li>
         <li className="nav-about">
-          <NavLink to={pageLinks.about} className={({ isActive }) => (isActive ? "active-link " : "")}>
+          <PrivateLink to={pageLinks.about} activeCn="active-link" passiveCn="">
             About
-          </NavLink>
+          </PrivateLink>{" "}
         </li>
 
         {!user.isAuth && (
