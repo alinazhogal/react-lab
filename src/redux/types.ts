@@ -11,6 +11,7 @@ export enum ActionsType {
   GET_PROFILE = "GET_PROFILE",
   GET_TOP_GAMES = "GET_TOP_GAMES",
   GET_SEARCHED_GAMES = "GET_SEARCHED_GAMES",
+  GET_FILTERED_GAMES = "GET_FILTERED_GAMES",
   SET_SEARCH_LOADING = "SET_SEARCH_LOADING",
   SET_TOP_LOADING = "SET_TOP_LOADING",
 }
@@ -88,6 +89,11 @@ export interface GamesState {
 
 export interface getTopGames {
   type: ActionsType.GET_TOP_GAMES;
+  payload: Game[];
+}
+
+export interface getFilteredGames {
+  type: ActionsType.GET_FILTERED_GAMES;
   payload: Game[];
 }
 

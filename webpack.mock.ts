@@ -35,6 +35,40 @@ export default webpackMockServer.add((app, helper) => {
     res.json(getGamesResponse(helper).filter((game) => game.name.toLowerCase().includes(text.toLowerCase())));
   });
 
+  app.get("/api/products", ({ query: { genre, age, sortCriteria, sortType } }, res) => {
+    let products = [...getGamesResponse(helper)];
+    if (genre) products = genre !== "All genres" ? products.filter((game) => game.genre === genre) : products;
+    if (age) products = age !== "All ages" ? products.filter((game) => game.age === Number(age)) : products;
+
+    products.sort((a, b) => {
+      switch (sortCriteria) {
+        case "recent":
+          if (a.date < b.date) return sortType === "asc" ? 1 : -1;
+          if (a.date > b.date) return sortType === "asc" ? -1 : 1;
+          if (a.date === b.date) return 0;
+          break;
+
+        case "name":
+          if (a.name < b.name) return sortType === "asc" ? 1 : -1;
+          if (a.name > b.name) return sortType === "asc" ? -1 : 1;
+          if (a.name === b.name) return 0;
+          break;
+
+        case "price":
+          if (a.price < b.price) return sortType === "asc" ? 1 : -1;
+          if (a.price > b.price) return sortType === "asc" ? -1 : 1;
+          if (a.price === b.price) return 0;
+          break;
+
+        default:
+          break;
+      }
+      return 0;
+    });
+
+    res.json(products);
+  });
+
   app.post("/api/auth/signUp", (req, res) => {
     const user: User = {
       login: req.body.login,

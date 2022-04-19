@@ -1,3 +1,4 @@
+import api from "@/api";
 import { getSearchedGames, getTopGames } from "@/api/games";
 import { Game } from "@/components/home/games/games.types";
 import { ActionsType } from "../types";
@@ -18,5 +19,13 @@ export function getSearched(value: string) {
     const data = await getSearchedGames(value);
     dispatch({ type: ActionsType.GET_SEARCHED_GAMES, payload: data });
     dispatch({ type: ActionsType.SET_SEARCH_LOADING, payload: false });
+  };
+}
+
+export function getFiltered(genre: string, age: string, sortCriteria: string, sortType: string) {
+  return async (dispatch: (arg0: { type: ActionsType; payload: Game[] | undefined }) => void) => {
+    const response = await api.get<Game[]>("/api/products", { params: { genre, age, sortCriteria, sortType } });
+    const { data } = response;
+    dispatch({ type: ActionsType.GET_FILTERED_GAMES, payload: data });
   };
 }

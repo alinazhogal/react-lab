@@ -36,7 +36,7 @@ export function getGamesResponse(helper: MockServerHelper) {
       date: "2020-07-05",
       link: "https://www.minecraft.net/ru-ru",
       platforms: ["pc", "playstation", "xbox"],
-      age: 6,
+      age: 3,
       genre: "Arcade",
     },
     {

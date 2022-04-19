@@ -65,6 +65,8 @@ section {
     .products {
       display: flex;
       flex-direction: column;
+      max-width: 930px;
+      width: 100%;
 
       .products-container {
         display: flex;
