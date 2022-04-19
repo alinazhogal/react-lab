@@ -68,7 +68,7 @@ export default function NavBar() {
         <li className="nav-about">
           <PrivateLink to={pageLinks.about} activeCn="active-link" passiveCn="">
             About
-          </PrivateLink>{" "}
+          </PrivateLink>
         </li>
 
         {!user.isAuth && (

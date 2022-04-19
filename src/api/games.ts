@@ -35,6 +35,9 @@ export function getGamesResponse(helper: MockServerHelper) {
       price: 29,
       date: "2020-07-05",
       link: "https://www.minecraft.net/ru-ru",
+      platforms: ["pc", "playstation", "xbox"],
+      age: 6,
+      genre: "Arcade",
     },
     {
       id: helper.getUniqueIdInt(),
@@ -45,6 +48,9 @@ export function getGamesResponse(helper: MockServerHelper) {
       price: 24,
       date: "2021-07-05",
       link: "https://playoverwatch.com/ru-ru/",
+      platforms: ["playstation", "xbox"],
+      age: 12,
+      genre: "Shooter",
     },
     {
       id: helper.getUniqueIdInt(),
@@ -56,6 +62,9 @@ export function getGamesResponse(helper: MockServerHelper) {
       price: 19,
       date: "2019-07-05",
       link: "https://www.epicgames.com/fortnite/ru/home",
+      platforms: ["pc", "playstation"],
+      age: 18,
+      genre: "Survive",
     },
     {
       id: helper.getUniqueIdInt(),
@@ -67,6 +76,9 @@ export function getGamesResponse(helper: MockServerHelper) {
       price: 30,
       date: "2016-07-05",
       link: "https://www.epicgames.com/fortnite/ru/home",
+      platforms: ["pc", "xbox"],
+      age: 12,
+      genre: "Survive",
     },
     {
       id: helper.getUniqueIdInt(),
@@ -77,6 +89,9 @@ export function getGamesResponse(helper: MockServerHelper) {
       price: 16,
       date: "2018-07-05",
       link: "https://www.epicgames.com/fortnite/ru/home",
+      platforms: ["pc", "playstation", "xbox"],
+      age: 6,
+      genre: "Arcade",
     },
   ];
 }

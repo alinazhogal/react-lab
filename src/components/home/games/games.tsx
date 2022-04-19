@@ -6,7 +6,8 @@ import grid from "../../../assets/images/grid.svg";
 
 interface GamesProps {
   games: Game[];
-  loading: boolean;
+  // eslint-disable-next-line react/require-default-props
+  loading?: boolean;
 }
 
 function Games({ games, loading }: GamesProps) {

@@ -1,8 +1,8 @@
-import { Game } from "./games/games.types";
+import { Game } from "./home/games/games.types";
 import "./search.scss";
-import searchIcon from "../../assets/images/search.svg";
-import stars from "../../assets/images/stars.svg";
-import arrowRight from "../../assets/images/arrow-right.svg";
+import searchIcon from "../assets/images/search.svg";
+import stars from "../assets/images/stars.svg";
+import arrowRight from "../assets/images/arrow-right.svg";
 
 interface SearchProps {
   value: string;

@@ -4,7 +4,7 @@ import { ActionsType } from "@/redux/types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import debounce from "../../helpers/debounce";
-import { Search, SearchResults } from "./search";
+import { Search, SearchResults } from "../search";
 import Categories from "./categories/categories";
 import Games from "./games/games";
 
