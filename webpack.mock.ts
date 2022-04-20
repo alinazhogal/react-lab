@@ -35,10 +35,12 @@ export default webpackMockServer.add((app, helper) => {
     res.json(getGamesResponse(helper).filter((game) => game.name.toLowerCase().includes(text.toLowerCase())));
   });
 
-  app.get("/api/products", ({ query: { genre, age, sortCriteria, sortType } }, res) => {
+  app.get("/api/products", ({ query: { platform, genre, age, sortCriteria, sortType, search } }, res) => {
     let products = [...getGamesResponse(helper)];
+    if (platform) products = products.filter((game) => game.platforms.includes(platform.toString()));
     if (genre) products = genre !== "All genres" ? products.filter((game) => game.genre === genre) : products;
     if (age) products = age !== "All ages" ? products.filter((game) => game.age === Number(age)) : products;
+    if (search) products = products.filter((game) => game.name.toLowerCase().includes(search.toString().toLowerCase()));
 
     products.sort((a, b) => {
       switch (sortCriteria) {
@@ -49,14 +51,14 @@ export default webpackMockServer.add((app, helper) => {
           break;
 
         case "name":
-          if (a.name < b.name) return sortType === "asc" ? 1 : -1;
-          if (a.name > b.name) return sortType === "asc" ? -1 : 1;
+          if (a.name < b.name) return sortType === "asc" ? -1 : 1;
+          if (a.name > b.name) return sortType === "asc" ? 1 : -1;
           if (a.name === b.name) return 0;
           break;
 
         case "price":
-          if (a.price < b.price) return sortType === "asc" ? 1 : -1;
-          if (a.price > b.price) return sortType === "asc" ? -1 : 1;
+          if (a.price < b.price) return sortType === "asc" ? -1 : 1;
+          if (a.price > b.price) return sortType === "asc" ? 1 : -1;
           if (a.price === b.price) return 0;
           break;
 

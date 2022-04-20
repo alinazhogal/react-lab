@@ -22,9 +22,18 @@ export function getSearched(value: string) {
   };
 }
 
-export function getFiltered(genre: string, age: string, sortCriteria: string, sortType: string) {
+export function getFiltered(
+  platform: string | undefined,
+  genre: string,
+  age: string,
+  sortCriteria: string,
+  sortType: string,
+  search: string | undefined
+) {
   return async (dispatch: (arg0: { type: ActionsType; payload: Game[] | undefined }) => void) => {
-    const response = await api.get<Game[]>("/api/products", { params: { genre, age, sortCriteria, sortType } });
+    const response = await api.get<Game[]>("/api/products", {
+      params: { platform, genre, age, sortCriteria, sortType, search },
+    });
     const { data } = response;
     dispatch({ type: ActionsType.GET_FILTERED_GAMES, payload: data });
   };

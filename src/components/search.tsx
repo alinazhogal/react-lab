@@ -7,7 +7,8 @@ import arrowRight from "../assets/images/arrow-right.svg";
 interface SearchProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  loading: boolean;
+  // eslint-disable-next-line react/require-default-props
+  loading?: boolean;
 }
 
 export function Search({ value, onChange, loading }: SearchProps) {

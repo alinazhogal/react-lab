@@ -1,8 +1,10 @@
 import { getFiltered } from "@/redux/actions/gamesAction";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useParams, useLocation } from "react-router-dom";
 
-function Filters({ category }: { category: string | undefined }) {
+function Filters({ search }: { search: string }) {
+  const { category } = useParams();
   const [filters, setFilters] = useState({
     platform: category,
     age: "All ages",
@@ -10,13 +12,17 @@ function Filters({ category }: { category: string | undefined }) {
     sortCriteria: "recent",
     sortType: "asc",
   });
+  const location = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFiltered(filters.genre, filters.age, filters.sortCriteria, filters.sortType));
-  }, [filters]);
+    setFilters({ ...filters, platform: location.pathname.split("/")[2] });
+  }, [location]);
 
-  console.log({ filters });
+  useEffect(() => {
+    dispatch(getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType, search));
+  }, [filters, search]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFilters({ ...filters, [name]: value });

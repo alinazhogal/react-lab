@@ -76,7 +76,7 @@ export function getGamesResponse(helper: MockServerHelper) {
       price: 30,
       date: "2016-07-05",
       link: "https://www.epicgames.com/fortnite/ru/home",
-      platforms: ["pc", "xbox"],
+      platforms: ["pc"],
       age: 12,
       genre: "Survive",
     },
