@@ -9,7 +9,7 @@ import Filters from "./filters";
 import "./products.scss";
 
 function Products() {
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>();
   const Loader = useLoader();
   const { isFilterLoading, games } = useSelector((state: RootState) => state.games);
 
@@ -24,7 +24,7 @@ function Products() {
       <div className="section-content products-page">
         <Filters search={search} />
         <div className="main">
-          <Search value={search} onChange={handleChange} />
+          <Search value={search || ""} onChange={handleChange} />
           <div className="products-container">
             <Loader isLoading={isFilterLoading}>
               {gamesArr.length !== 0 ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}

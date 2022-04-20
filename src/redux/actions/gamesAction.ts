@@ -27,7 +27,7 @@ export function getFiltered(
   age: string,
   sortCriteria: string,
   sortType: string,
-  search: string | undefined
+  search?: string | undefined
 ) {
   return async (dispatch: (arg0: { type: ActionsType; payload?: Game[] | undefined }) => void) => {
     dispatch({ type: ActionsType.GET_FILTERED_GAMES });

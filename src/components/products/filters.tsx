@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 
-function Filters({ search }: { search: string }) {
+// eslint-disable-next-line react/require-default-props
+function Filters({ search }: { search?: string }) {
   const { category } = useParams();
   const [filters, setFilters] = useState({
     platform: category,
@@ -22,17 +23,17 @@ function Filters({ search }: { search: string }) {
   }, [location]);
 
   useEffect(() => {
-    dispatch(getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType, search));
+    dispatch(getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType));
   }, [filters]);
 
   useEffect(() => {
-    if (!search) return;
-
-    debounce(() =>
-      dispatch(
-        getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType, search)
-      )
-    );
+    if (search !== undefined) {
+      debounce(() =>
+        dispatch(
+          getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType, search)
+        )
+      );
+    }
   }, [search]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
