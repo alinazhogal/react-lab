@@ -16,7 +16,8 @@ function Filters({ search }: { search: string }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setFilters({ ...filters, platform: location.pathname.split("/")[2] });
+    if (location.pathname.split("/")[2] !== filters.platform)
+      setFilters({ ...filters, platform: location.pathname.split("/")[2] });
   }, [location]);
 
   useEffect(() => {

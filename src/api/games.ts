@@ -2,7 +2,7 @@ import { MockServerHelper } from "webpack-mock-server/lib/mockServerHelper";
 import { Game } from "@/components/home/games/games.types";
 import api from ".";
 
-function wait(milliseconds = 300) {
+export function wait(milliseconds = 300) {
   // eslint-disable-next-line no-promise-executor-return
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }

@@ -96,7 +96,7 @@ export default function NavBar() {
           <>
             <li>
               <NavLink to={pageLinks.profile}>
-                <button type="button" className="auth-button" aria-label="profile page">
+                <button type="button" className="auth-button profile-desc" aria-label="profile page">
                   <img src={profile} alt="profile" />
                   {user.username}
                 </button>

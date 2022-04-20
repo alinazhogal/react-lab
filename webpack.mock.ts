@@ -67,8 +67,9 @@ export default webpackMockServer.add((app, helper) => {
       }
       return 0;
     });
-
-    res.json(products);
+    setTimeout(() => {
+      res.json(products);
+    }, 1000);
   });
 
   app.post("/api/auth/signUp", (req, res) => {

@@ -1,8 +1,10 @@
 import { useState } from "react";
+import Loader from "@/elements/loader";
 import { Game, Layout } from "./games.types";
-import GameCard from "./gameCard";
+// import GameCard from "./gameCard";
 import list from "../../../assets/images/list.svg";
 import grid from "../../../assets/images/grid.svg";
+import GameCard from "./gameCard";
 
 interface GamesProps {
   games: Game[];
@@ -44,7 +46,7 @@ function Games({ games, loading }: GamesProps) {
             </button>
           </div>
         </div>
-        {loading && <div className="lds-dual-ring" />}
+        {loading && <Loader />}
         {!loading && (
           <div className={layout === Layout.Grid ? "games-grid" : "games-list"}>
             {gamesArr.length !== 0 ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}

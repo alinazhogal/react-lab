@@ -6,8 +6,15 @@ section {
     align-items: flex-start;
     justify-content: space-between;
 
+    @media screen and (max-width: 630px) {
+      flex-direction: column;
+    }
+
     .search-div {
       margin-bottom: 30px;
+      @media screen and (max-width: 900px) {
+        width: 340px;
+      }
     }
 
     .filters-container {
@@ -74,14 +81,10 @@ section {
       max-width: 930px;
       width: 100%;
 
-      .products {
+      .products-container {
         display: flex;
-        flex-direction: column;
-
-        .products-container {
-          display: flex;
-          flex-wrap: wrap;
-        }
+        flex-wrap: wrap;
+        justify-content: center;
       }
     }
   }
