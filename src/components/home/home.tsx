@@ -10,9 +10,8 @@ import Games from "./games/games";
 
 function Home() {
   const [inputValue, setInputValue] = useState<string>("");
-
   const dispatch = useDispatch();
-  const { games, isTopLoading, searchedGames, isSearchLoading } = useSelector((state: RootState) => state.games);
+  const { searchedGames, isSearchLoading } = useSelector((state: RootState) => state.games);
 
   useEffect(() => {
     dispatch(getGames());
@@ -39,7 +38,7 @@ function Home() {
       <Search value={inputValue} onChange={(e) => handleChange(e)} loading={isSearchLoading} />
       {searchedGames !== undefined && inputValue && <SearchResults results={searchedGames} />}
       <Categories />
-      <Games games={games} loading={isTopLoading} />
+      <Games />
     </>
   );
 }

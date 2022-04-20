@@ -1,20 +1,17 @@
 import { useState } from "react";
-import Loader from "@/elements/loader";
-import { Game, Layout } from "./games.types";
-// import GameCard from "./gameCard";
+import useLoader from "@/helpers/useLoader";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux";
+import { Layout } from "./games.types";
 import list from "../../../assets/images/list.svg";
 import grid from "../../../assets/images/grid.svg";
 import GameCard from "./gameCard";
 
-interface GamesProps {
-  games: Game[];
-  // eslint-disable-next-line react/require-default-props
-  loading?: boolean;
-}
-
-function Games({ games, loading }: GamesProps) {
+function Games() {
   const [layout, setLayout] = useState<Layout>(Layout.Grid);
+  const Loader = useLoader();
 
+  const { isTopLoading, games } = useSelector((state: RootState) => state.games);
   function changeLayout(option: Layout) {
     if (option === layout) return;
 
@@ -46,12 +43,11 @@ function Games({ games, loading }: GamesProps) {
             </button>
           </div>
         </div>
-        {loading && <Loader />}
-        {!loading && (
-          <div className={layout === Layout.Grid ? "games-grid" : "games-list"}>
+        <div className={layout === Layout.Grid ? "games-grid" : "games-list"}>
+          <Loader isLoading={isTopLoading}>
             {gamesArr.length !== 0 ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}
-          </div>
-        )}
+          </Loader>
+        </div>
       </div>
     </section>
   );

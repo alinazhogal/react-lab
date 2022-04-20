@@ -1,3 +1,4 @@
+import debounce from "@/helpers/debounce";
 import { getFiltered } from "@/redux/actions/gamesAction";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -22,7 +23,17 @@ function Filters({ search }: { search: string }) {
 
   useEffect(() => {
     dispatch(getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType, search));
-  }, [filters, search]);
+  }, [filters]);
+
+  useEffect(() => {
+    if (!search) return;
+
+    debounce(() =>
+      dispatch(
+        getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType, search)
+      )
+    );
+  }, [search]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
