@@ -8,12 +8,34 @@ section {
 
     @media screen and (max-width: 630px) {
       flex-direction: column;
+      align-items: center;
     }
 
     .search-div {
       margin-bottom: 30px;
       @media screen and (max-width: 900px) {
         width: 340px;
+      }
+    }
+
+    .filters-mobile {
+      display: flex;
+      width: 100vw;
+      height: 60px;
+      background-color: $basicColor;
+      align-items: center;
+      justify-content: center;
+
+      h4 {
+        margin-right: 20px;
+      }
+
+      img {
+        transition: 300ms ease-out;
+      }
+
+      .arrow-up {
+        transform: rotate(180deg);
       }
     }
 
@@ -31,6 +53,11 @@ section {
         font-weight: normal;
         font-size: 20px;
         margin-bottom: 16px;
+      }
+
+      @media screen and (max-width: 630px) {
+        margin: 0;
+        display: none;
       }
 
       .sort-container {
@@ -72,6 +99,10 @@ section {
         flex-direction: column;
         margin-bottom: 20px;
       }
+    }
+
+    .filters-open {
+      display: block;
     }
 
     .main {

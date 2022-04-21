@@ -3,6 +3,7 @@ import { getFiltered } from "@/redux/actions/gamesAction";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
+import arrow from "../../assets/images/arrow-down.svg";
 
 // eslint-disable-next-line react/require-default-props
 function Filters({ search }: { search?: string }) {
@@ -14,6 +15,7 @@ function Filters({ search }: { search?: string }) {
     sortCriteria: "recent",
     sortType: "asc",
   });
+  const [isMobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -72,36 +74,48 @@ function Filters({ search }: { search?: string }) {
   ));
 
   return (
-    <div className="filters-container">
-      <h3>{category}</h3>
-      <div className="sort-container">
-        <h5>Sort</h5>
-        <div className="sort">
-          <span>Criteria</span>
-          <select name="sortCriteria" id="criteria" onChange={handleChange}>
-            <option value="recent">Recent</option>
-            <option value="name">Name</option>
-            <option value="price">Price</option>
-          </select>
-        </div>
-        <div className="sort">
-          <span>Type</span>
-          <select name="sortType" id="type" onChange={handleChange}>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-        </div>
+    <>
+      <div
+        className="filters-mobile"
+        role="button"
+        tabIndex={0}
+        onClick={() => setMobileOpen(!isMobileOpen)}
+        onKeyDown={() => setMobileOpen(!isMobileOpen)}
+      >
+        <h4>Filters</h4>
+        <img src={arrow} alt="arrow" className={isMobileOpen ? "arrow-up" : ""} />
       </div>
+      <div className={isMobileOpen ? "filters-container filters-open" : "filters-container"}>
+        <h3>{category}</h3>
+        <div className="sort-container">
+          <h5>Sort</h5>
+          <div className="sort">
+            <span>Criteria</span>
+            <select name="sortCriteria" id="criteria" onChange={handleChange}>
+              <option value="recent">Recent</option>
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+            </select>
+          </div>
+          <div className="sort">
+            <span>Type</span>
+            <select name="sortType" id="type" onChange={handleChange}>
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+        </div>
 
-      <div className="filter">
-        <h5>Age</h5>
-        {agesFilter}
+        <div className="filter">
+          <h5>Age</h5>
+          {agesFilter}
+        </div>
+        <div className="filter">
+          <h5>Genres</h5>
+          {genresFilter}
+        </div>
       </div>
-      <div className="filter">
-        <h5>Genres</h5>
-        {genresFilter}
-      </div>
-    </div>
+    </>
   );
 }
 
