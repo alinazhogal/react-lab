@@ -26,6 +26,10 @@ section {
       align-items: center;
       justify-content: center;
 
+      @media screen and (min-width: 630px) {
+        display: none;
+      }
+
       h4 {
         margin-right: 20px;
       }
