@@ -8,7 +8,7 @@ import setSignInOpen from "@/redux/actions/modalActions";
 import pageLinks from "../../routesLinks";
 import arrow from "../../assets/images/arrow-down.svg";
 import profile from "../../assets/images/account.svg";
-import cart from "../../assets/images/cart.svg";
+import cartIcon from "../../assets/images/cart.svg";
 import logout from "../../assets/images/log-out.svg";
 import Modal from "../modal/modal";
 import SignInForm from "../modal/forms/signInForm";
@@ -19,10 +19,12 @@ import PrivateLink from "./privateLink";
 export default function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const isSignInOpen = useSelector((state: RootState) => state.modal.isOpen);
   const user = useSelector((state: RootState) => state.auth);
+  const cart = useSelector((state: RootState) => state.cart);
+  // eslint-disable-next-line no-unsafe-optional-chaining
+  const total = cart.reduce((acc, cur) => acc + cur?.amount, 0);
 
   function handleLogOut() {
     dispatch(logOut());
@@ -105,7 +107,8 @@ export default function NavBar() {
             <li>
               <NavLink to={pageLinks.cart}>
                 <button type="button" className="auth-button" aria-label="cart page">
-                  <img src={cart} alt="cart" />0
+                  <img src={cartIcon} alt="cart" />
+                  {total}
                 </button>
               </NavLink>
             </li>

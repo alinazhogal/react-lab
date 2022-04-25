@@ -1,0 +1,100 @@
+section {
+  .cart-page {
+    align-items: flex-end;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 40px 0;
+
+      thead {
+        th {
+          border-bottom: 1px solid #fff;
+        }
+
+        th:nth-child(1) {
+          width: 30%;
+        }
+
+        th:nth-child(2) {
+          width: 20%;
+        }
+
+        th:nth-child(3) {
+          width: 20%;
+        }
+
+        th:nth-child(4) {
+          width: 15%;
+        }
+
+        th:nth-child(5) {
+          width: 10%;
+        }
+
+        th:nth-child(6) {
+          width: 5%;
+        }
+      }
+
+      tbody {
+        td {
+          text-align: center;
+          border-bottom: 1px solid rgb(154, 153, 153);
+
+          input {
+            width: 60px;
+            height: 24px;
+            padding: 0 4px;
+          }
+
+          select {
+            height: 24px;
+            width: 100px;
+          }
+
+          button {
+            padding: 4px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+          }
+        }
+      }
+
+      th,
+      td {
+        padding: 20px;
+      }
+
+      tfoot {
+        th:first-child {
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .cart-buttons {
+      button {
+        margin: 10px;
+      }
+    }
+  }
+}
+
+.secondary-button {
+  padding: 12px 40px;
+  border-radius: 20px;
+  border: 2px solid $accent-color;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+  transition: 300ms ease-out;
+  font-size: 16px;
+  opacity: 1;
+
+  &:hover {
+    border: 2px solid #cb31a7;
+    background-color: #cb31a7;
+  }
+}

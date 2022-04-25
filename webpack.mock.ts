@@ -10,6 +10,7 @@ const testUser: User = {
   description: "ejdjdkdkdkdk",
   address: "Minsk",
   photo: "",
+  cart: [],
 };
 
 const users = {
@@ -67,9 +68,8 @@ export default webpackMockServer.add((app, helper) => {
       }
       return 0;
     });
-    // setTimeout(() => {
+
     res.json(products);
-    // }, 1000);
   });
 
   app.post("/api/auth/signUp", (req, res) => {
@@ -94,6 +94,7 @@ export default webpackMockServer.add((app, helper) => {
           address: users[user.login].address,
           description: users[user.login].description,
           phone: users[user.login].phone,
+          cart: users[user.login].cart,
         });
       }
     } else {
@@ -144,6 +145,35 @@ export default webpackMockServer.add((app, helper) => {
 
   app.get("/api/getProfile/:login", (req, res) => {
     res.json(users[req.params.login]);
+  });
+
+  app.get("/api/getCart/:login", (req, res) => {
+    res.json(users[req.params.login].cart);
+  });
+
+  app.post("/api/addCartItem", (req, res) => {
+    const { login } = req.body;
+    const cartItem = {
+      name: req.body.name,
+      platforms: req.body.platforms,
+      date: new Date().toLocaleDateString(),
+      amount: 1,
+      price: req.body.price,
+      id: req.body.id,
+    };
+    users[login].cart?.push(cartItem);
+    res.json(cartItem);
+  });
+
+  app.delete("/api/clearCart/:login", (req, res) => {
+    const { login } = req.params;
+    users[login].cart = [];
+    res.status(200).end();
+  });
+
+  app.delete("/api/deleteCartItem", ({ query: { name, login } }: { query: { name: string; login: string } }, res) => {
+    users[login].cart = users[login].cart?.filter((item) => item.name !== name);
+    res.status(200).end();
   });
 
   app.post("/testPostMock", (req, res) => {

@@ -1,3 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux";
+import { addCartItem } from "@/redux/actions/cartActions";
 import { Game, Layout } from "./games.types";
 import "./games.scss";
 import Button from "../../../elements/button";
@@ -6,10 +9,15 @@ import xbox from "../../../assets/images/xbox.png";
 import pc from "../../../assets/images/desktop-computer.png";
 import playstation from "../../../assets/images/playstation.png";
 
-function GameCard({ name, image, description, price, link, platforms, age, layout }: Game & { layout: Layout }) {
+function GameCard({ id, name, image, description, price, link, platforms, age, layout }: Game & { layout: Layout }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth);
+
   function click(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    alert("got product");
+    if (user.isAuth) {
+      dispatch(addCartItem({ name, platforms, price, id }));
+    } else alert("not authorised");
   }
 
   const platformID = {

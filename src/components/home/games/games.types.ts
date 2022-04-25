@@ -1,4 +1,4 @@
-enum Platforms {
+export enum Platforms {
   PC = "pc",
   Playstation = "playstation",
   Xbox = "xbox",
