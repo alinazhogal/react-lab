@@ -3,4 +3,5 @@ export default {
   about: "/about",
   products: "/products",
   profile: "/profile",
+  cart: "/cart",
 };

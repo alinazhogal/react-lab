@@ -68,7 +68,7 @@ export default function NavBar() {
         <li className="nav-about">
           <PrivateLink to={pageLinks.about} activeCn="active-link" passiveCn="">
             About
-          </PrivateLink>{" "}
+          </PrivateLink>
         </li>
 
         {!user.isAuth && (
@@ -96,16 +96,18 @@ export default function NavBar() {
           <>
             <li>
               <NavLink to={pageLinks.profile}>
-                <button type="button" className="auth-button" aria-label="profile page">
+                <button type="button" className="auth-button profile-desc" aria-label="profile page">
                   <img src={profile} alt="profile" />
                   {user.username}
                 </button>
               </NavLink>
             </li>
             <li>
-              <button type="button" className="auth-button" aria-label="cart page">
-                <img src={cart} alt="cart" />0
-              </button>
+              <NavLink to={pageLinks.cart}>
+                <button type="button" className="auth-button" aria-label="cart page">
+                  <img src={cart} alt="cart" />0
+                </button>
+              </NavLink>
             </li>
             <li>
               <button type="button" className="auth-button" onClick={handleLogOut} aria-label="log out">

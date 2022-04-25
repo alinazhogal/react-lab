@@ -10,9 +10,11 @@ export enum ActionsType {
   SAVE_PROFILE = "SAVE_PROFILE",
   GET_PROFILE = "GET_PROFILE",
   GET_TOP_GAMES = "GET_TOP_GAMES",
+  SET_TOP_GAMES = "SET_TOP_GAMES",
   GET_SEARCHED_GAMES = "GET_SEARCHED_GAMES",
+  GET_FILTERED_GAMES = "GET_FILTERED_GAMES",
+  SET_FILTERED_GAMES = "SET_FILTERED_GAMES",
   SET_SEARCH_LOADING = "SET_SEARCH_LOADING",
-  SET_TOP_LOADING = "SET_TOP_LOADING",
 }
 
 export interface ModalState {
@@ -84,10 +86,24 @@ export interface GamesState {
   searchedGames: Game[] | undefined;
   isSearchLoading: boolean;
   isTopLoading: boolean;
+  isFilterLoading: boolean;
 }
 
 export interface getTopGames {
   type: ActionsType.GET_TOP_GAMES;
+}
+
+export interface setTopGames {
+  type: ActionsType.SET_TOP_GAMES;
+  payload: Game[];
+}
+
+export interface getFilteredGames {
+  type: ActionsType.GET_FILTERED_GAMES;
+}
+
+export interface setFilteredGames {
+  type: ActionsType.SET_FILTERED_GAMES;
   payload: Game[];
 }
 
@@ -98,10 +114,5 @@ export interface getSearchedGames {
 
 export interface setSearchedLoading {
   type: ActionsType.SET_SEARCH_LOADING;
-  payload: boolean;
-}
-
-export interface setTopLoading {
-  type: ActionsType.SET_TOP_LOADING;
   payload: boolean;
 }

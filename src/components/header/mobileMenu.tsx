@@ -43,6 +43,9 @@ export default function MobileMenu() {
               Xbox One
             </NavLink>
           </div>
+          <NavLink to={pageLinks.profile} className="profile-mobile" onClick={() => setOpenMenu(false)}>
+            Profile
+          </NavLink>
         </div>
       </div>
     </>

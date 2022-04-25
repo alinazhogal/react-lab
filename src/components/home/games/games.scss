@@ -77,6 +77,10 @@ section {
         object-fit: cover;
       }
 
+      span {
+        font-size: 18px;
+      }
+
       .game-info {
         margin-left: 40px;
 
@@ -126,6 +130,11 @@ section {
     .platform img {
       width: 24px;
       height: 24px;
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
 
     .price-info {
@@ -155,6 +164,13 @@ section {
         border-radius: 10px 10px 0 0;
       }
 
+      span {
+        font-size: 18px;
+        position: relative;
+        top: 0;
+        right: -110px;
+      }
+
       .platform {
         position: absolute;
         top: 4px;
@@ -171,33 +187,6 @@ section {
           margin-bottom: 16px;
         }
       }
-    }
-  }
-
-  .lds-dual-ring {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-  }
-
-  .lds-dual-ring:after {
-    content: " ";
-    display: block;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border-radius: 50%;
-    border: 6px solid #fff;
-    border-color: #fff transparent #fff transparent;
-    animation: lds-dual-ring 1.2s linear infinite;
-  }
-  @keyframes lds-dual-ring {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(360deg);
     }
   }
 }

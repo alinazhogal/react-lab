@@ -4,7 +4,7 @@ import "./styles/main.scss";
 import { Provider } from "react-redux";
 import Button from "./elements/button";
 import { store } from "./redux";
-import Routes from "./Routes";
+import Routes from "./routes";
 
 class MainApp extends Component<unknown, { hasError: boolean }> {
   constructor(props: unknown) {

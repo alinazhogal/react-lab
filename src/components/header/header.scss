@@ -89,6 +89,12 @@ header {
           }
         }
 
+        @media screen and (max-width: 460px) {
+          .profile-desc {
+            display: none;
+          }
+        }
+
         .dropbtn {
           background-color: transparent;
           color: white;
@@ -173,6 +179,12 @@ header {
           font-size: 18px;
         }
 
+        @media screen and (min-width: 460px) {
+          .profile-mobile {
+            display: none;
+          }
+        }
+
         .products-links {
           display: flex;
           flex-direction: column;
@@ -205,6 +217,12 @@ header {
         width: 260px;
       }
     }
+    @media screen and (max-width: 460px) {
+      nav {
+        width: 200px;
+      }
+    }
+
     @media screen and (min-width: 620px) {
       .mobile-nav {
         display: none;

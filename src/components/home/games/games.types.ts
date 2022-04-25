@@ -1,3 +1,9 @@
+enum Platforms {
+  PC = "pc",
+  Playstation = "playstation",
+  Xbox = "xbox",
+}
+
 export interface Game {
   id: number;
   name: string;
@@ -6,6 +12,9 @@ export interface Game {
   price: number;
   date: string;
   link: string;
+  platforms: Platforms[];
+  age: number;
+  genre: string;
 }
 
 export enum Layout {
