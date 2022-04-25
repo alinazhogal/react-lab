@@ -16,13 +16,16 @@ section {
       @media screen and (max-width: 900px) {
         width: 340px;
       }
+      @media screen and (max-width: 630px) {
+        margin-top: 30px;
+      }
     }
 
     .filters-mobile {
       display: flex;
       width: 100vw;
       height: 60px;
-      background-color: $basicColor;
+      background-color: $accent-color;
       align-items: center;
       justify-content: center;
 
@@ -102,6 +105,10 @@ section {
         display: flex;
         flex-direction: column;
         margin-bottom: 20px;
+
+        input {
+          margin-right: 3px;
+        }
       }
     }
 

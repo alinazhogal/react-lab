@@ -103,9 +103,11 @@ export default function NavBar() {
               </NavLink>
             </li>
             <li>
-              <button type="button" className="auth-button" aria-label="cart page">
-                <img src={cart} alt="cart" />0
-              </button>
+              <NavLink to={pageLinks.cart}>
+                <button type="button" className="auth-button" aria-label="cart page">
+                  <img src={cart} alt="cart" />0
+                </button>
+              </NavLink>
             </li>
             <li>
               <button type="button" className="auth-button" onClick={handleLogOut} aria-label="log out">
