@@ -127,7 +127,7 @@ export interface CartItem {
   id: number;
   name: string;
   platforms: Platforms[];
-  selectedPlatform?: Platforms;
+  selectedPlatform: Platforms;
   date: string;
   amount: number;
   price: number;
@@ -157,5 +157,5 @@ export interface ClearCart {
 
 export interface UpdateCartItem {
   type: ActionsType.UPDATE_CART_ITEM;
-  payload: { name: string; amount: number; platform: Platforms };
+  payload: CartItem[];
 }

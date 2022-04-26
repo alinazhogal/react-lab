@@ -11,6 +11,7 @@ export interface User {
   address?: string;
   photo?: string;
   cart?: CartItem[];
+  order?: CartItem[];
 }
 
 export async function signUp(values: User) {

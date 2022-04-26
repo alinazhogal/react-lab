@@ -156,13 +156,32 @@ export default webpackMockServer.add((app, helper) => {
     const cartItem = {
       name: req.body.name,
       platforms: req.body.platforms,
+      selectedPlatform: req.body.platforms[0],
       date: new Date().toLocaleDateString(),
       amount: 1,
       price: req.body.price,
       id: req.body.id,
     };
+    if (users[login].cart?.some((item) => item.name === cartItem.name)) return;
     users[login].cart?.push(cartItem);
     res.json(cartItem);
+  });
+
+  app.post("/api/updateCartItem", (req, res) => {
+    const { login, name, platform, amount } = req.body;
+    const updatedCart = users[login].cart?.map((item) => {
+      if (item.name === name) {
+        return {
+          ...item,
+          selectedPlatform: platform || item.selectedPlatform,
+          amount: amount || item.amount,
+          price: (amount || item.amount) * (item.price / item.amount),
+        };
+      }
+      return item;
+    });
+    users[login].cart = updatedCart;
+    res.json(updatedCart);
   });
 
   app.delete("/api/clearCart/:login", (req, res) => {
@@ -173,6 +192,14 @@ export default webpackMockServer.add((app, helper) => {
 
   app.delete("/api/deleteCartItem", ({ query: { name, login } }: { query: { name: string; login: string } }, res) => {
     users[login].cart = users[login].cart?.filter((item) => item.name !== name);
+    res.status(200).end();
+  });
+
+  app.post("/api/buy", (req, res) => {
+    const { login, orderedItems } = req.body;
+    users[login].order = orderedItems;
+    users[login].cart = [];
+    console.log(users[login]);
     res.status(200).end();
   });
 

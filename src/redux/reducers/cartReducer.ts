@@ -25,13 +25,10 @@ const modalReducer = (
       return [];
     case ActionsType.DELETE_CART_ITEM:
       return state.filter((item) => item.name !== action.payload);
-    // case ActionsType.UPDATE_CART_ITEM:
-    //   return [
-    //     ...state,
-    //     { name: action.payload.name, platform: action.payload.platform, amount: action.payload.amount },
-    //   ];
-    // case ActionsType.BUY_ORDER:
-    //   return [];
+    case ActionsType.UPDATE_CART_ITEM:
+      return action.payload;
+    case ActionsType.BUY_ORDER:
+      return [];
     default:
       return state;
   }

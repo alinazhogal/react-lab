@@ -22,8 +22,7 @@ export function addCartItem(values: { id: number; name: string; price: number; p
 export function clearCart(login: string) {
   return async (dispatch: (arg0: { type: ActionsType }) => void) => {
     await api.delete(`/api/clearCart/${login}`);
-    // могу ли просто делать гет?
-    dispatch({ type: ActionsType.ADD_CART_ITEM });
+    dispatch({ type: ActionsType.CLEAR_CART });
   };
 }
 
@@ -31,5 +30,20 @@ export function deleteCartItem(name: string) {
   return async (dispatch: (arg0: { type: ActionsType; payload: string }) => void) => {
     await api.delete("/api/deleteCartItem", { params: { name, login: store.getState().auth.username } });
     dispatch({ type: ActionsType.DELETE_CART_ITEM, payload: name });
+  };
+}
+
+export function updateCartItem(values: { name: string; amount: number; platform: Platforms }) {
+  return async (dispatch: (arg0: { type: ActionsType; payload: CartItem }) => void) => {
+    const response = await api.post("/api/updateCartItem", { ...values, login: store.getState().auth.username });
+    const cart = response.data;
+    dispatch({ type: ActionsType.UPDATE_CART_ITEM, payload: cart });
+  };
+}
+
+export function buyCart(orderedItems: CartItem[]) {
+  return async (dispatch: (arg0: { type: ActionsType }) => void) => {
+    await api.post("/api/buy", { orderedItems, login: store.getState().auth.username });
+    dispatch({ type: ActionsType.BUY_ORDER });
   };
 }

@@ -1,16 +1,24 @@
-import { deleteCartItem } from "@/redux/actions/cartActions";
+import { deleteCartItem, updateCartItem } from "@/redux/actions/cartActions";
 import { CartItem } from "@/redux/types";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import close from "../../assets/images/close.svg";
+import { Platforms } from "../home/games/games.types";
 
-function CartItem({ name, platforms, date, amount, price }: CartItem) {
-  const [values, setValues] = useState({ amount, platform: platforms[0] });
+interface CartValues {
+  amount: number;
+  platform: Platforms;
+}
+
+function CartItem({ name, platforms, date, amount, price, selectedPlatform }: CartItem) {
+  const [values, setValues] = useState<CartValues>({ amount, platform: selectedPlatform });
   const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name: eventName, value } = e.target;
-    setValues({ ...values, [eventName]: value });
+    const updatedValues = { ...values, [eventName]: value };
+    setValues({ ...updatedValues });
+    dispatch(updateCartItem({ name, ...updatedValues }));
   };
 
   function handleDeleteItem() {
@@ -31,7 +39,7 @@ function CartItem({ name, platforms, date, amount, price }: CartItem) {
       </td>
       <td aria-label="Order date">{date}</td>
       <td aria-label="Amount">
-        <input type="number" name="amount" value={values.amount} onChange={handleChange} />
+        <input type="number" name="amount" min="1" value={values.amount} onChange={handleChange} required />
       </td>
       <td aria-label="Price">${price}</td>
       <td aria-label=" ">
