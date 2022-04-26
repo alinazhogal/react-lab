@@ -38,7 +38,7 @@ function Cart() {
 
   return (
     <section>
-      <div className="section-content cart-page">
+      <div className="section-content" id="cart-page">
         <table>
           <thead>
             <tr>

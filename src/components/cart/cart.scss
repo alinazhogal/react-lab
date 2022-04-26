@@ -1,5 +1,5 @@
 section {
-  .cart-page {
+  #cart-page {
     align-items: flex-end;
 
     table {
@@ -46,11 +46,19 @@ section {
             width: 60px;
             height: 24px;
             padding: 0 4px;
+
+            &:focus {
+              outline: 1px solid $accent-color;
+            }
           }
 
           select {
             height: 24px;
             width: 100px;
+
+            &:focus {
+              outline: 1px solid $accent-color;
+            }
           }
 
           button {
@@ -74,9 +82,61 @@ section {
       }
     }
 
+    @media screen and (max-width: 670px) {
+      thead {
+        display: none;
+      }
+
+      tbody tr td {
+        text-align: right;
+        display: block;
+
+        &:before {
+          content: attr(aria-label);
+          float: left;
+          font-weight: bold;
+        }
+      }
+
+      tr {
+        display: block;
+        border-bottom: 2px solid #e8e9eb;
+
+        td:last-child {
+          border-bottom: none;
+        }
+      }
+
+      tfoot tr {
+        th:nth-child(1) {
+          width: 50%;
+        }
+
+        th:nth-child(2) {
+          width: 0;
+        }
+
+        th:nth-child(3) {
+          width: 0;
+        }
+
+        th:nth-child(4) {
+          width: 25%;
+        }
+
+        th:nth-child(5) {
+          width: 25%;
+        }
+
+        th:nth-child(6) {
+          width: 0;
+        }
+      }
+    }
+
     .cart-buttons {
       button {
-        margin: 10px;
+        margin: 0 10px 40px;
       }
     }
   }

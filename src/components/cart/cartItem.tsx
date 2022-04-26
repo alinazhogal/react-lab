@@ -19,8 +19,8 @@ function CartItem({ name, platforms, date, amount, price }: CartItem) {
 
   return (
     <tr>
-      <td>{name}</td>
-      <td>
+      <td aria-label="Name">{name}</td>
+      <td aria-label="Platform">
         <select name="platform" id="platform" onChange={handleChange}>
           {platforms.map((pl) => (
             <option key={pl} value={pl}>
@@ -29,12 +29,12 @@ function CartItem({ name, platforms, date, amount, price }: CartItem) {
           ))}
         </select>
       </td>
-      <td>{date}</td>
-      <td>
+      <td aria-label="Order date">{date}</td>
+      <td aria-label="Amount">
         <input type="number" name="amount" value={values.amount} onChange={handleChange} />
       </td>
-      <td>${price}</td>
-      <td>
+      <td aria-label="Price">${price}</td>
+      <td aria-label=" ">
         <button type="button" aria-label="Delete item" onClick={handleDeleteItem}>
           <img src={close} alt="delete" />
         </button>
