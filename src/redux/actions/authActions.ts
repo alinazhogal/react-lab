@@ -8,14 +8,14 @@ export const logOut = () => ({
 });
 
 export function logIn(values: User, successCallback: () => void, errorCallback: () => void) {
-  return async (dispatch: (arg0: { type: ActionsType; payload: string | boolean }) => void) => {
+  return async (dispatch: (arg0: { type: ActionsType; payload: boolean | AuthState }) => void) => {
     try {
-      const { isAuth, username } = await signIn(values);
+      const { isAuth, username, role } = await signIn(values);
       if (isAuth) {
-        dispatch({ type: ActionsType.LOGIN, payload: values.login });
+        dispatch({ type: ActionsType.LOGIN, payload: { username: values.login, role } });
         successCallback();
         dispatch({ type: ActionsType.SET_SIGNIN_OPEN, payload: false });
-        saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, username }));
+        saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, username, role }));
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -27,10 +27,10 @@ export function logIn(values: User, successCallback: () => void, errorCallback: 
 }
 
 export function register(values: User, cb: () => void) {
-  return async (dispatch: (arg0: { type: ActionsType; payload: string }) => void) => {
-    const { isAuth, username } = await signUp(values);
-    dispatch({ type: ActionsType.SIGNUP, payload: username });
-    saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, username }));
+  return async (dispatch: (arg0: { type: ActionsType; payload: AuthState }) => void) => {
+    const { isAuth, username, role } = await signUp(values);
+    dispatch({ type: ActionsType.SIGNUP, payload: { username, role } });
+    saveItemToStorage(SavableKeys.User, JSON.stringify({ isAuth, username, role }));
     cb();
   };
 }

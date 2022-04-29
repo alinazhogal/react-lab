@@ -54,15 +54,6 @@ section {
             }
           }
 
-          select {
-            height: 24px;
-            width: 100px;
-
-            &:focus {
-              outline: 1px solid $accent-color;
-            }
-          }
-
           button {
             padding: 4px;
             background-color: transparent;
@@ -145,7 +136,7 @@ section {
 }
 
 .secondary-button {
-  padding: 12px 40px;
+  padding: 10px 40px;
   border-radius: 20px;
   border: 2px solid $accent-color;
   cursor: pointer;
@@ -158,5 +149,14 @@ section {
   &:hover {
     border: 2px solid #cb31a7;
     background-color: #cb31a7;
+  }
+}
+
+select {
+  height: 24px;
+  width: 100px;
+
+  &:focus {
+    outline: 1px solid $accent-color;
   }
 }

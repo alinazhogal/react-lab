@@ -35,6 +35,11 @@
     margin-bottom: 14px;
   }
 
+  .confirm {
+    color: #fff;
+    font-size: 16px;
+  }
+
   h5 {
     font-weight: normal;
     font-size: 16px;
@@ -60,6 +65,20 @@
       justify-content: center;
     }
   }
+
+  .edit-form {
+    display: flex;
+
+    .image-preview {
+      margin: 14px 30px 0 0;
+
+      img {
+        width: 210px;
+        height: 255px;
+        object-fit: cover;
+      }
+    }
+  }
 }
 
 .modal-overlay {
@@ -70,6 +89,12 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
+}
+
+.edit-buttons {
+  display: flex;
+  width: 280px;
+  justify-content: space-between;
 }
 
 form {
@@ -114,6 +139,29 @@ form {
       color: rgb(252, 77, 77);
       width: 280px;
       margin-top: 4px;
+    }
+  }
+
+  .form-option {
+    display: flex;
+    width: 280px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    input {
+      margin-left: 4px;
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .checklist {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-size: 18px;
+      margin-bottom: 10px;
     }
   }
 

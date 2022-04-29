@@ -17,6 +17,7 @@ const user = restoredUser
   : {
       isAuth: "",
       username: "",
+      role: "",
     };
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   description: "",
   address: "",
   photo: "",
+  role: user.role,
 };
 
 const modalReducer = (
@@ -35,13 +37,13 @@ const modalReducer = (
 ) => {
   switch (action.type) {
     case ActionsType.LOGIN:
-      return { ...state, isAuth: true, username: action.payload };
+      return { ...state, isAuth: true, username: action.payload.username, role: action.payload.role };
     case ActionsType.LOGOUT:
-      return { isAuth: false, username: "", phone: "", description: "", address: "", photo: "" };
+      return { isAuth: false, username: "", phone: "", description: "", address: "", photo: "", role: "" };
     case ActionsType.SIGNUP:
-      return { ...state, isAuth: true, username: action.payload };
+      return { ...state, isAuth: true, username: action.payload.username, role: action.payload.role };
     case ActionsType.RESTORE_USER:
-      return { ...state, isAuth: action.payload.isAuth, username: action.payload.username };
+      return { ...state, isAuth: action.payload.isAuth, username: action.payload.username, role: action.payload.role };
     case ActionsType.CHANGE_PASSWORD:
       return state;
     case ActionsType.SAVE_PROFILE:

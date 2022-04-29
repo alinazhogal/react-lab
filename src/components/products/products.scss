@@ -11,13 +11,24 @@ section {
       align-items: center;
     }
 
-    .search-div {
+    .add-card-search {
+      display: flex;
+      align-items: center;
       margin-bottom: 30px;
-      @media screen and (max-width: 900px) {
-        width: 340px;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      button {
+        margin: 38px 15px 0;
       }
-      @media screen and (max-width: 630px) {
-        margin-top: 30px;
+
+      .search-div {
+        @media screen and (max-width: 900px) {
+          width: 340px;
+        }
+        @media screen and (max-width: 630px) {
+          margin-top: 30px;
+        }
       }
     }
 

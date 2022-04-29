@@ -12,8 +12,8 @@ import profile from "../../assets/images/account.svg";
 import cartIcon from "../../assets/images/cart.svg";
 import logout from "../../assets/images/log-out.svg";
 import Modal from "../modal/modal";
-import SignInForm from "../modal/forms/signInForm";
-import SignUpForm from "../modal/forms/signUpForm";
+import SignInForm from "../modal/forms/signIn";
+import SignUpForm from "../modal/forms/signUp";
 import MobileMenu from "./mobileMenu";
 import PrivateLink from "./privateLink";
 

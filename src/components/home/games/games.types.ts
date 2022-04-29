@@ -13,7 +13,7 @@ export interface Game {
   date: string;
   link: string;
   platforms: Platforms[];
-  age: number;
+  age: string;
   genre: string;
 }
 

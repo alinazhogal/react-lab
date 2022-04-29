@@ -10,6 +10,7 @@ export interface User {
   description?: string;
   address?: string;
   photo?: string;
+  role?: string;
   cart?: CartItem[];
   order?: CartItem[];
 }

@@ -7,6 +7,8 @@ import {
   setSearchedLoading,
   setFilteredGames,
   setTopGames,
+  DeleteGameCard,
+  AddGameCard,
 } from "../types";
 
 const initialState = {
@@ -20,7 +22,15 @@ const initialState = {
 const gamesReducer = (
   // eslint-disable-next-line default-param-last
   state: GamesState = initialState,
-  action: getSearchedGames | getTopGames | setSearchedLoading | getFilteredGames | setFilteredGames | setTopGames
+  action:
+    | getSearchedGames
+    | getTopGames
+    | setSearchedLoading
+    | getFilteredGames
+    | setFilteredGames
+    | setTopGames
+    | DeleteGameCard
+    | AddGameCard
 ) => {
   switch (action.type) {
     case ActionsType.GET_TOP_GAMES:
@@ -35,6 +45,10 @@ const gamesReducer = (
       return { ...state, searchedGames: action.payload };
     case ActionsType.SET_SEARCH_LOADING:
       return { ...state, isSearchLoading: action.payload };
+    case ActionsType.ADD_GAME:
+      return { ...state, games: [...state.games, action.payload] };
+    case ActionsType.DELETE_GAME:
+      return { ...state, games: state.games.filter((game) => game.id !== action.payload) };
 
     default:
       return state;
