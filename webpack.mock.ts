@@ -111,6 +111,15 @@ export default webpackMockServer.add((app, helper) => {
     res.status(201).json(game);
   });
 
+  app.put("/api/product", (req, res) => {
+    const game = req.body.values;
+    games = games.map((item) => {
+      if (item.id === game.id) return game;
+      return item;
+    });
+    res.status(200).json(game);
+  });
+
   app.post("/api/auth/signUp", (req, res) => {
     const user: User = {
       login: req.body.login,

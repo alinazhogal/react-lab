@@ -1,14 +1,26 @@
+/* eslint-disable react/require-default-props */
 import { Platforms } from "@/components/home/games/games.types";
 import Button from "@/elements/button";
 import Input from "@/elements/input";
 import { RootState } from "@/redux";
-import { addGame, deleteGame } from "@/redux/actions/gamesAction";
+import { addGame, deleteGame, updateGame } from "@/redux/actions/gamesAction";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../modal";
 
-// eslint-disable-next-line react/require-default-props
-function EditCardForm({ id, onClose, action }: { id?: number; onClose: () => void; action: "add" | "edit" }) {
+function EditCardForm({
+  id,
+  onClose,
+  action,
+  link,
+  date,
+}: {
+  id?: number;
+  onClose: () => void;
+  action: "add" | "edit";
+  link?: string;
+  date?: string;
+}) {
   const { games } = useSelector((state: RootState) => state.games);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const dispatch = useDispatch();
@@ -52,6 +64,12 @@ function EditCardForm({ id, onClose, action }: { id?: number; onClose: () => voi
           price: Number(cardValues.price),
         })
       );
+      onClose();
+    }
+    if (action === "edit") {
+      if (date && link && id) {
+        dispatch(updateGame({ ...cardValues, date, link, id, price: Number(cardValues.price) }));
+      }
       onClose();
     }
   };

@@ -131,6 +131,10 @@ export interface AddGameCard {
   payload: Game;
 }
 
+export interface UpdateGameCard {
+  type: ActionsType.UPDATE_GAME;
+  payload: Game;
+}
 export interface DeleteGameCard {
   type: ActionsType.DELETE_GAME;
   payload: number;

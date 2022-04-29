@@ -12,7 +12,18 @@ import xbox from "../../../assets/images/xbox.png";
 import pc from "../../../assets/images/desktop-computer.png";
 import playstation from "../../../assets/images/playstation.png";
 
-function GameCard({ id, name, image, description, price, link, platforms, age, layout }: Game & { layout: Layout }) {
+function GameCard({
+  id,
+  name,
+  image,
+  description,
+  price,
+  link,
+  platforms,
+  age,
+  layout,
+  date,
+}: Game & { layout: Layout }) {
   const [editOpen, setEditOpen] = useState(false);
   const dispatch = useDispatch();
   const { isAuth, role } = useSelector((state: RootState) => state.auth);
@@ -94,7 +105,7 @@ function GameCard({ id, name, image, description, price, link, platforms, age, l
         </div>
       </a>
       <Modal title="Edit card" isOpen={editOpen} onClose={() => setEditOpen(false)}>
-        <EditCardForm onClose={() => setEditOpen(false)} id={id} action="edit" />
+        <EditCardForm onClose={() => setEditOpen(false)} id={id} action="edit" link={link} date={date} />
       </Modal>
     </>
   );

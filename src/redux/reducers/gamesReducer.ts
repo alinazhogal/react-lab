@@ -9,6 +9,7 @@ import {
   setTopGames,
   DeleteGameCard,
   AddGameCard,
+  UpdateGameCard,
 } from "../types";
 
 const initialState = {
@@ -31,6 +32,7 @@ const gamesReducer = (
     | setTopGames
     | DeleteGameCard
     | AddGameCard
+    | UpdateGameCard
 ) => {
   switch (action.type) {
     case ActionsType.GET_TOP_GAMES:
@@ -47,9 +49,16 @@ const gamesReducer = (
       return { ...state, isSearchLoading: action.payload };
     case ActionsType.ADD_GAME:
       return { ...state, games: [...state.games, action.payload] };
+    case ActionsType.UPDATE_GAME:
+      return {
+        ...state,
+        games: state.games.map((game) => {
+          if (game.id === action.payload.id) return action.payload;
+          return game;
+        }),
+      };
     case ActionsType.DELETE_GAME:
       return { ...state, games: state.games.filter((game) => game.id !== action.payload) };
-
     default:
       return state;
   }
