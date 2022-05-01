@@ -71,6 +71,17 @@
 
     .image-preview {
       margin: 14px 30px 0 0;
+      width: 210px;
+      height: 255px;
+      background-color: rgb(158, 158, 158);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h4 {
+        text-transform: uppercase;
+        font-weight: normal;
+      }
 
       img {
         width: 210px;

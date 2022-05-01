@@ -18,6 +18,7 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform }: Ca
     const { name: eventName, value } = e.target;
     const updatedValues = { ...values, [eventName]: value };
     setValues({ ...updatedValues });
+    if (updatedValues.amount <= 0) return;
     dispatch(updateCartItem({ name, ...updatedValues }));
   };
 

@@ -77,7 +77,7 @@ function EditCardForm({
   return (
     <div className="edit-form">
       <div className="image-preview">
-        <img src={cardValues.image} alt="Game" />
+        {cardValues.image ? <img src={cardValues.image} alt="Game" /> : <h4>No picture</h4>}
       </div>
       <form onSubmit={handleSubmit}>
         <Input label="Name" id="name" type="text" value={cardValues.name} onChange={handleChange} />
