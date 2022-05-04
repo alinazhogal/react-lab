@@ -29,6 +29,7 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform, imag
     } else if (!value) {
       updatedValues = { ...values, amount: "" };
       setValues({ ...updatedValues });
+      return;
     } else {
       updatedValues = { ...values, amount: 1 };
       setValues({ ...updatedValues });

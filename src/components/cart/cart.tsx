@@ -2,8 +2,8 @@ import { RootState } from "@/redux";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@/elements/button";
 import "./cart.scss";
-import { useEffect, useState } from "react";
-import { buyCart, clearCart, getCart } from "@/redux/actions/cartActions";
+import { useState } from "react";
+import { buyCart, clearCart } from "@/redux/actions/cartActions";
 import CartItem from "./cartItem";
 import Modal from "../modal/modal";
 
@@ -38,10 +38,6 @@ function Cart() {
       </p>
     </div>
   ));
-
-  useEffect(() => {
-    dispatch(getCart(login));
-  }, []);
 
   function handleClear() {
     dispatch(clearCart(login));

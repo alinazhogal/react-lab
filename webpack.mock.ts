@@ -78,6 +78,7 @@ export default webpackMockServer.add((app, helper) => {
       password: req.body.password,
     };
     users[user.login] = user;
+    users[user.login].cart = [];
     res.status(201).json({ isAuth: true, username: user.login });
   });
 
@@ -94,7 +95,6 @@ export default webpackMockServer.add((app, helper) => {
           address: users[user.login].address,
           description: users[user.login].description,
           phone: users[user.login].phone,
-          cart: users[user.login].cart,
         });
       }
     } else {
