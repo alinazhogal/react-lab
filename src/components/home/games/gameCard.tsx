@@ -13,7 +13,7 @@ function GameCard({ id, name, image, description, price, link, platforms, age, l
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth);
   const cart = useSelector((state: RootState) => state.cart);
-  const isAdded = cart.some((item) => item.name === name);
+  const isAdded = cart.some((item) => item.name === name) && user.isAuth;
   const [disabled, setDisabled] = useState(isAdded);
 
   function click(e: React.MouseEvent<HTMLButtonElement>) {
