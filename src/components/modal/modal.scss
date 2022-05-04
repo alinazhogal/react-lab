@@ -7,6 +7,8 @@
   z-index: 1000;
   padding: 30px;
   border-radius: 14px;
+  overflow-y: scroll;
+  max-height: 85vh;
 
   .close {
     background: none;
@@ -52,7 +54,7 @@
   }
   @media screen and (max-width: 600px) {
     width: 100vw;
-    height: 100vh;
+    max-height: 100vh;
     border-radius: 0;
 
     .close {
@@ -89,6 +91,18 @@
         object-fit: cover;
       }
     }
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      align-items: center;
+
+      .image-preview {
+        margin: 0;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+    }
   }
 }
 
@@ -100,6 +114,7 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
+  overflow: auto;
 }
 
 .edit-buttons {
