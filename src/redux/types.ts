@@ -131,6 +131,7 @@ export interface CartItem {
   date: string;
   amount: number;
   price: number;
+  image: string;
 }
 
 export interface GetCart {

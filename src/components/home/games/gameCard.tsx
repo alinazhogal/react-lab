@@ -16,7 +16,7 @@ function GameCard({ id, name, image, description, price, link, platforms, age, l
   function click(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (user.isAuth) {
-      dispatch(addCartItem({ name, platforms, price, id }));
+      dispatch(addCartItem({ name, platforms, price, id, image }));
     } else alert("not authorised");
   }
 

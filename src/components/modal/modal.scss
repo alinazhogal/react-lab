@@ -28,6 +28,12 @@
     }
   }
 
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
   p {
     font-size: 14px;
     color: rgb(252, 77, 77);
@@ -40,6 +46,12 @@
     font-size: 16px;
     width: 240px;
     margin-bottom: 14px;
+  }
+
+  .check-cart-item {
+    p {
+      color: #fff;
+    }
   }
 
   button {
@@ -115,10 +127,5 @@ form {
       width: 280px;
       margin-top: 4px;
     }
-  }
-
-  .disabled {
-    opacity: 0.5;
-    pointer-events: none;
   }
 }

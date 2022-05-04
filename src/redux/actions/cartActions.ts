@@ -11,7 +11,13 @@ export function getCart(login: string) {
   };
 }
 
-export function addCartItem(values: { id: number; name: string; price: number; platforms: Platforms[] }) {
+export function addCartItem(values: {
+  id: number;
+  name: string;
+  price: number;
+  platforms: Platforms[];
+  image: string;
+}) {
   return async (dispatch: (arg0: { type: ActionsType; payload: CartItem }) => void) => {
     const response = await api.post("/api/addCartItem", { ...values, login: store.getState().auth.username });
     const cartItem = response.data;
@@ -33,7 +39,7 @@ export function deleteCartItem(name: string) {
   };
 }
 
-export function updateCartItem(values: { name: string; amount: number; platform: Platforms }) {
+export function updateCartItem(values: { name: string; amount: number | string; platform: Platforms }) {
   return async (dispatch: (arg0: { type: ActionsType; payload: CartItem }) => void) => {
     const response = await api.post("/api/updateCartItem", { ...values, login: store.getState().auth.username });
     const cart = response.data;
