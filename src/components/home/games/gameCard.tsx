@@ -4,7 +4,6 @@ import { addCartItem } from "@/redux/actions/cartActions";
 import { useState } from "react";
 import Modal from "@/components/modal/modal";
 import EditCardForm from "@/components/modal/forms/editCard";
-import Button from "@/elements/button";
 import { Game, Layout } from "./games.types";
 import "./games.scss";
 import stars from "../../../assets/images/stars.svg";
@@ -106,14 +105,10 @@ function GameCard({
             </div>
             <div className="price-info">
               <h4>${price}</h4>
-              <Button title="Add to cart" onClick={(e) => click(e)} />
+              <button type="button" className={disabled ? "button-el disabled" : "button-el"} onClick={click}>
+                {disabled ? "Added" : "Add to cart"}
+              </button>
             </div>
-          </div>
-          <div className="price-info">
-            <h4>${price}</h4>
-            <button type="button" className={disabled ? "button-el disabled" : "button-el"} onClick={click}>
-              {disabled ? "Added" : "Add to cart"}
-            </button>
           </div>
         </div>
       </a>
