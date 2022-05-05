@@ -4,9 +4,9 @@ import { addCartItem } from "@/redux/actions/cartActions";
 import { useState } from "react";
 import Modal from "@/components/modal/modal";
 import EditCardForm from "@/components/modal/forms/editCard";
+import Button from "@/elements/button";
 import { Game, Layout } from "./games.types";
 import "./games.scss";
-import Button from "../../../elements/button";
 import stars from "../../../assets/images/stars.svg";
 import xbox from "../../../assets/images/xbox.png";
 import pc from "../../../assets/images/desktop-computer.png";
@@ -27,12 +27,17 @@ function GameCard({
   const [editOpen, setEditOpen] = useState(false);
   const dispatch = useDispatch();
   const { isAuth, role } = useSelector((state: RootState) => state.auth);
+  const cart = useSelector((state: RootState) => state.cart);
+
+  const isAdded = cart.some((item) => item.name === name) && isAuth;
+  const [disabled, setDisabled] = useState(isAdded);
 
   const isAdmin = role === "admin";
   function click(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (isAuth) {
-      dispatch(addCartItem({ name, platforms, price, id }));
+      dispatch(addCartItem({ name, platforms, price, id, image }));
+      setDisabled(true);
     } else alert("not authorised");
   }
 
@@ -67,8 +72,10 @@ function GameCard({
             <p>{description}</p>
             <div className="price-info">
               <h4>${price}</h4>
-              <span>{age === "All ages" ? "All ages" : `${age}+`}</span>
-              <Button title="Add to cart" onClick={(e) => click(e)} />
+              <span>{age}+</span>
+              <button type="button" className={disabled ? "button-el disabled" : "button-el"} onClick={click}>
+                {disabled ? "Added" : "Add to cart"}
+              </button>
             </div>
           </div>
         </div>
@@ -101,6 +108,12 @@ function GameCard({
               <h4>${price}</h4>
               <Button title="Add to cart" onClick={(e) => click(e)} />
             </div>
+          </div>
+          <div className="price-info">
+            <h4>${price}</h4>
+            <button type="button" className={disabled ? "button-el disabled" : "button-el"} onClick={click}>
+              {disabled ? "Added" : "Add to cart"}
+            </button>
           </div>
         </div>
       </a>

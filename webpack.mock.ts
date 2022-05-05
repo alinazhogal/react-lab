@@ -205,6 +205,7 @@ export default webpackMockServer.add((app, helper) => {
     const { login } = req.body;
     const cartItem = {
       name: req.body.name,
+      image: req.body.image,
       platforms: req.body.platforms,
       selectedPlatform: req.body.platforms[0],
       date: new Date().toLocaleDateString(),
@@ -225,7 +226,7 @@ export default webpackMockServer.add((app, helper) => {
           ...item,
           selectedPlatform: platform || item.selectedPlatform,
           amount: amount || item.amount,
-          price: (amount || item.amount) * (item.price / item.amount),
+          price: +((amount || item.amount) * (item.price / item.amount)).toFixed(2),
         };
       }
       return item;
