@@ -2,6 +2,7 @@
 import { Platforms } from "@/components/home/games/games.types";
 import Button from "@/elements/button";
 import Input from "@/elements/input";
+import { EditErrors, validateEdit } from "@/helpers/validate";
 import { RootState } from "@/redux";
 import { addGame, deleteGame, updateGame } from "@/redux/actions/gamesAction";
 import React, { useState } from "react";
@@ -36,6 +37,16 @@ function EditCardForm({
     age: game?.age || "All ages",
     platforms: game?.platforms || [],
   });
+  const [editErrors, setEditErrors] = useState<EditErrors>({
+    name: "",
+    image: "",
+    genre: "",
+    price: "",
+    description: "",
+    platforms: "",
+  });
+
+  const isError = editErrors.name || editErrors.image || editErrors.genre || editErrors.price || editErrors.description;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -48,7 +59,21 @@ function EditCardForm({
     else setCardValues({ ...cardValues, platforms: cardValues.platforms.filter((pl) => pl !== e.target.value) });
   };
 
-  const handleDelete = () => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setEditErrors(validateEdit(e.target.name, e.target.value, editErrors));
+  };
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setEditErrors({ ...editErrors, [e.target.name]: "" });
+  };
+
+  const handleDeleteClick = () => {
+    if (action === "add") {
+      onClose();
+    } else setConfirmOpen(true);
+  };
+
+  const handleDeleteCard = () => {
     if (id) {
       dispatch(deleteGame(id));
       setConfirmOpen(false);
@@ -57,20 +82,26 @@ function EditCardForm({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (action === "add") {
-      dispatch(
-        addGame({
-          ...cardValues,
-          price: Number(cardValues.price),
-        })
-      );
-      onClose();
+    if (!cardValues.platforms.length) {
+      setEditErrors({ ...editErrors, platforms: "Choose at least one platform" });
+      return;
     }
-    if (action === "edit") {
-      if (date && link && id) {
-        dispatch(updateGame({ ...cardValues, date, link, id, price: Number(cardValues.price) }));
+    if (!isError) {
+      if (action === "add") {
+        dispatch(
+          addGame({
+            ...cardValues,
+            price: Number(cardValues.price),
+          })
+        );
+        onClose();
       }
-      onClose();
+      if (action === "edit") {
+        if (date && link && id) {
+          dispatch(updateGame({ ...cardValues, date, link, id, price: Number(cardValues.price) }));
+        }
+        onClose();
+      }
     }
   };
 
@@ -80,10 +111,46 @@ function EditCardForm({
         {cardValues.image ? <img src={cardValues.image} alt="Game" /> : <h4>No picture</h4>}
       </div>
       <form onSubmit={handleSubmit}>
-        <Input label="Name" id="name" type="text" value={cardValues.name} onChange={handleChange} />
-        <Input label="Image" id="image" type="text" value={cardValues.image} onChange={handleChange} />
-        <Input label="Genre" id="genre" type="text" value={cardValues.genre} onChange={handleChange} />
-        <Input label="Price" id="price" type="text" value={cardValues.price.toString()} onChange={handleChange} />
+        <Input
+          label="Name"
+          id="name"
+          type="text"
+          value={cardValues.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          errorMessage={editErrors.name}
+        />
+        <Input
+          label="Image"
+          id="image"
+          type="text"
+          value={cardValues.image}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          errorMessage={editErrors.image}
+        />
+        <Input
+          label="Genre"
+          id="genre"
+          type="text"
+          value={cardValues.genre}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          errorMessage={editErrors.genre}
+        />
+        <Input
+          label="Price"
+          id="price"
+          type="text"
+          value={cardValues.price.toString()}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          errorMessage={editErrors.price}
+        />
         <div className="input-div">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="description">Description</label>
@@ -93,7 +160,10 @@ function EditCardForm({
             value={cardValues.description}
             required
             onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
           />
+          <span>{editErrors.description}</span>
         </div>
         <div className="form-option">
           <span>Age</span>
@@ -107,6 +177,7 @@ function EditCardForm({
         </div>
         <div className="checklist">
           <span>Platforms</span>
+          <p>{editErrors.platforms}</p>
           <div className="form-option">
             <label htmlFor="pc">
               PC
@@ -138,7 +209,7 @@ function EditCardForm({
           </div>
         </div>
         <div className="edit-buttons">
-          <button type="button" className="secondary-button" onClick={() => setConfirmOpen(true)}>
+          <button type="button" className="secondary-button" onClick={handleDeleteClick}>
             Delete
           </button>
           <Modal isOpen={confirmOpen} onClose={() => setConfirmOpen(false)} title="Are you sure?">
@@ -147,7 +218,7 @@ function EditCardForm({
               <button type="button" className="secondary-button" onClick={() => setConfirmOpen(false)}>
                 No
               </button>
-              <Button title="Yes" onClick={handleDelete} />
+              <Button title="Yes" onClick={handleDeleteCard} />
             </div>
           </Modal>
           <button type="submit" className="button-el">

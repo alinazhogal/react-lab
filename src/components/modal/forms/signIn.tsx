@@ -12,6 +12,7 @@ function SignInForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const callbackLink = useSelector((state: RootState) => state.modal.callbackLink);
+
   const isError = formErrors.login || formErrors.password;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

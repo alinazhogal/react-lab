@@ -12,6 +12,15 @@ export interface ProfileFields {
   address: string;
 }
 
+export interface EditErrors {
+  name: string;
+  image: string;
+  price: string;
+  genre: string;
+  description: string;
+  platforms: string;
+}
+
 export function checkEmpty(value: string) {
   if (!value) {
     return "Field is required";
@@ -68,6 +77,37 @@ export function validateProfile(fieldName: string, value: string, formErrors: Pr
       break;
     default:
       errors[fieldName as keyof ProfileFields] = checkEmpty(value);
+  }
+  return errors;
+}
+
+export function validatePrice(value: string) {
+  const priceRegex = /^\d+(\.\d{1,2})?$/gm;
+  if (!priceRegex.test(value)) {
+    return "Incorrect price";
+  }
+  return "";
+}
+
+export function validateImage(value: string) {
+  const imageRegex = /(http[s]?:\/\/.*\.(?:png|jpg|gif|svg|jpeg))/i;
+  if (!imageRegex.test(value)) {
+    return "Incorrect image url";
+  }
+  return "";
+}
+
+export function validateEdit(fieldName: string, value: string, formErrors: EditErrors) {
+  const errors = { ...formErrors };
+  switch (fieldName) {
+    case "price":
+      errors.price = checkEmpty(value) || validatePrice(value);
+      break;
+    case "image":
+      errors.image = checkEmpty(value) || validateImage(value);
+      break;
+    default:
+      errors[fieldName as keyof EditErrors] = checkEmpty(value);
   }
   return errors;
 }
