@@ -7,6 +7,7 @@ import { RootState } from "@/redux";
 import { addGame, deleteGame, updateGame } from "@/redux/actions/gamesAction";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Modal from "../modal";
 
 function EditCardForm({
@@ -25,6 +26,7 @@ function EditCardForm({
   const { games } = useSelector((state: RootState) => state.games);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const game = games.find((item) => item.id === id);
 
@@ -95,6 +97,7 @@ function EditCardForm({
           })
         );
         onClose();
+        navigate(0);
       }
       if (action === "edit") {
         if (date && link && id) {

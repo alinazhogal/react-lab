@@ -15,7 +15,7 @@ function Modal({ isOpen, onClose, children, title }: ModalProps) {
 
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "scroll";
+    else document.body.style.overflowY = "scroll";
   }, [isOpen]);
 
   if (!isOpen) return null;
