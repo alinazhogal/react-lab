@@ -53,31 +53,55 @@ function Cart() {
     <section>
       {cart.length !== 0 && (
         <div className="section-content" id="cart-page">
-          <table>
-            <thead>
-              <tr>
-                <th>&nbsp;</th>
-                <th>Name</th>
-                <th>Platform</th>
-                <th>Order date</th>
-                <th>Amount</th>
-                <th>Price($)</th>
-                <th>&nbsp;</th>
-              </tr>
-            </thead>
-            <tbody>{cartArr}</tbody>
-            <tfoot>
-              <tr>
-                <th>Total</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-                <th>{totalAmount}</th>
-                <th>${totalPrice}</th>
-                <th>&nbsp;</th>
-              </tr>
-            </tfoot>
-          </table>
+          <div className="table" role="table">
+            <div className="table-row header" role="rowgroup">
+              <div className="table-data" role="columnheader">
+                &nbsp;
+              </div>
+              <div className="table-data" role="columnheader">
+                Name
+              </div>
+              <div className="table-data" role="columnheader" aria-label="Platform">
+                Platform
+              </div>
+              <div className="table-data" role="columnheader" aria-label="Order date">
+                Order date
+              </div>
+              <div className="table-data" role="columnheader">
+                Amount
+              </div>
+              <div className="table-data" role="columnheader">
+                Price
+              </div>
+              <div className="table-data" role="columnheader">
+                &nbsp;
+              </div>
+            </div>
+            {cartArr}
+            <div className="table-row footer" role="rowgroup">
+              <div className="table-data" role="columnheader">
+                Total
+              </div>
+              <div className="table-data" role="columnheader">
+                &nbsp;
+              </div>
+              <div className="table-data" role="columnheader">
+                &nbsp;
+              </div>
+              <div className="table-data" role="columnheader">
+                &nbsp;
+              </div>
+              <div className="table-data" role="columnheader">
+                {totalAmount}
+              </div>
+              <div className="table-data" role="columnheader">
+                ${totalPrice}
+              </div>
+              <div className="table-data" role="columnheader">
+                &nbsp;
+              </div>
+            </div>
+          </div>
           <div className="cart-buttons">
             <button type="button" className="secondary-button" onClick={handleClear}>
               Clear all

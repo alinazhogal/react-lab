@@ -4,30 +4,61 @@ section {
     min-height: 76vh;
     justify-content: flex-start;
 
-    table {
+    .table {
       width: 100%;
-      border-collapse: collapse;
       margin: 40px 0;
 
-      thead {
-        th {
-          border-bottom: 1px solid #fff;
-        }
+      .table-row {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+      }
 
-        th:nth-child(2) {
-          min-width: 166px;
-        }
+      .table-data {
+        padding: 16px;
+        text-align: center;
+      }
 
-        th:nth-child(6) {
-          min-width: 100px;
+      .table-data:nth-child(1) {
+        width: 11%;
+      }
+
+      .table-data:nth-child(2) {
+        width: 20%;
+      }
+
+      .table-data:nth-child(3) {
+        width: 16%;
+      }
+
+      .table-data:nth-child(4) {
+        width: 16%;
+      }
+
+      .table-data:nth-child(5) {
+        width: 12%;
+      }
+
+      .table-data:nth-child(6) {
+        width: 15%;
+      }
+
+      .table-data:nth-child(7) {
+        width: 10%;
+      }
+
+      .header {
+        border-bottom: 1px solid #fff;
+
+        .table-data {
+          font-weight: 600;
         }
       }
 
-      tbody {
-        td {
-          text-align: center;
-          border-bottom: 1px solid rgb(154, 153, 153);
+      .data-row {
+        border-bottom: 1px solid rgb(154, 153, 153);
 
+        .table-data {
           img {
             width: 60px;
             height: 60px;
@@ -71,18 +102,79 @@ section {
         }
       }
 
-      th,
-      td {
-        padding: 16px;
-      }
+      .footer {
+        .table-data {
+          font-weight: 600;
 
-      tfoot {
-        th {
-          font-size: 18px;
+          &:first-child {
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 810px) {
+      align-items: center;
+
+      .table {
+        max-width: 400px;
+
+        .header {
+          display: none;
         }
 
-        th:first-child {
-          text-transform: uppercase;
+        .data-row {
+          border: 1px solid #fff;
+          border-radius: 12px;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 14px;
+
+          .table-data {
+            text-align: right;
+            border: none;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+
+            &:before {
+              content: attr(aria-label);
+              font-weight: bold;
+            }
+          }
+        }
+
+        .footer {
+          border: 1px solid #fff;
+          border-radius: 12px;
+
+          .table-data:nth-child(1) {
+            width: 25%;
+          }
+
+          .table-data:nth-child(2) {
+            width: 0;
+          }
+
+          .table-data:nth-child(3) {
+            width: 0;
+          }
+
+          .table-data:nth-child(4) {
+            display: none;
+          }
+
+          .table-data:nth-child(5) {
+            width: 25%;
+          }
+
+          .table-data:nth-child(6) {
+            width: 25%;
+          }
+
+          .table-data:nth-child(7) {
+            display: none;
+          }
         }
       }
     }
@@ -90,53 +182,6 @@ section {
     .cart-buttons {
       button {
         margin: 0 10px 40px;
-      }
-    }
-    @media screen and (max-width: 790px) {
-      align-items: center;
-
-      table {
-        max-width: 400px;
-
-        thead {
-          display: none;
-        }
-
-        tbody {
-          tr td {
-            text-align: right;
-            display: block;
-            border: none;
-
-            &:before {
-              content: attr(aria-label);
-              float: left;
-              font-weight: bold;
-            }
-          }
-        }
-
-        tr {
-          display: block;
-          border: 2px solid #e8e9eb;
-          border-radius: 10px;
-          margin-bottom: 14px;
-          max-width: 400px;
-        }
-
-        tfoot tr {
-          th:nth-child(1) {
-            width: 50%;
-          }
-
-          th:nth-child(5) {
-            width: 20%;
-          }
-
-          th:nth-child(6) {
-            width: 30%;
-          }
-        }
       }
     }
   }
