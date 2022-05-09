@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import { Platforms } from "@/components/home/games/games.types";
+import { Genres, Platforms } from "@/components/home/games/games.types";
 import Button from "@/elements/button";
 import Input from "@/elements/input";
 import { EditErrors, validateEdit } from "@/helpers/validate";
@@ -48,11 +48,15 @@ function EditCardForm({
     platforms: "",
   });
 
-  const isError = editErrors.name || editErrors.image || editErrors.genre || editErrors.price || editErrors.description;
+  const isError = editErrors.name || editErrors.image || editErrors.price || editErrors.description;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setCardValues({ ...cardValues, [name]: value });
+    if (name === "description") {
+      setCardValues({ ...cardValues, [name]: value });
+      return;
+    }
+    setCardValues({ ...cardValues, [name]: value.trim() });
   };
 
   const handlePlatformsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,11 +65,11 @@ function EditCardForm({
     else setCardValues({ ...cardValues, platforms: cardValues.platforms.filter((pl) => pl !== e.target.value) });
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setEditErrors(validateEdit(e.target.name, e.target.value, editErrors));
   };
 
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setEditErrors({ ...editErrors, [e.target.name]: "" });
   };
 
@@ -101,7 +105,16 @@ function EditCardForm({
       }
       if (action === "edit") {
         if (date && link && id) {
-          dispatch(updateGame({ ...cardValues, date, link, id, price: Number(cardValues.price) }));
+          dispatch(
+            updateGame({
+              ...cardValues,
+              genre: cardValues.genre as Genres,
+              date,
+              link,
+              id,
+              price: Number(cardValues.price),
+            })
+          );
         }
         onClose();
       }
@@ -135,16 +148,6 @@ function EditCardForm({
           errorMessage={editErrors.image}
         />
         <Input
-          label="Genre"
-          id="genre"
-          type="text"
-          value={cardValues.genre}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          errorMessage={editErrors.genre}
-        />
-        <Input
           label="Price"
           id="price"
           type="text"
@@ -154,7 +157,7 @@ function EditCardForm({
           onFocus={handleFocus}
           errorMessage={editErrors.price}
         />
-        <div className="input-div">
+        <div className="input-div last">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="description">Description</label>
           <textarea
@@ -168,6 +171,26 @@ function EditCardForm({
           />
           <span>{editErrors.description}</span>
         </div>
+        <div className="form-option">
+          <span>Genre</span>
+          <select
+            name="genre"
+            id="genre"
+            value={cardValues.genre}
+            onChange={handleChange}
+            required
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+          >
+            <option disabled value="">
+              &nbsp;
+            </option>
+            <option value="Arcade">Arcade</option>
+            <option value="Survive">Survive</option>
+            <option value="Shooter">Shooter</option>
+          </select>
+        </div>
+        <p className="form-error">{editErrors.genre}</p>
         <div className="form-option">
           <span>Age</span>
           <select name="age" id="age" value={cardValues.age} onChange={handleChange}>

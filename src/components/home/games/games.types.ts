@@ -4,6 +4,12 @@ export enum Platforms {
   Xbox = "xbox",
 }
 
+export enum Genres {
+  Arcade = "Arcade",
+  Shooter = "Shooter",
+  Survive = "Survive",
+}
+
 export interface Game {
   id: number;
   name: string;
@@ -14,7 +20,7 @@ export interface Game {
   link: string;
   platforms: Platforms[];
   age: string;
-  genre: string;
+  genre: Genres;
 }
 
 export enum Layout {

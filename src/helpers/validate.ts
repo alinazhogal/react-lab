@@ -22,7 +22,7 @@ export interface EditErrors {
 }
 
 export function checkEmpty(value: string) {
-  if (!value) {
+  if (!value.trim()) {
     return "Field is required";
   }
   return "";

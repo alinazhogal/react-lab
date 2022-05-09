@@ -33,7 +33,7 @@ function Products() {
         <div className="main">
           <div className="add-card-search">
             <Search value={search || ""} onChange={handleChange} />
-            {isAdmin && <Button title="Add card" onClick={() => setEditOpen(true)} />}
+            {isAdmin && <Button title="Add product" onClick={() => setEditOpen(true)} />}
           </div>
           <div className="products-container">
             <Loader isLoading={isFilterLoading}>

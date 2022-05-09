@@ -17,7 +17,6 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform, imag
     const { value } = e.target;
     const updatedValues: CartValues = { ...values, platform: value as Platforms };
     setValues({ ...updatedValues });
-    if (updatedValues.amount <= 0) return;
     dispatch(updateCartItem({ name, ...updatedValues }));
   };
 
@@ -43,12 +42,14 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform, imag
   }
 
   return (
-    <tr>
-      <td aria-label=" ">
+    <div className="table-row data-row">
+      <div className="table-data" role="cell">
         <img src={image} alt="game" />
-      </td>
-      <td aria-label="Name">{name}</td>
-      <td aria-label="Platform">
+      </div>
+      <div className="table-data" role="cell" aria-label="Name">
+        {name}
+      </div>
+      <div className="table-data" role="cell" aria-label="Platform">
         <select name="platform" id="platform" onChange={handleSelectChange}>
           {platforms.map((pl) => (
             <option key={pl} value={pl}>
@@ -56,9 +57,11 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform, imag
             </option>
           ))}
         </select>
-      </td>
-      <td aria-label="Order date">{date}</td>
-      <td aria-label="Amount">
+      </div>
+      <div className="table-data" role="cell" aria-label="Order date">
+        {date}
+      </div>
+      <div className="table-data" role="cell" aria-label="Amount">
         <input
           type="number"
           name="amount"
@@ -68,14 +71,16 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform, imag
           required
           title="Enter whole positive number"
         />
-      </td>
-      <td aria-label="Price">${price}</td>
-      <td aria-label=" ">
+      </div>
+      <div className="table-data" role="cell" aria-label="Price">
+        ${price}
+      </div>
+      <div className="table-data" role="cell">
         <button type="button" aria-label="Delete item" onClick={handleDeleteItem}>
           Delete
         </button>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 }
 export default CartItem;
