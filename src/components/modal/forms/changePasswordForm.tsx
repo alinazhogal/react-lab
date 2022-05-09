@@ -1,4 +1,4 @@
-import InputText from "@/elements/inputText";
+import Input from "@/elements/input";
 import { AuthFields, validateAuth } from "@/helpers/validate";
 import { RootState } from "@/redux";
 import { changePassword } from "@/redux/actions/authActions";
@@ -37,7 +37,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <InputText
+      <Input
         label="Password"
         id="password"
         type="password"
@@ -47,7 +47,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-      <InputText
+      <Input
         label="Repeat password"
         id="confirmPassword"
         type="password"

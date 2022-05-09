@@ -1,3 +1,4 @@
+import { CartItem } from "@/redux/types";
 import api from ".";
 
 export interface User {
@@ -9,6 +10,8 @@ export interface User {
   description?: string;
   address?: string;
   photo?: string;
+  cart?: CartItem[];
+  order?: CartItem[];
 }
 
 export async function signUp(values: User) {

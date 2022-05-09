@@ -1,4 +1,4 @@
-import { Game } from "@/components/home/games/games.types";
+import { Game, Platforms } from "@/components/home/games/games.types";
 
 export enum ActionsType {
   SET_SIGNIN_OPEN = "SET_SIGNIN_OPEN",
@@ -15,6 +15,12 @@ export enum ActionsType {
   GET_FILTERED_GAMES = "GET_FILTERED_GAMES",
   SET_FILTERED_GAMES = "SET_FILTERED_GAMES",
   SET_SEARCH_LOADING = "SET_SEARCH_LOADING",
+  GET_CART = "GET_CART",
+  ADD_CART_ITEM = "ADD_CART_ITEM",
+  UPDATE_CART_ITEM = "UPDATE_CART_ITEM",
+  DELETE_CART_ITEM = "DELETE_CART_ITEM",
+  BUY_ORDER = "BUY_ORDER",
+  CLEAR_CART = "CLEAR_CART",
 }
 
 export interface ModalState {
@@ -115,4 +121,42 @@ export interface getSearchedGames {
 export interface setSearchedLoading {
   type: ActionsType.SET_SEARCH_LOADING;
   payload: boolean;
+}
+
+export interface CartItem {
+  id: number;
+  name: string;
+  platforms: Platforms[];
+  selectedPlatform: Platforms;
+  date: string;
+  amount: number;
+  price: number;
+  image: string;
+}
+
+export interface GetCart {
+  type: ActionsType.GET_CART;
+  payload: CartItem[];
+}
+export interface AddCartItem {
+  type: ActionsType.ADD_CART_ITEM;
+  payload: CartItem;
+}
+
+export interface DeleteCartItem {
+  type: ActionsType.DELETE_CART_ITEM;
+  payload: string;
+}
+
+export interface BuyOrder {
+  type: ActionsType.BUY_ORDER;
+}
+
+export interface ClearCart {
+  type: ActionsType.CLEAR_CART;
+}
+
+export interface UpdateCartItem {
+  type: ActionsType.UPDATE_CART_ITEM;
+  payload: CartItem[];
 }

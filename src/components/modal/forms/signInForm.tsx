@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InputText from "@/elements/inputText";
+import Input from "@/elements/input";
 import { AuthFields, validateAuth } from "@/helpers/validate";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "@/redux/actions/authActions";
@@ -48,7 +48,7 @@ function SignInForm() {
     <>
       <p>{formErrors.response}</p>
       <form onSubmit={handleSubmit}>
-        <InputText
+        <Input
           label="Login"
           id="login"
           type="text"
@@ -58,7 +58,7 @@ function SignInForm() {
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
-        <InputText
+        <Input
           label="Password"
           id="password"
           type="password"

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import InputText from "@/elements/inputText";
+import Input from "@/elements/input";
 import { AuthFields, validateAuth } from "@/helpers/validate";
 import { useDispatch } from "react-redux";
 import { register } from "@/redux/actions/authActions";
@@ -40,7 +40,7 @@ function SignUpForm({ onClose }: { onClose: () => void }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <InputText
+      <Input
         label="Login"
         id="login"
         type="text"
@@ -50,7 +50,7 @@ function SignUpForm({ onClose }: { onClose: () => void }) {
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-      <InputText
+      <Input
         label="Password"
         id="password"
         type="password"
@@ -60,7 +60,7 @@ function SignUpForm({ onClose }: { onClose: () => void }) {
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-      <InputText
+      <Input
         label="Confirm password"
         id="confirmPassword"
         type="password"

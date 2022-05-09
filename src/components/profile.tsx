@@ -1,5 +1,5 @@
 import Button from "@/elements/button";
-import InputText from "@/elements/inputText";
+import Input from "@/elements/input";
 import { ProfileFields, validateProfile } from "@/helpers/validate";
 import { RootState } from "@/redux";
 import { getProfileInfo, saveProfileInfo } from "@/redux/actions/authActions";
@@ -103,7 +103,7 @@ function Profile() {
             </Modal>
           </div>
           <form onSubmit={handleSubmit}>
-            <InputText
+            <Input
               label="Username"
               id="username"
               type="text"
@@ -113,7 +113,7 @@ function Profile() {
               onBlur={handleBlur}
               onFocus={handleFocus}
             />
-            <InputText
+            <Input
               label="Phone"
               id="phone"
               type="tel"
@@ -123,7 +123,7 @@ function Profile() {
               onBlur={handleBlur}
               onFocus={handleFocus}
             />
-            <InputText
+            <Input
               label="Address"
               id="address"
               type="text"

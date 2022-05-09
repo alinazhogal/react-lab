@@ -10,7 +10,7 @@ interface InputProps {
   onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-function InputText({ id, label, type, value, errorMessage, onChange, onBlur, onFocus }: InputProps) {
+function Input({ id, label, type, value, errorMessage, onChange, onBlur, onFocus }: InputProps) {
   return (
     <div className="input-div">
       <label htmlFor={id}>{label}</label>
@@ -29,4 +29,4 @@ function InputText({ id, label, type, value, errorMessage, onChange, onBlur, onF
   );
 }
 
-export default InputText;
+export default Input;
