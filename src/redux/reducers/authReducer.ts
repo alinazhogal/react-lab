@@ -2,38 +2,36 @@ import { getItemFromStorage, SavableKeys } from "@/helpers/storage";
 import {
   ActionsType,
   AuthState,
-  RestoreUser,
   Login,
   Logout,
   SignUp,
   ChangePassword,
   GetProfile,
   SaveProfile,
+  GetUser,
 } from "../types";
 
 const restoredUser = getItemFromStorage(SavableKeys.User);
 const user = restoredUser
   ? JSON.parse(restoredUser)
   : {
-      isAuth: "",
       username: "",
-      role: "",
     };
 
 const initialState = {
-  isAuth: user.isAuth,
+  isAuth: !!user.username,
   username: user.username,
   phone: "",
   description: "",
   address: "",
   photo: "",
-  role: user.role,
+  role: "",
 };
 
 const modalReducer = (
   // eslint-disable-next-line default-param-last
   state: AuthState = initialState,
-  action: Login | Logout | SignUp | RestoreUser | ChangePassword | SaveProfile | GetProfile
+  action: Login | Logout | SignUp | ChangePassword | SaveProfile | GetProfile | GetUser
 ) => {
   switch (action.type) {
     case ActionsType.LOGIN:
@@ -42,8 +40,8 @@ const modalReducer = (
       return { isAuth: false, username: "", phone: "", description: "", address: "", photo: "", role: "" };
     case ActionsType.SIGNUP:
       return { ...state, isAuth: true, username: action.payload.username, role: action.payload.role };
-    case ActionsType.RESTORE_USER:
-      return { ...state, isAuth: action.payload.isAuth, username: action.payload.username, role: action.payload.role };
+    case ActionsType.GET_USER:
+      return { ...state, role: action.payload };
     case ActionsType.CHANGE_PASSWORD:
       return state;
     case ActionsType.SAVE_PROFILE:

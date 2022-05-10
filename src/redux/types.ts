@@ -5,7 +5,7 @@ export enum ActionsType {
   LOGIN = "LOGIN",
   LOGOUT = "LOGOUT",
   SIGNUP = "SIGNUP",
-  RESTORE_USER = "RESTORE_USER",
+  GET_USER = "GET_USER",
   CHANGE_PASSWORD = "CHANGE_PASSWORD",
   SAVE_PROFILE = "SAVE_PROFILE",
   GET_PROFILE = "GET_PROFILE",
@@ -60,9 +60,9 @@ export interface Logout {
   type: ActionsType.LOGOUT;
 }
 
-export interface RestoreUser {
-  type: ActionsType.RESTORE_USER;
-  payload: { isAuth: boolean; username: string; role: string };
+export interface GetUser {
+  type: ActionsType.GET_USER;
+  payload: string;
 }
 
 export interface ChangePassword {

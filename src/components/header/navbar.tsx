@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "@/redux/actions/authActions";
 import { RootState } from "@/redux";
 import setSignInOpen from "@/redux/actions/modalActions";
+import { ActionsType } from "@/redux/types";
 import pageLinks from "../../routesLinks";
 import arrow from "../../assets/images/arrow-down.svg";
 import profile from "../../assets/images/account.svg";
@@ -28,6 +29,7 @@ export default function NavBar() {
 
   function handleLogOut() {
     dispatch(logOut());
+    dispatch({ type: ActionsType.CLEAR_CART });
     removeItemFromStorage(SavableKeys.User);
     navigate(pageLinks.home);
   }

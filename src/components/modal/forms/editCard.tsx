@@ -52,7 +52,7 @@ function EditCardForm({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    if (name === "description") {
+    if (name === "description" || name === "name") {
       setCardValues({ ...cardValues, [name]: value });
       return;
     }

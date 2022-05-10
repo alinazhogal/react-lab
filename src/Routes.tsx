@@ -9,18 +9,23 @@ import Home from "./components/home/home";
 import Products from "./components/products/products";
 import Profile from "./components/profile";
 import { RootState } from "./redux";
+import { getUser } from "./redux/actions/authActions";
 import { getCart } from "./redux/actions/cartActions";
 import pageLinks from "./routesLinks";
 
 export default function Routes() {
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const login = useSelector((state: RootState) => state.auth.username);
+  const role = useSelector((state: RootState) => state.auth.role);
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isAuth && !cart.length) {
       dispatch(getCart(login));
+    }
+    if (isAuth && !role) {
+      dispatch(getUser(login));
     }
   }, [isAuth, login]);
 

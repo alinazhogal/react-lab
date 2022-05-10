@@ -6,6 +6,11 @@ body {
   background-color: $background;
   font-family: "OpenSans-Regular", sans-serif;
   color: #fff;
+  overflow-y: auto;
+}
+
+.no-scroll {
+  overflow-y: hidden;
 }
 
 #app {

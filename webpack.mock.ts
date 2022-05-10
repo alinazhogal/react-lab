@@ -127,6 +127,7 @@ export default webpackMockServer.add((app, helper) => {
     };
     users[user.login] = user;
     users[user.login].role = "user";
+    users[user.login].cart = [];
     res.status(201).json({ isAuth: true, username: user.login, role: "user" });
   });
 
@@ -150,6 +151,10 @@ export default webpackMockServer.add((app, helper) => {
     } else {
       res.status(400).json({ isAuth: false });
     }
+  });
+
+  app.get("/api/auth/getUser/:login", (req, res) => {
+    res.json({ role: users[req.params.login].role });
   });
 
   app.post("/api/changePassword", (req, res) => {
@@ -198,7 +203,8 @@ export default webpackMockServer.add((app, helper) => {
   });
 
   app.get("/api/getCart/:login", (req, res) => {
-    res.json(users[req.params.login].cart);
+    const cart = users[req.params.login].cart?.length ? users[req.params.login].cart : [];
+    res.json(cart);
   });
 
   app.post("/api/addCartItem", (req, res) => {
