@@ -1,5 +1,6 @@
 import ReactDom from "react-dom";
 import "./modal.scss";
+import { useEffect } from "react";
 import close from "../../assets/images/close.svg";
 
 interface ModalProps {
@@ -11,6 +12,11 @@ interface ModalProps {
 
 function Modal({ isOpen, onClose, children, title }: ModalProps) {
   const portal = document.getElementById("portal") as HTMLElement;
+
+  useEffect(() => {
+    if (isOpen) document.body.classList.add("no-scroll");
+    else document.body.classList.remove("no-scroll");
+  }, [isOpen]);
 
   if (!isOpen) return null;
   return ReactDom.createPortal(

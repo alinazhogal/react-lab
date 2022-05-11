@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { User } from "@/api/users";
+import { Game } from "@/components/home/games/games.types";
 import webpackMockServer from "webpack-mock-server";
 import { getGamesResponse } from "./src/api/games";
 
@@ -10,11 +11,24 @@ const testUser: User = {
   description: "ejdjdkdkdkdk",
   address: "Minsk",
   photo: "",
+  role: "user",
+  cart: [],
+};
+
+const admin: User = {
+  login: "admin1",
+  password: "Admin1",
+  phone: "",
+  description: "",
+  address: "",
+  photo: "",
+  role: "admin",
   cart: [],
 };
 
 const users = {
   [testUser.login]: testUser,
+  [admin.login]: admin,
 };
 
 export default webpackMockServer.add((app, helper) => {
@@ -28,19 +42,21 @@ export default webpackMockServer.add((app, helper) => {
     res.json(response);
   });
 
+  let games = getGamesResponse(helper);
+
   app.get("/api/getTopProducts", (_req, res) => {
-    res.json(getGamesResponse(helper));
+    res.json(games);
   });
 
   app.get("/api/search/:text", ({ params: { text } }, res) => {
-    res.json(getGamesResponse(helper).filter((game) => game.name.toLowerCase().includes(text.toLowerCase())));
+    res.json(games.filter((game) => game.name.toLowerCase().includes(text.toLowerCase())));
   });
 
   app.get("/api/products", ({ query: { platform, genre, age, sortCriteria, sortType, search } }, res) => {
-    let products = [...getGamesResponse(helper)];
+    let products = games;
     if (platform) products = products.filter((game) => game.platforms.includes(platform.toString()));
     if (genre) products = genre !== "All genres" ? products.filter((game) => game.genre === genre) : products;
-    if (age) products = age !== "All ages" ? products.filter((game) => game.age === Number(age)) : products;
+    if (age) products = age !== "All ages" ? products.filter((game) => Number(game.age) === Number(age)) : products;
     if (search) products = products.filter((game) => game.name.toLowerCase().includes(search.toString().toLowerCase()));
 
     products.sort((a, b) => {
@@ -72,14 +88,47 @@ export default webpackMockServer.add((app, helper) => {
     res.json(products);
   });
 
+  app.delete("/api/product/:id", (req, res) => {
+    games = games.filter((game) => game.id !== Number(req.params.id));
+    res.status(200).end();
+  });
+
+  app.post("/api/product", (req, res) => {
+    const { name, image, price, description, platforms, genre, age } = req.body;
+    const game: Game = {
+      id: helper.getUniqueIdInt(),
+      name,
+      image,
+      price,
+      description,
+      platforms,
+      genre,
+      age,
+      date: new Date().toLocaleDateString("en-CA"),
+      link: image,
+    };
+    games.push(game);
+    res.status(201).json(game);
+  });
+
+  app.put("/api/product", (req, res) => {
+    const game = req.body.values;
+    games = games.map((item) => {
+      if (item.id === game.id) return game;
+      return item;
+    });
+    res.status(200).json(game);
+  });
+
   app.post("/api/auth/signUp", (req, res) => {
     const user: User = {
       login: req.body.login,
       password: req.body.password,
     };
     users[user.login] = user;
+    users[user.login].role = "user";
     users[user.login].cart = [];
-    res.status(201).json({ isAuth: true, username: user.login });
+    res.status(201).json({ isAuth: true, username: user.login, role: "user" });
   });
 
   app.put("/api/auth/signIn", (req, res) => {
@@ -95,11 +144,17 @@ export default webpackMockServer.add((app, helper) => {
           address: users[user.login].address,
           description: users[user.login].description,
           phone: users[user.login].phone,
+          role: users[user.login].role,
+          cart: users[user.login].cart,
         });
       }
     } else {
       res.status(400).json({ isAuth: false });
     }
+  });
+
+  app.get("/api/auth/getUser/:login", (req, res) => {
+    res.json({ role: users[req.params.login].role });
   });
 
   app.post("/api/changePassword", (req, res) => {
@@ -148,7 +203,8 @@ export default webpackMockServer.add((app, helper) => {
   });
 
   app.get("/api/getCart/:login", (req, res) => {
-    res.json(users[req.params.login].cart);
+    const cart = users[req.params.login].cart?.length ? users[req.params.login].cart : [];
+    res.json(cart);
   });
 
   app.post("/api/addCartItem", (req, res) => {

@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "@/redux/actions/authActions";
 import { RootState } from "@/redux";
 import setSignInOpen from "@/redux/actions/modalActions";
+import { ActionsType } from "@/redux/types";
 import pageLinks from "../../routesLinks";
 import arrow from "../../assets/images/arrow-down.svg";
 import profile from "../../assets/images/account.svg";
 import cartIcon from "../../assets/images/cart.svg";
 import logout from "../../assets/images/log-out.svg";
 import Modal from "../modal/modal";
-import SignInForm from "../modal/forms/signInForm";
-import SignUpForm from "../modal/forms/signUpForm";
+import SignInForm from "../modal/forms/signIn";
+import SignUpForm from "../modal/forms/signUp";
 import MobileMenu from "./mobileMenu";
 import PrivateLink from "./privateLink";
 
@@ -28,6 +29,7 @@ export default function NavBar() {
 
   function handleLogOut() {
     dispatch(logOut());
+    dispatch({ type: ActionsType.CLEAR_CART });
     removeItemFromStorage(SavableKeys.User);
     navigate(pageLinks.home);
   }

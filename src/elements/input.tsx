@@ -4,10 +4,10 @@ interface InputProps {
   label: string;
   type: string;
   value: string | undefined;
-  errorMessage: string | undefined;
+  errorMessage?: string | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 function Input({ id, label, type, value, errorMessage, onChange, onBlur, onFocus }: InputProps) {

@@ -5,7 +5,7 @@ import { RootState } from "@/redux";
 import { getProfileInfo, saveProfileInfo } from "@/redux/actions/authActions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ChangePasswordForm from "./modal/forms/changePasswordForm";
+import ChangePasswordForm from "./modal/forms/changePassword";
 import Modal from "./modal/modal";
 import "./profile.scss";
 

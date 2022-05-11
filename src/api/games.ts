@@ -2,11 +2,6 @@ import { MockServerHelper } from "webpack-mock-server/lib/mockServerHelper";
 import { Game } from "@/components/home/games/games.types";
 import api from ".";
 
-export function wait(milliseconds = 300) {
-  // eslint-disable-next-line no-promise-executor-return
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-}
-
 export async function getTopGames(): Promise<Game[]> {
   const response = await api.get<Game[]>("/api/getTopProducts");
   return response.data
@@ -20,7 +15,6 @@ export async function getTopGames(): Promise<Game[]> {
 
 export async function getSearchedGames(searchReq: string): Promise<Game[]> {
   const response = await api.get<Game[]>(`/api/search/${searchReq}`);
-  await wait(300);
   return response.data;
 }
 
@@ -36,7 +30,7 @@ export function getGamesResponse(helper: MockServerHelper) {
       date: "2020-07-05",
       link: "https://www.minecraft.net/ru-ru",
       platforms: ["pc", "playstation", "xbox"],
-      age: 3,
+      age: "3",
       genre: "Arcade",
     },
     {
@@ -49,7 +43,7 @@ export function getGamesResponse(helper: MockServerHelper) {
       date: "2021-07-05",
       link: "https://playoverwatch.com/ru-ru/",
       platforms: ["playstation", "xbox"],
-      age: 12,
+      age: "12",
       genre: "Shooter",
     },
     {
@@ -63,7 +57,7 @@ export function getGamesResponse(helper: MockServerHelper) {
       date: "2019-07-05",
       link: "https://www.epicgames.com/fortnite/ru/home",
       platforms: ["pc", "playstation"],
-      age: 18,
+      age: "18",
       genre: "Survive",
     },
     {
@@ -77,7 +71,7 @@ export function getGamesResponse(helper: MockServerHelper) {
       date: "2016-07-05",
       link: "https://www.epicgames.com/fortnite/ru/home",
       platforms: ["pc"],
-      age: 12,
+      age: "12",
       genre: "Survive",
     },
     {
@@ -90,7 +84,7 @@ export function getGamesResponse(helper: MockServerHelper) {
       date: "2018-07-05",
       link: "https://www.epicgames.com/fortnite/ru/home",
       platforms: ["pc", "playstation", "xbox"],
-      age: 6,
+      age: "6",
       genre: "Arcade",
     },
   ];
