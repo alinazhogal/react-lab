@@ -17,7 +17,7 @@ import SignUpForm from "../modal/forms/signUp";
 import MobileMenu from "./mobileMenu";
 import PrivateLink from "./privateLink";
 
-export default function NavBar() {
+function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -126,3 +126,5 @@ export default function NavBar() {
     </nav>
   );
 }
+
+export default NavBar;

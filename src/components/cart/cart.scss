@@ -185,25 +185,3 @@ section {
     }
   }
 }
-
-.secondary-button {
-  padding: 12px 40px;
-  border-radius: 20px;
-  border: 2px solid $accent-color;
-  cursor: pointer;
-  background-color: transparent;
-  color: white;
-  transition: 300ms ease-out;
-  font-size: 16px;
-  opacity: 1;
-
-  &:hover {
-    border: 2px solid #cb31a7;
-    background-color: #cb31a7;
-  }
-}
-
-.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
