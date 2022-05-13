@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import useLoader from "@/helpers/useLoader";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux";
@@ -45,7 +45,7 @@ function Games() {
         </div>
         <div className={layout === Layout.Grid ? "games-grid" : "games-list"}>
           <Loader isLoading={isTopLoading}>
-            {gamesArr.length !== 0 ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}
+            {gamesArr.length !== 0 ? gamesArr : <h3 className="no-data">No games found</h3>}
           </Loader>
         </div>
       </div>
@@ -53,4 +53,4 @@ function Games() {
   );
 }
 
-export default Games;
+export default memo(Games);

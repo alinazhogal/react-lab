@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Game } from "./home/games/games.types";
 import "./search.scss";
 import searchIcon from "../assets/images/search.svg";
@@ -11,15 +12,13 @@ interface SearchProps {
   loading?: boolean;
 }
 
-export function Search({ value, onChange, loading }: SearchProps) {
-  return (
-    <div className="search-div">
-      {!loading && <img src={searchIcon} alt="" />}
-      {loading && <div className="lds-dual-ring" />}
-      <input type="search" placeholder="Search..." className="search" value={value} onChange={onChange} />
-    </div>
-  );
-}
+export const Search = memo(({ value, onChange, loading }: SearchProps) => (
+  <div className="search-div">
+    {!loading && <img src={searchIcon} alt="" />}
+    {loading && <div className="lds-dual-ring" />}
+    <input type="search" placeholder="Search..." className="search" value={value} onChange={onChange} />
+  </div>
+));
 
 function SearchCard({ image, link, name, price }: Game) {
   return (
@@ -46,7 +45,7 @@ export function SearchResults({ results }: searchResultsProps) {
 
   return (
     <div className="results">
-      {searchResultsArr.length ? searchResultsArr : <h3 style={{ marginTop: "40px" }}>No games found</h3>}
+      {searchResultsArr.length ? searchResultsArr : <h3 className="no-data">No games found</h3>}
     </div>
   );
 }

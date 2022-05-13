@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLinkProps, NavLink } from "react-router-dom";
 import { RootState } from "@/redux";
 import setSignInOpen from "@/redux/actions/modalActions";
+import { memo } from "react";
 
-export default function PrivateLink({
+function PrivateLink({
   children,
   activeCn,
   passiveCn,
@@ -16,9 +17,9 @@ export default function PrivateLink({
   const dispatch = useDispatch();
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
-  function handleLinkClick(link: string) {
+  const handleLinkClick = (link: string) => {
     dispatch(setSignInOpen(true, link));
-  }
+  };
 
   if (!isAuth) {
     return (
@@ -39,3 +40,5 @@ export default function PrivateLink({
     </NavLink>
   );
 }
+
+export default memo(PrivateLink);

@@ -1,6 +1,6 @@
 import { deleteCartItem, updateCartItem } from "@/redux/actions/cartActions";
 import { CartItem } from "@/redux/types";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Platforms } from "../home/games/games.types";
 
@@ -83,4 +83,4 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform, imag
     </div>
   );
 }
-export default CartItem;
+export default memo(CartItem);
