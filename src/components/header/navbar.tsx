@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { removeItemFromStorage, SavableKeys } from "@/helpers/storage";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,12 +27,12 @@ function NavBar() {
 
   const total = cart.reduce((acc, cur) => acc + Number(cur.amount), 0);
 
-  const handleLogOut = useCallback(() => {
+  const handleLogOut = () => {
     dispatch(logOut());
     dispatch({ type: ActionsType.CLEAR_CART });
     removeItemFromStorage(SavableKeys.User);
     navigate(pageLinks.home);
-  }, [dispatch]);
+  };
 
   function onSignInOpen() {
     dispatch(setSignInOpen(true));
@@ -127,4 +127,4 @@ function NavBar() {
   );
 }
 
-export default memo(NavBar);
+export default NavBar;

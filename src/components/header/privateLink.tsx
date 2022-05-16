@@ -2,13 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLinkProps, NavLink } from "react-router-dom";
 import { RootState } from "@/redux";
 import setSignInOpen from "@/redux/actions/modalActions";
-import { memo } from "react";
 
 function PrivateLink({
   children,
   activeCn,
   passiveCn,
-  ...navLinkProps
+  to,
 }: NavLinkProps & {
   // eslint-disable-next-line react/require-default-props
   activeCn?: string;
@@ -23,22 +22,17 @@ function PrivateLink({
 
   if (!isAuth) {
     return (
-      <NavLink
-        {...navLinkProps}
-        className={passiveCn}
-        to="#"
-        onClick={() => handleLinkClick(navLinkProps.to as string)}
-      >
+      <NavLink className={passiveCn} to="#" onClick={() => handleLinkClick(to as string)}>
         {children}
       </NavLink>
     );
   }
 
   return (
-    <NavLink {...navLinkProps} className={({ isActive }) => (isActive && activeCn ? activeCn : passiveCn)}>
+    <NavLink to={to} className={({ isActive }) => (isActive && activeCn ? activeCn : passiveCn)}>
       {children}
     </NavLink>
   );
 }
 
-export default memo(PrivateLink);
+export default PrivateLink;

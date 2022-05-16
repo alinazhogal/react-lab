@@ -1,6 +1,6 @@
 import debounce from "@/helpers/debounce";
 import { getFiltered } from "@/redux/actions/gamesAction";
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 import arrow from "../../assets/images/arrow-down.svg";
@@ -119,4 +119,4 @@ function Filters({ search }: { search?: string }) {
   );
 }
 
-export default memo(Filters);
+export default Filters;

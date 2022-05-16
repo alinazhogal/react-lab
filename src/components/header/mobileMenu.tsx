@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import pageLinks from "../../routesLinks";
 import burger from "../../assets/images/burger-menu.svg";
@@ -52,4 +52,4 @@ function MobileMenu() {
   );
 }
 
-export default memo(MobileMenu);
+export default MobileMenu;

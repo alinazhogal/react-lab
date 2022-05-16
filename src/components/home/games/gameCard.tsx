@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux";
 import { addCartItem } from "@/redux/actions/cartActions";
-import { memo, useCallback, useState } from "react";
+import { useState } from "react";
 import Modal from "@/components/modal/modal";
 import EditCardForm from "@/components/modal/forms/editCard";
 import { Game, Layout } from "./games.types";
@@ -28,21 +28,18 @@ function GameCard({
   const { isAuth, role } = useSelector((state: RootState) => state.auth);
   const cart = useSelector((state: RootState) => state.cart);
 
-  const isAdded = () => cart.some((item) => item.name === name) && isAuth;
+  const isAdded = cart.some((item) => item.name === name) && isAuth;
   const [disabled, setDisabled] = useState(isAdded);
 
   const isAdmin = role === "admin";
 
-  const click = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      if (isAuth) {
-        dispatch(addCartItem({ name, platforms, price, id, image }));
-        setDisabled(true);
-      } else alert("not authorised");
-    },
-    [dispatch, disabled, name, platforms, price, id, image, isAuth]
-  );
+  const click = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (isAuth) {
+      dispatch(addCartItem({ name, platforms, price, id, image }));
+      setDisabled(true);
+    } else alert("not authorised");
+  };
 
   const platformID = {
     xbox,
@@ -50,13 +47,10 @@ function GameCard({
     pc,
   };
 
-  const handleEdit = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      setEditOpen(true);
-    },
-    [editOpen]
-  );
+  const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setEditOpen(true);
+  };
 
   if (layout === Layout.List)
     return (
@@ -126,4 +120,4 @@ function GameCard({
   );
 }
 
-export default memo(GameCard);
+export default GameCard;

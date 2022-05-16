@@ -4,13 +4,7 @@ import api from ".";
 
 export async function getTopGames(): Promise<Game[]> {
   const response = await api.get<Game[]>("/api/getTopProducts");
-  return response.data
-    .sort((a, b) => {
-      if (a.date < b.date) return 1;
-      if (a.date > b.date) return -1;
-      return 0;
-    })
-    .slice(0, 3);
+  return response.data;
 }
 
 export async function getSearchedGames(searchReq: string): Promise<Game[]> {

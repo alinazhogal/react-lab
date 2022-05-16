@@ -1,4 +1,3 @@
-import { memo } from "react";
 import xbox from "../../../assets/images/xbox.png";
 import playstation from "../../../assets/images/playstation.png";
 import desktop from "../../../assets/images/desktop-computer.png";
@@ -20,4 +19,4 @@ function Categories() {
   );
 }
 
-export default memo(Categories);
+export default Categories;

@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import useLoader from "@/helpers/useLoader";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux";
@@ -10,11 +10,10 @@ import GameCard from "./gameCard";
 function Games() {
   const [layout, setLayout] = useState<Layout>(Layout.Grid);
   const Loader = useLoader();
-
   const { isTopLoading, games } = useSelector((state: RootState) => state.games);
+
   function changeLayout(option: Layout) {
     if (option === layout) return;
-
     setLayout(option);
   }
 
@@ -53,4 +52,4 @@ function Games() {
   );
 }
 
-export default memo(Games);
+export default Games;

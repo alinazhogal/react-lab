@@ -1,7 +1,7 @@
 import Button from "@/elements/button";
 import useLoader from "@/helpers/useLoader";
 import { RootState } from "@/redux";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import GameCard from "../home/games/gameCard";
 import { Layout } from "../home/games/games.types";
@@ -18,16 +18,16 @@ function Products() {
   const { isFilterLoading, games } = useSelector((state: RootState) => state.games);
   const { role } = useSelector((state: RootState) => state.auth);
 
-  const isAdmin = useMemo(() => role === "admin", [role]);
+  const isAdmin = role === "admin";
 
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSearch(e.target.value);
-    },
-    [search]
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const gamesArr = useMemo(
+    () => games.map((game) => <GameCard key={game.id} {...game} layout={Layout.Grid} />),
+    [games]
   );
-
-  const gamesArr = games.map((game) => <GameCard key={game.id} {...game} layout={Layout.Grid} />);
 
   const openModal = () => setEditOpen(true);
 
