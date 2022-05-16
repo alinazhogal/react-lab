@@ -1,7 +1,7 @@
 import Button from "@/elements/button";
 import useLoader from "@/helpers/useLoader";
 import { RootState } from "@/redux";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import GameCard from "../home/games/gameCard";
 import { Layout } from "../home/games/games.types";
@@ -24,7 +24,14 @@ function Products() {
     setSearch(e.target.value);
   };
 
-  const gamesArr = games.map((game) => <GameCard key={game.id} {...game} layout={Layout.Grid} />);
+  const gamesArr = useMemo(
+    () => games.map((game) => <GameCard key={game.id} {...game} layout={Layout.Grid} />),
+    [games]
+  );
+
+  const openModal = () => setEditOpen(true);
+
+  const closeModal = () => setEditOpen(false);
 
   return (
     <section>
@@ -33,16 +40,16 @@ function Products() {
         <div className="main">
           <div className="add-card-search">
             <Search value={search || ""} onChange={handleChange} />
-            {isAdmin && <Button title="Add product" onClick={() => setEditOpen(true)} />}
+            {isAdmin && <Button title="Add product" onClick={openModal} />}
           </div>
           <div className="products-container">
             <Loader isLoading={isFilterLoading}>
-              {gamesArr.length !== 0 ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}
+              {gamesArr.length !== 0 ? gamesArr : <h3 className="no-data">No games found</h3>}
             </Loader>
           </div>
         </div>
-        <Modal title="Edit card" isOpen={editOpen} onClose={() => setEditOpen(false)}>
-          <EditCardForm onClose={() => setEditOpen(false)} action="add" />
+        <Modal title="Edit card" isOpen={editOpen} onClose={closeModal}>
+          <EditCardForm onClose={closeModal} action="add" />
         </Modal>
       </div>
     </section>

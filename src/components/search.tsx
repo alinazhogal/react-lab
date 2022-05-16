@@ -46,7 +46,7 @@ export function SearchResults({ results }: searchResultsProps) {
 
   return (
     <div className="results">
-      {searchResultsArr.length ? searchResultsArr : <h3 style={{ marginTop: "40px" }}>No games found</h3>}
+      {searchResultsArr.length ? searchResultsArr : <h3 className="no-data">No games found</h3>}
     </div>
   );
 }

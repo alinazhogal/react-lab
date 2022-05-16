@@ -17,7 +17,7 @@ import SignUpForm from "../modal/forms/signUp";
 import MobileMenu from "./mobileMenu";
 import PrivateLink from "./privateLink";
 
-export default function NavBar() {
+function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,12 +27,12 @@ export default function NavBar() {
 
   const total = cart.reduce((acc, cur) => acc + Number(cur.amount), 0);
 
-  function handleLogOut() {
+  const handleLogOut = () => {
     dispatch(logOut());
     dispatch({ type: ActionsType.CLEAR_CART });
     removeItemFromStorage(SavableKeys.User);
     navigate(pageLinks.home);
-  }
+  };
 
   function onSignInOpen() {
     dispatch(setSignInOpen(true));
@@ -126,3 +126,5 @@ export default function NavBar() {
     </nav>
   );
 }
+
+export default NavBar;

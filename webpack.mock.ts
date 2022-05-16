@@ -45,7 +45,15 @@ export default webpackMockServer.add((app, helper) => {
   let games = getGamesResponse(helper);
 
   app.get("/api/getTopProducts", (_req, res) => {
-    res.json(games);
+    res.json(
+      games
+        .sort((a, b) => {
+          if (a.date < b.date) return 1;
+          if (a.date > b.date) return -1;
+          return 0;
+        })
+        .slice(0, 3)
+    );
   });
 
   app.get("/api/search/:text", ({ params: { text } }, res) => {

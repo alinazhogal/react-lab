@@ -10,11 +10,10 @@ import GameCard from "./gameCard";
 function Games() {
   const [layout, setLayout] = useState<Layout>(Layout.Grid);
   const Loader = useLoader();
-
   const { isTopLoading, games } = useSelector((state: RootState) => state.games);
+
   function changeLayout(option: Layout) {
     if (option === layout) return;
-
     setLayout(option);
   }
 
@@ -45,7 +44,7 @@ function Games() {
         </div>
         <div className={layout === Layout.Grid ? "games-grid" : "games-list"}>
           <Loader isLoading={isTopLoading}>
-            {gamesArr.length !== 0 ? gamesArr : <h3 style={{ marginBottom: "40px" }}>No games found</h3>}
+            {gamesArr.length !== 0 ? gamesArr : <h3 className="no-data">No games found</h3>}
           </Loader>
         </div>
       </div>

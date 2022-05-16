@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import pageLinks from "../../routesLinks";
 import burger from "../../assets/images/burger-menu.svg";
 
-export default function MobileMenu() {
+function MobileMenu() {
   const [openMenu, setOpenMenu] = useState(false);
   function handleClick() {
     if (openMenu) {
@@ -51,3 +51,5 @@ export default function MobileMenu() {
     </>
   );
 }
+
+export default MobileMenu;

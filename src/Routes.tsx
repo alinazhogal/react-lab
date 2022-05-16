@@ -1,17 +1,20 @@
-import { useEffect } from "react";
+import React, { lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes as DOMRoutes } from "react-router-dom";
-import About from "./components/about";
-import Cart from "./components/cart/cart";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import Home from "./components/home/home";
-import Products from "./components/products/products";
-import Profile from "./components/profile";
+import Loader from "./elements/loader";
+
 import { RootState } from "./redux";
 import { getUser } from "./redux/actions/authActions";
 import { getCart } from "./redux/actions/cartActions";
 import pageLinks from "./routesLinks";
+
+const Products = lazy(() => import("./components/products/products"));
+const Profile = lazy(() => import("./components/profile"));
+const Cart = lazy(() => import("./components/cart/cart"));
+const About = lazy(() => import("./components/about"));
 
 export default function Routes() {
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
@@ -34,15 +37,67 @@ export default function Routes() {
       <Header />
       <DOMRoutes>
         <Route path={pageLinks.home} element={<Home />} />
-        <Route path={pageLinks.products} element={isAuth ? <Products /> : <Navigate to={pageLinks.home} />}>
+        <Route
+          path={pageLinks.products}
+          element={
+            isAuth ? (
+              <React.Suspense fallback={<Loader />}>
+                <Products />
+              </React.Suspense>
+            ) : (
+              <Navigate to={pageLinks.home} />
+            )
+          }
+        >
           <Route
             path={`${pageLinks.products}/:category`}
-            element={isAuth ? <Products /> : <Navigate to={pageLinks.home} />}
+            element={
+              isAuth ? (
+                <React.Suspense fallback={<Loader />}>
+                  <Products />
+                </React.Suspense>
+              ) : (
+                <Navigate to={pageLinks.home} />
+              )
+            }
           />
         </Route>
-        <Route path={pageLinks.about} element={isAuth ? <About /> : <Navigate to={pageLinks.home} />} />
-        <Route path={pageLinks.profile} element={isAuth ? <Profile /> : <Navigate to={pageLinks.home} />} />
-        <Route path={pageLinks.cart} element={isAuth ? <Cart /> : <Navigate to={pageLinks.home} />} />
+        <Route
+          path={pageLinks.about}
+          element={
+            isAuth ? (
+              <React.Suspense fallback={<Loader />}>
+                <About />
+              </React.Suspense>
+            ) : (
+              <Navigate to={pageLinks.home} />
+            )
+          }
+        />
+        <Route
+          path={pageLinks.profile}
+          element={
+            isAuth ? (
+              <React.Suspense fallback={<Loader />}>
+                <Profile />
+              </React.Suspense>
+            ) : (
+              <Navigate to={pageLinks.home} />
+            )
+          }
+        />
+        <Route
+          path={pageLinks.cart}
+          element={
+            isAuth ? (
+              <React.Suspense fallback={<Loader />}>
+                <Cart />
+              </React.Suspense>
+            ) : (
+              <Navigate to={pageLinks.home} />
+            )
+          }
+        />
         <Route path="*" element={<Navigate to={pageLinks.home} />} />
       </DOMRoutes>
       <Footer />

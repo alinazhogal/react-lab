@@ -32,13 +32,14 @@ function GameCard({
   const [disabled, setDisabled] = useState(isAdded);
 
   const isAdmin = role === "admin";
-  function click(e: React.MouseEvent<HTMLButtonElement>) {
+
+  const click = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (isAuth) {
       dispatch(addCartItem({ name, platforms, price, id, image }));
       setDisabled(true);
     } else alert("not authorised");
-  }
+  };
 
   const platformID = {
     xbox,
@@ -46,10 +47,10 @@ function GameCard({
     pc,
   };
 
-  function handleEdit(e: React.MouseEvent<HTMLButtonElement>) {
+  const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setEditOpen(true);
-  }
+  };
 
   if (layout === Layout.List)
     return (
