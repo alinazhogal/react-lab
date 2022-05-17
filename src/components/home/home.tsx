@@ -1,5 +1,5 @@
 import { RootState } from "@/redux";
-import { getGames, getSearched } from "@/redux/actions/gamesAction";
+import { getTopGames, getSearchedGames } from "@/redux/actions/gamesAction";
 import { ActionsType } from "@/redux/types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,12 +14,12 @@ function Home() {
   const { searchedGames, isSearchLoading } = useSelector((state: RootState) => state.games);
 
   useEffect(() => {
-    dispatch(getGames());
+    dispatch(getTopGames());
   }, []);
 
   const fetchData = (value: string) => {
     if (value) {
-      dispatch(getSearched(value));
+      dispatch(getSearchedGames(value));
     }
   };
 

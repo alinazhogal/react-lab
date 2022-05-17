@@ -1,18 +1,6 @@
 import { MockServerHelper } from "webpack-mock-server/lib/mockServerHelper";
-import { Game } from "@/components/home/games/games.types";
-import api from ".";
 
-export async function getTopGames(): Promise<Game[]> {
-  const response = await api.get<Game[]>("/api/getTopProducts");
-  return response.data;
-}
-
-export async function getSearchedGames(searchReq: string): Promise<Game[]> {
-  const response = await api.get<Game[]>(`/api/search/${searchReq}`);
-  return response.data;
-}
-
-export function getGamesResponse(helper: MockServerHelper) {
+export default function getGamesResponse(helper: MockServerHelper) {
   return [
     {
       id: helper.getUniqueIdInt(),

@@ -1,5 +1,4 @@
 import api from "@/api";
-import { getSearchedGames, getTopGames } from "@/api/games";
 import { Game, Platforms } from "@/components/home/games/games.types";
 import { ActionsType } from "../types";
 
@@ -13,19 +12,21 @@ export interface GameCardValues {
   platforms: Platforms[];
 }
 
-export function getGames() {
+export function getTopGames() {
   return async (dispatch: (arg0: { type: ActionsType; payload?: Game[] }) => void) => {
     dispatch({ type: ActionsType.GET_TOP_GAMES });
-    const data = await getTopGames();
+    const response = await api.get<Game[]>("/api/getTopProducts");
+    const { data } = response;
     dispatch({ type: ActionsType.SET_TOP_GAMES, payload: data });
   };
 }
 
-export function getSearched(value: string) {
+export function getSearchedGames(value: string) {
   return async (dispatch: (arg0: { type: ActionsType; payload: boolean | Game[] | undefined }) => void) => {
     dispatch({ type: ActionsType.GET_SEARCHED_GAMES, payload: undefined });
     dispatch({ type: ActionsType.SET_SEARCH_LOADING, payload: true });
-    const data = await getSearchedGames(value);
+    const response = await api.get<Game[]>(`/api/search/${value}`);
+    const { data } = response;
     dispatch({ type: ActionsType.GET_SEARCHED_GAMES, payload: data });
     dispatch({ type: ActionsType.SET_SEARCH_LOADING, payload: false });
   };

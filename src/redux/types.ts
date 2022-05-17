@@ -36,6 +36,20 @@ export interface SetSignInOpen {
   payload: { isOpen: boolean; callbackLink: string };
 }
 
+export interface User {
+  login: string;
+  newLogin?: string;
+  password?: string;
+  newPassword?: string;
+  phone?: string;
+  description?: string;
+  address?: string;
+  photo?: string;
+  role?: string;
+  cart?: CartItem[];
+  order?: CartItem[];
+}
+
 export interface AuthState {
   username: string;
   isAuth?: boolean;

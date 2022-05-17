@@ -1,8 +1,7 @@
 import api from "@/api";
-import { getProfile, saveProfile, signIn, signUp, updatePassword, User } from "@/api/users";
 import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
 import { AxiosError } from "axios";
-import { ActionsType, AuthState } from "../types";
+import { ActionsType, AuthState, User } from "../types";
 
 export const logOut = () => ({
   type: ActionsType.LOGOUT,
@@ -11,7 +10,8 @@ export const logOut = () => ({
 export function logIn(values: User, successCallback: () => void, errorCallback: () => void) {
   return async (dispatch: (arg0: { type: ActionsType; payload: boolean | AuthState }) => void) => {
     try {
-      const { isAuth, username, role } = await signIn(values);
+      const response = await api.put("/api/auth/signIn", values);
+      const { isAuth, username, role } = response.data;
       if (isAuth) {
         dispatch({ type: ActionsType.LOGIN, payload: { username: values.login, role, isAuth } });
         successCallback();
@@ -29,7 +29,8 @@ export function logIn(values: User, successCallback: () => void, errorCallback: 
 
 export function register(values: User, cb: () => void) {
   return async (dispatch: (arg0: { type: ActionsType; payload: AuthState }) => void) => {
-    const { isAuth, username, role } = await signUp(values);
+    const response = await api.post("/api/auth/signUp", values);
+    const { isAuth, username, role } = response.data;
     dispatch({ type: ActionsType.SIGNUP, payload: { username, role, isAuth } });
     saveItemToStorage(SavableKeys.User, JSON.stringify({ username }));
     cb();
@@ -38,14 +39,14 @@ export function register(values: User, cb: () => void) {
 
 export function changePassword(values: User) {
   return async (dispatch: (arg0: { type: ActionsType }) => void) => {
-    await updatePassword(values);
+    await api.post("/api/changePassword", values);
     dispatch({ type: ActionsType.CHANGE_PASSWORD });
   };
 }
 
 export function saveProfileInfo(values: User) {
   return async (dispatch: (arg0: { type: ActionsType; payload: AuthState }) => void) => {
-    await saveProfile(values);
+    await api.post("/api/saveProfile", values);
     saveItemToStorage(SavableKeys.User, JSON.stringify({ username: values.newLogin || values.login }));
     dispatch({ type: ActionsType.SAVE_PROFILE, payload: { ...values, username: values.newLogin || values.login } });
   };
@@ -53,7 +54,8 @@ export function saveProfileInfo(values: User) {
 
 export function getProfileInfo(username: string) {
   return async (dispatch: (arg0: { type: ActionsType; payload: AuthState }) => void) => {
-    const { login, phone, address, description, photo } = await getProfile(username);
+    const response = await api.get(`/api/getProfile/${username}`);
+    const { login, phone, address, description, photo } = response.data;
     dispatch({
       type: ActionsType.GET_PROFILE,
       payload: {
