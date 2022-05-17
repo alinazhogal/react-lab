@@ -2,6 +2,7 @@ import { deleteCartItem, updateCartItem } from "@/redux/actions/cartActions";
 import { CartItem } from "@/redux/types";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import styles from "./cart.module.scss";
 import { Platforms } from "../home/games/games.types";
 
 interface CartValues {
@@ -42,14 +43,14 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform, imag
   }
 
   return (
-    <div className="table-row data-row">
-      <div className="table-data" role="cell">
+    <div className={`${styles.tableRow} ${styles.dataRow}`}>
+      <div className={styles.tableData} role="cell">
         <img src={image} alt="game" />
       </div>
-      <div className="table-data" role="cell" aria-label="Name">
+      <div className={styles.tableData} role="cell" aria-label="Name">
         {name}
       </div>
-      <div className="table-data" role="cell" aria-label="Platform">
+      <div className={styles.tableData} role="cell" aria-label="Platform">
         <select name="platform" id="platform" onChange={handleSelectChange}>
           {platforms.map((pl) => (
             <option key={pl} value={pl}>
@@ -58,10 +59,10 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform, imag
           ))}
         </select>
       </div>
-      <div className="table-data" role="cell" aria-label="Order date">
+      <div className={styles.tableData} role="cell" aria-label="Order date">
         {date}
       </div>
-      <div className="table-data" role="cell" aria-label="Amount">
+      <div className={styles.tableData} role="cell" aria-label="Amount">
         <input
           type="number"
           name="amount"
@@ -72,10 +73,10 @@ function CartItem({ name, platforms, date, amount, price, selectedPlatform, imag
           title="Enter whole positive number"
         />
       </div>
-      <div className="table-data" role="cell" aria-label="Price">
+      <div className={styles.tableData} role="cell" aria-label="Price">
         ${price}
       </div>
-      <div className="table-data" role="cell">
+      <div className={styles.tableData} role="cell">
         <button type="button" aria-label="Delete item" onClick={handleDeleteItem}>
           Delete
         </button>

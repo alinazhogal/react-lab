@@ -7,9 +7,9 @@ import GameCard from "../home/games/gameCard";
 import { Layout } from "../home/games/games.types";
 import EditCardForm from "../modal/forms/editCard";
 import Modal from "../modal/modal";
-import { Search } from "../search";
+import { Search } from "../../elements/search";
 import Filters from "./filters";
-import "./products.scss";
+import styles from "./products.module.scss";
 
 function Products() {
   const [search, setSearch] = useState<string>();
@@ -35,14 +35,14 @@ function Products() {
 
   return (
     <section>
-      <div className="section-content products-page">
+      <div className={`section-content ${styles.productsPage}`}>
         <Filters search={search} />
-        <div className="main">
-          <div className="add-card-search">
-            <Search value={search || ""} onChange={handleChange} />
+        <div className={styles.main}>
+          <div className={styles.addCardSearch}>
+            <Search value={search || ""} onChange={handleChange} styleAdd="products" />
             {isAdmin && <Button title="Add product" onClick={openModal} />}
           </div>
-          <div className="products-container">
+          <div className={styles.productsContainer}>
             <Loader isLoading={isFilterLoading}>
               {gamesArr.length !== 0 ? gamesArr : <h3 className="no-data">No games found</h3>}
             </Loader>

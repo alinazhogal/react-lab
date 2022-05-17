@@ -1,10 +1,10 @@
-export enum Platforms {
+export const enum Platforms {
   PC = "pc",
   Playstation = "playstation",
   Xbox = "xbox",
 }
 
-export enum Genres {
+export const enum Genres {
   Arcade = "Arcade",
   Shooter = "Shooter",
   Survive = "Survive",
@@ -23,7 +23,7 @@ export interface Game {
   genre: Genres;
 }
 
-export enum Layout {
+export const enum Layout {
   Grid,
   List,
 }

@@ -1,6 +1,6 @@
 import ReactDom from "react-dom";
-import "./modal.scss";
 import { useEffect } from "react";
+import styles from "./modal.module.scss";
 import close from "../../assets/images/close.svg";
 
 interface ModalProps {
@@ -21,11 +21,11 @@ function Modal({ isOpen, onClose, children, title }: ModalProps) {
   if (!isOpen) return null;
   return ReactDom.createPortal(
     <>
-      <div className="modal-overlay" onClick={onClose} role="presentation" aria-label="overlay" aria-hidden="true" />
-      <div className="modal" role="dialog">
-        <div className="modal-title">
+      <div className={styles.overlay} onClick={onClose} role="presentation" aria-label="overlay" aria-hidden="true" />
+      <div className={styles.modal} role="dialog">
+        <div className={styles.title}>
           <h3>{title}</h3>
-          <button type="button" onClick={onClose} className="close">
+          <button type="button" onClick={onClose} className={styles.close}>
             <img src={close} alt="close modal" />
           </button>
         </div>

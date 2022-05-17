@@ -1,4 +1,4 @@
-import "./footer.scss";
+import styles from "./footer.module.scss";
 import g2aLogo from "../../assets/images/g2a.svg";
 import valveLogo from "../../assets/images/valve.svg";
 import nintendoLogo from "../../assets/images/nintendo.svg";
@@ -7,9 +7,9 @@ import segaLogo from "../../assets/images/Sega.svg";
 function Footer() {
   return (
     <footer>
-      <div className="footer-container">
+      <div className={styles.container}>
         <span>Incredible convenient</span>
-        <div className="games-links">
+        <div className={styles.gamesLinks}>
           <a href="https://www.g2a.com/" aria-label="g2a link">
             <img src={g2aLogo} alt="g2a logo" />
           </a>

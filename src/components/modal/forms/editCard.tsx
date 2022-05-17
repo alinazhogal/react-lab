@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Modal from "../modal";
+import styles from "../modal.module.scss";
 
 function EditCardForm({
   id,
@@ -122,8 +123,8 @@ function EditCardForm({
   };
 
   return (
-    <div className="edit-form">
-      <div className="image-preview">
+    <div className={styles.editForm}>
+      <div className={styles.imagePreview}>
         {cardValues.image ? <img src={cardValues.image} alt="Game" /> : <h4>No picture</h4>}
       </div>
       <form onSubmit={handleSubmit}>
@@ -157,7 +158,7 @@ function EditCardForm({
           onFocus={handleFocus}
           errorMessage={editErrors.price}
         />
-        <div className="input-div last">
+        <div className={`${styles.inputDiv} ${styles.last}`}>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="description">Description</label>
           <textarea
@@ -171,7 +172,7 @@ function EditCardForm({
           />
           <span>{editErrors.description}</span>
         </div>
-        <div className="form-option">
+        <div className={styles.formOption}>
           <span>Genre</span>
           <select
             name="genre"
@@ -190,8 +191,8 @@ function EditCardForm({
             <option value="Shooter">Shooter</option>
           </select>
         </div>
-        <p className="form-error">{editErrors.genre}</p>
-        <div className="form-option">
+        <p className={styles.formError}>{editErrors.genre}</p>
+        <div className={styles.formOption}>
           <span>Age</span>
           <select name="age" id="age" value={cardValues.age} onChange={handleChange}>
             <option value="All ages">All ages</option>
@@ -201,10 +202,10 @@ function EditCardForm({
             <option value="18">18+</option>
           </select>
         </div>
-        <div className="checklist">
+        <div className={styles.checklist}>
           <span>Platforms</span>
           <p>{editErrors.platforms}</p>
-          <div className="form-option">
+          <div className={styles.formOption}>
             <label htmlFor="pc">
               PC
               <input
@@ -234,17 +235,19 @@ function EditCardForm({
             </label>
           </div>
         </div>
-        <div className="edit-buttons">
+        <div className={styles.editButtons}>
           <button type="button" className="secondary-button" onClick={handleDeleteClick}>
             Delete
           </button>
           <Modal isOpen={confirmOpen} onClose={() => setConfirmOpen(false)} title="Are you sure?">
-            <p className="confirm">Are you sure you want to delete game {game?.name}?</p>
-            <div className="edit-buttons">
-              <button type="button" className="secondary-button" onClick={() => setConfirmOpen(false)}>
-                No
-              </button>
-              <Button title="Yes" onClick={handleDeleteCard} />
+            <div className={styles.checkContainer}>
+              <p className={styles.confirm}>Are you sure you want to delete game {game?.name}?</p>
+              <div className={styles.editButtons}>
+                <button type="button" className="secondary-button" onClick={() => setConfirmOpen(false)}>
+                  No
+                </button>
+                <Button title="Yes" onClick={handleDeleteCard} />
+              </div>
             </div>
           </Modal>
           <button type="submit" className="button-el">

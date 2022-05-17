@@ -1,6 +1,6 @@
 import { Game, Platforms } from "@/components/home/games/games.types";
 
-export enum ActionsType {
+export const enum ActionsType {
   SET_SIGNIN_OPEN = "SET_SIGNIN_OPEN",
   LOGIN = "LOGIN",
   LOGOUT = "LOGOUT",

@@ -1,9 +1,10 @@
 import { RootState } from "@/redux";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@/elements/button";
-import "./cart.scss";
 import { useState } from "react";
 import { buyCart, clearCart } from "@/redux/actions/cartActions";
+import styles from "./cart.module.scss";
+import modal from "../modal/modal.module.scss";
 import CartItem from "./cartItem";
 import Modal from "../modal/modal";
 
@@ -32,7 +33,7 @@ function Cart() {
   ));
 
   const orderArr = cart.map((item) => (
-    <div className="check-cart-item" key={item.id}>
+    <div className={modal.checkCartItem} key={item.id}>
       <p>
         {item.name} on {item.selectedPlatform} in amount of {item.amount} for ${item.price}
       </p>
@@ -52,57 +53,57 @@ function Cart() {
   return (
     <section>
       {cart.length !== 0 && (
-        <div className="section-content" id="cart-page">
-          <div className="table" role="table">
-            <div className="table-row header" role="rowgroup">
-              <div className="table-data" role="columnheader">
+        <div className={styles.content}>
+          <div className={styles.table} role="table">
+            <div className={`${styles.tableRow} ${styles.header}`} role="rowgroup">
+              <div className={styles.tableData} role="columnheader">
                 &nbsp;
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 Name
               </div>
-              <div className="table-data" role="columnheader" aria-label="Platform">
+              <div className={styles.tableData} role="columnheader" aria-label="Platform">
                 Platform
               </div>
-              <div className="table-data" role="columnheader" aria-label="Order date">
+              <div className={styles.tableData} role="columnheader" aria-label="Order date">
                 Order date
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 Amount
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 Price
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 &nbsp;
               </div>
             </div>
             {cartArr}
-            <div className="table-row footer" role="rowgroup">
-              <div className="table-data" role="columnheader">
+            <div className={`${styles.tableRow} ${styles.footer}`} role="rowgroup">
+              <div className={styles.tableData} role="columnheader">
                 Total
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 &nbsp;
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 &nbsp;
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 &nbsp;
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 {totalAmount}
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 ${totalPrice}
               </div>
-              <div className="table-data" role="columnheader">
+              <div className={styles.tableData} role="columnheader">
                 &nbsp;
               </div>
             </div>
           </div>
-          <div className="cart-buttons">
+          <div className={styles.buttons}>
             <button type="button" className="secondary-button" onClick={handleClear}>
               Clear all
             </button>
@@ -116,20 +117,24 @@ function Cart() {
         </div>
       )}
       <Modal title="Check your order" isOpen={isCheckModalOpen} onClose={() => setCheckModalOpen(false)}>
-        <h5>Your order is:</h5>
-        {orderArr}
-        <h5>Total amount: {totalAmount} </h5>
-        <h5>Total price: ${totalPrice} </h5>
-        <div className="modal-buttons">
-          <button type="button" className="secondary-button" onClick={() => setCheckModalOpen(false)}>
-            Cancel
-          </button>
-          <Button title="Buy" onClick={() => handleBuy()} />
+        <div className={modal.checkContainer}>
+          <h5>Your order is:</h5>
+          {orderArr}
+          <h5>Total amount: {totalAmount} </h5>
+          <h5>Total price: ${totalPrice} </h5>
+          <div className={modal.buttons}>
+            <button type="button" className="secondary-button" onClick={() => setCheckModalOpen(false)}>
+              Cancel
+            </button>
+            <Button title="Buy" onClick={() => handleBuy()} />
+          </div>
         </div>
       </Modal>
       <Modal title="Ordered successfully" isOpen={isConfirmModalOpen} onClose={() => setConfirmModalOpen(false)}>
-        <h5>You have successfully purchase products</h5>
-        <Button title="Thanks!" onClick={() => setConfirmModalOpen(false)} />
+        <div className={modal.checkContainer}>
+          <h5>You have successfully purchase products</h5>
+          <Button title="Thanks!" onClick={() => setConfirmModalOpen(false)} />
+        </div>
       </Modal>
     </section>
   );

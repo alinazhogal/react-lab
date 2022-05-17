@@ -1,5 +1,5 @@
 section {
-  .products-page {
+  .productsPage {
     max-width: 1240px;
     width: 100%;
     flex-direction: row;
@@ -11,7 +11,7 @@ section {
       align-items: center;
     }
 
-    .add-card-search {
+    .addCardSearch {
       display: flex;
       align-items: center;
       margin-bottom: 30px;
@@ -22,7 +22,7 @@ section {
         margin: 38px 15px 0;
       }
 
-      .search-div {
+      .searchDiv {
         @media screen and (max-width: 900px) {
           width: 340px;
         }
@@ -32,7 +32,7 @@ section {
       }
     }
 
-    .filters-mobile {
+    .filtersMobile {
       display: flex;
       width: 100vw;
       height: 60px;
@@ -52,12 +52,12 @@ section {
         transition: 300ms ease-out;
       }
 
-      .arrow-up {
+      .arrowUp {
         transform: rotate(180deg);
       }
     }
 
-    .filters-container {
+    .filtersContainer {
       margin-top: 30px;
 
       h5 {
@@ -78,7 +78,7 @@ section {
         display: none;
       }
 
-      .sort-container {
+      .sortContainer {
         height: 130px;
         display: flex;
         flex-direction: column;
@@ -123,7 +123,7 @@ section {
       }
     }
 
-    .filters-open {
+    .filtersOpen {
       display: block;
     }
 
@@ -135,7 +135,7 @@ section {
       width: 100%;
       min-height: 650px;
 
-      .products-container {
+      .productsContainer {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
