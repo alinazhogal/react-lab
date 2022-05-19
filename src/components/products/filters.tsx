@@ -1,10 +1,14 @@
 import debounce from "@/helpers/debounce";
+import useIsMount from "@/helpers/useIsMount";
+import { RootState } from "@/redux";
 import { getFiltered } from "@/redux/actions/gamesAction";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 import arrow from "../../assets/images/arrow-down.svg";
 import styles from "./products.module.scss";
+
+const timeOfTwoHours = 2 * 60 * 60 * 1000;
 
 // eslint-disable-next-line react/require-default-props
 function Filters({ search }: { search?: string }) {
@@ -19,6 +23,8 @@ function Filters({ search }: { search?: string }) {
   const [isMobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
+  const timestamp = useSelector((state: RootState) => state.games.timestamp);
+  const isMount = useIsMount();
 
   useEffect(() => {
     if (location.pathname.split("/")[2] !== filters.platform)
@@ -26,8 +32,16 @@ function Filters({ search }: { search?: string }) {
   }, [location]);
 
   useEffect(() => {
-    dispatch(getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType));
+    if (!isMount) {
+      dispatch(getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType));
+    }
   }, [filters]);
+
+  useEffect(() => {
+    if (timestamp + timeOfTwoHours < Date.now()) {
+      dispatch(getFiltered(filters.platform, filters.genre, filters.age, filters.sortCriteria, filters.sortType));
+    }
+  }, []);
 
   useEffect(() => {
     if (search !== undefined) {

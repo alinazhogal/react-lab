@@ -117,6 +117,7 @@ export interface GamesState {
   isSearchLoading: boolean;
   isTopLoading: boolean;
   isFilterLoading: boolean;
+  timestamp: number;
 }
 
 export interface getTopGames {
