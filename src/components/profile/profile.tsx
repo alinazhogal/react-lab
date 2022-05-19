@@ -25,7 +25,9 @@ function Profile() {
   const isError = formErrors.username || formErrors.address || formErrors.phone || formErrors.description;
 
   useEffect(() => {
-    dispatch(getProfileInfo(user.username));
+    if (!user.address && !user.description && !user.photo && !user.phone) {
+      dispatch(getProfileInfo(user.username));
+    }
   }, []);
 
   useEffect(() => {

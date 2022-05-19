@@ -35,11 +35,25 @@ const modalReducer = (
 ) => {
   switch (action.type) {
     case ActionsType.LOGIN:
-      return { ...state, isAuth: true, username: action.payload.username, role: action.payload.role };
+      return {
+        ...state,
+        isAuth: true,
+        username: action.payload.username,
+        role: action.payload.role,
+        phone: action.payload.phone,
+        address: action.payload.address,
+        description: action.payload.description,
+        photo: action.payload.photo,
+      };
     case ActionsType.LOGOUT:
       return { isAuth: false, username: "", phone: "", description: "", address: "", photo: "", role: "" };
     case ActionsType.SIGNUP:
-      return { ...state, isAuth: true, username: action.payload.username, role: action.payload.role };
+      return {
+        ...state,
+        isAuth: true,
+        username: action.payload.username,
+        role: action.payload.role,
+      };
     case ActionsType.GET_USER:
       return { ...state, role: action.payload };
     case ActionsType.CHANGE_PASSWORD:
@@ -56,7 +70,6 @@ const modalReducer = (
     case ActionsType.GET_PROFILE:
       return {
         ...state,
-        username: action.payload.username,
         phone: action.payload.phone,
         address: action.payload.address,
         description: action.payload.description,

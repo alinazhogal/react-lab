@@ -52,9 +52,7 @@ function Games() {
           </div>
         </div>
         <div className={layout === Layout.Grid ? `${styles.gamesGrid}` : `${styles.gamesList}`}>
-          <Loader isLoading={isTopLoading}>
-            {gamesArr.length !== 0 ? gamesArr : <h3 className="no-data">No games found</h3>}
-          </Loader>
+          <Loader isLoading={isTopLoading}>{gamesArr.length > 3 ? gamesArr.slice(0, 3) : gamesArr}</Loader>
         </div>
       </div>
     </section>

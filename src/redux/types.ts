@@ -62,7 +62,14 @@ export interface AuthState {
 
 export interface Login {
   type: ActionsType.LOGIN;
-  payload: { username: string; role: string };
+  payload: {
+    username: string;
+    role: string;
+    address: string;
+    phone: string;
+    description: string;
+    photo: string;
+  };
 }
 
 export interface SignUp {

@@ -11,10 +11,12 @@ import Games from "./games/games";
 function Home() {
   const [inputValue, setInputValue] = useState<string>("");
   const dispatch = useDispatch();
-  const { searchedGames, isSearchLoading } = useSelector((state: RootState) => state.games);
+  const { searchedGames, isSearchLoading, games } = useSelector((state: RootState) => state.games);
 
   useEffect(() => {
-    dispatch(getTopGames());
+    if (!games.length) {
+      dispatch(getTopGames());
+    }
   }, []);
 
   const fetchData = (value: string) => {

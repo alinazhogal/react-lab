@@ -11,9 +11,19 @@ export function logIn(values: User, successCallback: () => void, errorCallback: 
   return async (dispatch: (arg0: { type: ActionsType; payload: boolean | AuthState }) => void) => {
     try {
       const response = await api.put("/api/auth/signIn", values);
-      const { isAuth, username, role } = response.data;
+      const { isAuth, username, role, phone, address, description, photo } = response.data;
       if (isAuth) {
-        dispatch({ type: ActionsType.LOGIN, payload: { username: values.login, role, isAuth } });
+        dispatch({
+          type: ActionsType.LOGIN,
+          payload: {
+            username: values.login,
+            role,
+            phone: phone || "",
+            address: address || "",
+            description: description || "",
+            photo: photo || "",
+          },
+        });
         successCallback();
         dispatch({ type: ActionsType.SET_SIGNIN_OPEN, payload: false });
         saveItemToStorage(SavableKeys.User, JSON.stringify({ username }));
