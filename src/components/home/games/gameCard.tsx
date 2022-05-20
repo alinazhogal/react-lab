@@ -5,7 +5,7 @@ import { useState } from "react";
 import Modal from "@/components/modal/modal";
 import EditCardForm from "@/components/modal/forms/editCard";
 import { Game, Layout } from "./games.types";
-import "./games.scss";
+import styles from "./games.module.scss";
 import stars from "../../../assets/images/stars.svg";
 import xbox from "../../../assets/images/xbox.png";
 import pc from "../../../assets/images/desktop-computer.png";
@@ -55,22 +55,22 @@ function GameCard({
   if (layout === Layout.List)
     return (
       <a href={link} target="_blank" rel="noreferrer">
-        <div className="game-card-list">
-          <img src={image} alt={name} className="game-img" />
-          <div className="game-info">
-            <div className="main-info">
-              <div className="name-rating">
+        <div className={styles.gameCardList}>
+          <img src={image} alt={name} className={styles.gameImg} />
+          <div className={styles.gameInfo}>
+            <div className={styles.mainInfo}>
+              <div className={styles.nameRating}>
                 <h3>{name}</h3>
                 <img src={stars} alt="rating" />
               </div>
-              <div className="platform">
+              <div className={styles.platform}>
                 {platforms.map((item) => (
                   <img src={platformID[item]} alt={item} key={item} />
                 ))}
               </div>
             </div>
             <p>{description}</p>
-            <div className="price-info">
+            <div className={styles.priceInfo}>
               <h4>${price}</h4>
               <span>{age}+</span>
               <button type="button" className={disabled ? "button-el disabled" : "button-el"} onClick={click}>
@@ -84,27 +84,27 @@ function GameCard({
   return (
     <>
       <a href={link} target="_blank" rel="noreferrer">
-        <div className="game-card-grid">
-          <img src={image} alt={name} className="game-img" />
-          <div className="platform">
+        <div className={styles.gameCardGrid}>
+          <img src={image} alt={name} className={styles.gameImg} />
+          <div className={styles.platform}>
             {platforms.map((item) => (
               <img src={platformID[item]} alt={item} key={item} />
             ))}
           </div>
           {isAdmin && (
-            <button type="button" className="admin-edit" onClick={handleEdit}>
+            <button type="button" className={styles.adminEdit} onClick={handleEdit}>
               Edit
             </button>
           )}
-          <div className="game-info">
-            <div className="main-info">
-              <div className="name-rating">
+          <div className={styles.gameInfo}>
+            <div className={styles.mainInfo}>
+              <div className={styles.nameRating}>
                 <h3>{name}</h3>
                 <img src={stars} alt="rating" />
                 <span>{age === "All ages" ? "All ages" : `${age}+`}</span>
               </div>
             </div>
-            <div className="price-info">
+            <div className={styles.priceInfo}>
               <h4>${price}</h4>
               <button type="button" className={disabled ? "button-el disabled" : "button-el"} onClick={click}>
                 {disabled ? "Added" : "Add to cart"}

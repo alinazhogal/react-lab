@@ -5,9 +5,10 @@ import { RootState } from "@/redux";
 import { getProfileInfo, saveProfileInfo } from "@/redux/actions/authActions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ChangePasswordForm from "./modal/forms/changePassword";
-import Modal from "./modal/modal";
-import "./profile.scss";
+import ChangePasswordForm from "../modal/forms/changePassword";
+import Modal from "../modal/modal";
+import profile from "./profile.module.scss";
+import modal from "../modal/modal.module.scss";
 
 function Profile() {
   const user = useSelector((state: RootState) => state.auth);
@@ -24,7 +25,9 @@ function Profile() {
   const isError = formErrors.username || formErrors.address || formErrors.phone || formErrors.description;
 
   useEffect(() => {
-    dispatch(getProfileInfo(user.username));
+    if (!user.address && !user.description && !user.photo && !user.phone) {
+      dispatch(getProfileInfo(user.username));
+    }
   }, []);
 
   useEffect(() => {
@@ -85,13 +88,13 @@ function Profile() {
     <section>
       <div className="section-content">
         <h2>Profile page</h2>
-        <div className="profile-content">
-          <div className="side-info">
-            <div className="picture">
+        <div className={profile.profileContent}>
+          <div className={profile.sideInfo}>
+            <div className={profile.picture}>
               {formValues.photo ? <img src={formValues.photo} alt="profile avatar" /> : <h4>No picture</h4>}
             </div>
-            <div className="file-container" role="button">
-              <label htmlFor="file" className="file-button">
+            <div className={profile.fileContainer} role="button">
+              <label htmlFor="file">
                 Change photo
                 <input type="file" name="file" id="file" accept="image/*" onChange={onUpload} />
               </label>
@@ -133,7 +136,7 @@ function Profile() {
               onBlur={handleBlur}
               onFocus={handleFocus}
             />
-            <div className="input-div">
+            <div className={modal.inputDiv}>
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label htmlFor="desc">Profile description</label>
               <textarea

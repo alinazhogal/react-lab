@@ -6,6 +6,7 @@ import { Layout } from "./games.types";
 import list from "../../../assets/images/list.svg";
 import grid from "../../../assets/images/grid.svg";
 import GameCard from "./gameCard";
+import styles from "./games.module.scss";
 
 function Games() {
   const [layout, setLayout] = useState<Layout>(Layout.Grid);
@@ -21,12 +22,16 @@ function Games() {
   return (
     <section>
       <div className="section-content">
-        <div className="section-title">
+        <div className={styles.title}>
           <h2>Games</h2>
-          <div className="layout">
+          <div className={styles.layout}>
             <button
               type="button"
-              className={layout === Layout.Grid ? "change-layout grid active-layout" : "change-layout grid"}
+              className={
+                layout === Layout.Grid
+                  ? `${styles.changeLayout} ${styles.grid} ${styles.activeLayout}`
+                  : `${styles.changeLayout} ${styles.grid}`
+              }
               aria-label="grid layout"
               onClick={() => changeLayout(Layout.Grid)}
             >
@@ -34,7 +39,11 @@ function Games() {
             </button>
             <button
               type="button"
-              className={layout === Layout.List ? "change-layout list active-layout" : "change-layout list"}
+              className={
+                layout === Layout.List
+                  ? `${styles.changeLayout} ${styles.list} ${styles.activeLayout}`
+                  : `${styles.changeLayout} ${styles.list}`
+              }
               aria-label="list layout"
               onClick={() => changeLayout(Layout.List)}
             >
@@ -42,10 +51,8 @@ function Games() {
             </button>
           </div>
         </div>
-        <div className={layout === Layout.Grid ? "games-grid" : "games-list"}>
-          <Loader isLoading={isTopLoading}>
-            {gamesArr.length !== 0 ? gamesArr : <h3 className="no-data">No games found</h3>}
-          </Loader>
+        <div className={layout === Layout.Grid ? `${styles.gamesGrid}` : `${styles.gamesList}`}>
+          <Loader isLoading={isTopLoading}>{gamesArr.length > 3 ? gamesArr.slice(0, 3) : gamesArr}</Loader>
         </div>
       </div>
     </section>

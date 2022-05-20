@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { User } from "@/api/users";
 import { Game } from "@/components/home/games/games.types";
+import { User } from "@/redux/types";
 import webpackMockServer from "webpack-mock-server";
-import { getGamesResponse } from "./src/api/games";
+import getGamesResponse from "./src/api/games";
 
 const testUser: User = {
   login: "qweqwe",
@@ -153,7 +153,6 @@ export default webpackMockServer.add((app, helper) => {
           description: users[user.login].description,
           phone: users[user.login].phone,
           role: users[user.login].role,
-          cart: users[user.login].cart,
         });
       }
     } else {
@@ -207,7 +206,8 @@ export default webpackMockServer.add((app, helper) => {
   });
 
   app.get("/api/getProfile/:login", (req, res) => {
-    res.json(users[req.params.login]);
+    const { login, phone, description, address, photo } = users[req.params.login];
+    res.json({ username: login, phone, description, address, photo });
   });
 
   app.get("/api/getCart/:login", (req, res) => {

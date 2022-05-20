@@ -1,6 +1,6 @@
 import { Game, Platforms } from "@/components/home/games/games.types";
 
-export enum ActionsType {
+export const enum ActionsType {
   SET_SIGNIN_OPEN = "SET_SIGNIN_OPEN",
   LOGIN = "LOGIN",
   LOGOUT = "LOGOUT",
@@ -36,6 +36,20 @@ export interface SetSignInOpen {
   payload: { isOpen: boolean; callbackLink: string };
 }
 
+export interface User {
+  login: string;
+  newLogin?: string;
+  password?: string;
+  newPassword?: string;
+  phone?: string;
+  description?: string;
+  address?: string;
+  photo?: string;
+  role?: string;
+  cart?: CartItem[];
+  order?: CartItem[];
+}
+
 export interface AuthState {
   username: string;
   isAuth?: boolean;
@@ -48,7 +62,14 @@ export interface AuthState {
 
 export interface Login {
   type: ActionsType.LOGIN;
-  payload: { username: string; role: string };
+  payload: {
+    username: string;
+    role: string;
+    address: string;
+    phone: string;
+    description: string;
+    photo: string;
+  };
 }
 
 export interface SignUp {
@@ -96,6 +117,7 @@ export interface GamesState {
   isSearchLoading: boolean;
   isTopLoading: boolean;
   isFilterLoading: boolean;
+  timestamp: number;
 }
 
 export interface getTopGames {

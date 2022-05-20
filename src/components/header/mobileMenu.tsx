@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import pageLinks from "../../routesLinks";
 import burger from "../../assets/images/burger-menu.svg";
+import header from "./header.module.scss";
 
 function MobileMenu() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -17,14 +18,14 @@ function MobileMenu() {
     <>
       <div
         role="presentation"
-        className={openMenu ? "menu-layout open-layout" : "menu-layout"}
+        className={openMenu ? `${header.menuLayout} ${header.openLayout}` : `${header.menuLayout}`}
         onClick={() => setOpenMenu(false)}
       />
-      <div className="mobile-nav">
+      <div className={header.mobileNav}>
         <button type="button" aria-label="menu" onClick={handleClick}>
           <img src={burger} alt="mobile menu" />
         </button>
-        <div className={openMenu ? "mobile-menu open" : "mobile-menu"}>
+        <div className={openMenu ? `${header.mobileMenu} ${header.open}` : `${header.mobileMenu}`}>
           <NavLink to={pageLinks.about} onClick={() => setOpenMenu(false)}>
             About
           </NavLink>
@@ -32,7 +33,7 @@ function MobileMenu() {
           <NavLink to={pageLinks.products} onClick={() => setOpenMenu(false)}>
             Products
           </NavLink>
-          <div className="products-links">
+          <div className={header.productsLinks}>
             <NavLink to={`${pageLinks.products}/pc`} onClick={() => setOpenMenu(false)}>
               PC
             </NavLink>
@@ -43,7 +44,7 @@ function MobileMenu() {
               Xbox One
             </NavLink>
           </div>
-          <NavLink to={pageLinks.profile} className="profile-mobile" onClick={() => setOpenMenu(false)}>
+          <NavLink to={pageLinks.profile} className={header.profileMobile} onClick={() => setOpenMenu(false)}>
             Profile
           </NavLink>
         </div>

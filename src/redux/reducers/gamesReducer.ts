@@ -18,6 +18,7 @@ const initialState = {
   isTopLoading: false,
   searchedGames: undefined,
   isFilterLoading: false,
+  timestamp: 0,
 };
 
 const gamesReducer = (
@@ -42,7 +43,7 @@ const gamesReducer = (
     case ActionsType.GET_FILTERED_GAMES:
       return { ...state, isFilterLoading: true };
     case ActionsType.SET_FILTERED_GAMES:
-      return { ...state, isFilterLoading: false, games: action.payload };
+      return { ...state, isFilterLoading: false, games: action.payload, timestamp: Date.now() };
     case ActionsType.GET_SEARCHED_GAMES:
       return { ...state, searchedGames: action.payload };
     case ActionsType.SET_SEARCH_LOADING:

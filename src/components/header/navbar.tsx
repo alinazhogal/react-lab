@@ -16,6 +16,7 @@ import SignInForm from "../modal/forms/signIn";
 import SignUpForm from "../modal/forms/signUp";
 import MobileMenu from "./mobileMenu";
 import PrivateLink from "./privateLink";
+import header from "./header.module.scss";
 
 function NavBar() {
   const [isSignUpOpen, setSignUpOpen] = useState<boolean>(false);
@@ -44,33 +45,37 @@ function NavBar() {
 
   return (
     <nav>
-      <ul className="navbar">
-        <li className="nav-home">
-          <NavLink to={pageLinks.home} className={({ isActive }) => (isActive ? "active-link" : "")}>
+      <ul className={header.navbar}>
+        <li className={header.navHome}>
+          <NavLink to={pageLinks.home} className={({ isActive }) => (isActive ? `${header.active}` : "")}>
             Home
           </NavLink>
         </li>
-        <li className="nav-prod">
-          <div className="dropdown">
-            <PrivateLink to={pageLinks.products} activeCn="active-link dropbtn" passiveCn="dropbtn">
+        <li className={header.navProd}>
+          <div className={header.dropdown}>
+            <PrivateLink
+              to={pageLinks.products}
+              activeCn={`${header.active} ${header.dropbtn}`}
+              passiveCn={header.dropbtn}
+            >
               Products
-              <img src={arrow} alt="arrow" className="arrow" />
+              <img src={arrow} alt="arrow" className={header.arrow} />
             </PrivateLink>
-            <div className="dropdown-content">
-              <PrivateLink to={`${pageLinks.products}/pc`} passiveCn="product-link">
+            <div className={header.dropdownContent}>
+              <PrivateLink to={`${pageLinks.products}/pc`} passiveCn={header.productLink}>
                 PC
               </PrivateLink>
-              <PrivateLink to={`${pageLinks.products}/playstation`} passiveCn="product-link">
+              <PrivateLink to={`${pageLinks.products}/playstation`} passiveCn={header.productLink}>
                 Playstation 5
               </PrivateLink>
-              <PrivateLink to={`${pageLinks.products}/xbox`} passiveCn="product-link">
+              <PrivateLink to={`${pageLinks.products}/xbox`} passiveCn={header.productLink}>
                 Xbox One
               </PrivateLink>
             </div>
           </div>
         </li>
-        <li className="nav-about">
-          <PrivateLink to={pageLinks.about} activeCn="active-link" passiveCn="">
+        <li className={header.navAbout}>
+          <PrivateLink to={pageLinks.about} activeCn={header.active} passiveCn="">
             About
           </PrivateLink>
         </li>
@@ -78,7 +83,7 @@ function NavBar() {
         {!user.isAuth && (
           <>
             <li>
-              <button type="button" onClick={onSignInOpen} className="nav-button">
+              <button type="button" onClick={onSignInOpen} className={header.navButton}>
                 Sign in
               </button>
             </li>
@@ -86,7 +91,7 @@ function NavBar() {
               <SignInForm />
             </Modal>
             <li>
-              <button type="button" onClick={() => setSignUpOpen(true)} className="nav-button">
+              <button type="button" onClick={() => setSignUpOpen(true)} className={header.navButton}>
                 Sign up
               </button>
             </li>
@@ -100,7 +105,11 @@ function NavBar() {
           <>
             <li>
               <NavLink to={pageLinks.profile}>
-                <button type="button" className="auth-button profile-desc" aria-label="profile page">
+                <button
+                  type="button"
+                  className={`${header.authButton} ${header.profileDesc}`}
+                  aria-label="profile page"
+                >
                   <img src={profile} alt="profile" />
                   {user.username}
                 </button>
@@ -108,14 +117,14 @@ function NavBar() {
             </li>
             <li>
               <NavLink to={pageLinks.cart}>
-                <button type="button" className="auth-button" aria-label="cart page">
+                <button type="button" className={header.authButton} aria-label="cart page">
                   <img src={cartIcon} alt="cart" />
                   {total}
                 </button>
               </NavLink>
             </li>
             <li>
-              <button type="button" className="auth-button" onClick={handleLogOut} aria-label="log out">
+              <button type="button" className={header.authButton} onClick={handleLogOut} aria-label="log out">
                 <img src={logout} alt="logout" />
               </button>
             </li>

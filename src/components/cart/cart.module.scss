@@ -1,64 +1,69 @@
 section {
-  #cart-page {
+  .content {
+    display: flex;
+    flex-direction: column;
     align-items: flex-end;
     min-height: 76vh;
     justify-content: flex-start;
+    max-width: 940px;
+    width: 100%;
+    margin: 0 20px;
 
     .table {
       width: 100%;
       margin: 40px 0;
 
-      .table-row {
+      .tableRow {
         display: flex;
         flex-flow: row wrap;
         align-items: center;
       }
 
-      .table-data {
+      .tableData {
         padding: 16px;
         text-align: center;
       }
 
-      .table-data:nth-child(1) {
+      .tableData:nth-child(1) {
         width: 11%;
       }
 
-      .table-data:nth-child(2) {
+      .tableData:nth-child(2) {
         width: 20%;
       }
 
-      .table-data:nth-child(3) {
+      .tableData:nth-child(3) {
         width: 16%;
       }
 
-      .table-data:nth-child(4) {
+      .tableData:nth-child(4) {
         width: 16%;
       }
 
-      .table-data:nth-child(5) {
+      .tableData:nth-child(5) {
         width: 12%;
       }
 
-      .table-data:nth-child(6) {
+      .tableData:nth-child(6) {
         width: 15%;
       }
 
-      .table-data:nth-child(7) {
+      .tableData:nth-child(7) {
         width: 10%;
       }
 
       .header {
         border-bottom: 1px solid #fff;
 
-        .table-data {
+        .tableData {
           font-weight: 600;
         }
       }
 
-      .data-row {
+      .dataRow {
         border-bottom: 1px solid rgb(154, 153, 153);
 
-        .table-data {
+        .tableData {
           img {
             width: 60px;
             height: 60px;
@@ -103,7 +108,7 @@ section {
       }
 
       .footer {
-        .table-data {
+        .tableData {
           font-weight: 600;
 
           &:first-child {
@@ -115,6 +120,7 @@ section {
 
     @media screen and (max-width: 810px) {
       align-items: center;
+      max-width: 400px;
 
       .table {
         max-width: 400px;
@@ -123,14 +129,14 @@ section {
           display: none;
         }
 
-        .data-row {
+        .dataRow {
           border: 1px solid #fff;
           border-radius: 12px;
           display: flex;
           flex-direction: column;
           margin-bottom: 14px;
 
-          .table-data {
+          .tableData {
             border: none;
             width: 90%;
             display: flex;
@@ -147,38 +153,38 @@ section {
           border: 1px solid #fff;
           border-radius: 12px;
 
-          .table-data:nth-child(1) {
+          .tableData:nth-child(1) {
             width: 25%;
           }
 
-          .table-data:nth-child(2) {
+          .tableData:nth-child(2) {
             width: 0;
           }
 
-          .table-data:nth-child(3) {
+          .tableData:nth-child(3) {
             width: 0;
           }
 
-          .table-data:nth-child(4) {
+          .tableData:nth-child(4) {
             display: none;
           }
 
-          .table-data:nth-child(5) {
+          .tableData:nth-child(5) {
             width: 25%;
           }
 
-          .table-data:nth-child(6) {
+          .tableData:nth-child(6) {
             width: 25%;
           }
 
-          .table-data:nth-child(7) {
+          .tableData:nth-child(7) {
             display: none;
           }
         }
       }
     }
 
-    .cart-buttons {
+    .buttons {
       button {
         margin: 0 10px 40px;
       }

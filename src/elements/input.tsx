@@ -1,3 +1,4 @@
+import styles from "../components/modal/modal.module.scss";
 /* eslint-disable react/require-default-props */
 interface InputProps {
   id: string;
@@ -12,7 +13,7 @@ interface InputProps {
 
 function Input({ id, label, type, value, errorMessage, onChange, onBlur, onFocus }: InputProps) {
   return (
-    <div className="input-div">
+    <div className={styles.inputDiv}>
       <label htmlFor={id}>{label}</label>
       <input
         type={type}

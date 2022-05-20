@@ -1,4 +1,4 @@
-export enum SavableKeys {
+export const enum SavableKeys {
   User = "user",
 }
 

@@ -5,7 +5,7 @@ footer {
   justify-content: center;
   background-color: #343334;
 
-  .footer-container {
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,7 +16,7 @@ footer {
       font-style: italic;
     }
 
-    .games-links {
+    .gamesLinks {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -31,14 +31,14 @@ footer {
         margin: 20px 0;
       }
 
-      .games-links {
+      .gamesLinks {
         flex-wrap: wrap;
         height: auto;
         margin-bottom: 20px;
       }
     }
     @media screen and (max-width: 460px) {
-      .games-links {
+      .gamesLinks {
         flex-direction: column;
         margin-bottom: 0;
 

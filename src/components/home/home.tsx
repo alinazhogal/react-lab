@@ -1,25 +1,27 @@
 import { RootState } from "@/redux";
-import { getGames, getSearched } from "@/redux/actions/gamesAction";
+import { getTopGames, getSearchedGames } from "@/redux/actions/gamesAction";
 import { ActionsType } from "@/redux/types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import debounce from "../../helpers/debounce";
-import { Search, SearchResults } from "../search";
+import { Search, SearchResults } from "../../elements/search";
 import Categories from "./categories/categories";
 import Games from "./games/games";
 
 function Home() {
   const [inputValue, setInputValue] = useState<string>("");
   const dispatch = useDispatch();
-  const { searchedGames, isSearchLoading } = useSelector((state: RootState) => state.games);
+  const { searchedGames, isSearchLoading, games } = useSelector((state: RootState) => state.games);
 
   useEffect(() => {
-    dispatch(getGames());
+    if (!games.length) {
+      dispatch(getTopGames());
+    }
   }, []);
 
   const fetchData = (value: string) => {
     if (value) {
-      dispatch(getSearched(value));
+      dispatch(getSearchedGames(value));
     }
   };
 

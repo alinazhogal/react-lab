@@ -1,11 +1,11 @@
-.profile-content {
+.profileContent {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   width: 560px;
   margin-bottom: 40px;
 
-  .side-info {
+  .sideInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +31,7 @@
       }
     }
 
-    .file-container {
+    .fileContainer {
       width: 100%;
       padding: 12px 40px;
       border-radius: 20px;
@@ -66,7 +66,7 @@
     width: 300px;
     justify-content: center;
 
-    .side-info {
+    .sideInfo {
       .picture {
         margin: 0 0 20px;
       }

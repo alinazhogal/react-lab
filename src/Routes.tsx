@@ -12,7 +12,7 @@ import { getCart } from "./redux/actions/cartActions";
 import pageLinks from "./routesLinks";
 
 const Products = lazy(() => import("./components/products/products"));
-const Profile = lazy(() => import("./components/profile"));
+const Profile = lazy(() => import("./components/profile/profile"));
 const Cart = lazy(() => import("./components/cart/cart"));
 const About = lazy(() => import("./components/about"));
 
