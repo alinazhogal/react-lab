@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Input from "@/elements/input";
-import { AuthFields, validateAuth } from "@/helpers/validate";
 import { useDispatch, useSelector } from "react-redux";
-import { logIn } from "@/redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "@/redux";
+import { logIn } from "../../../redux/actions/authActions";
+import { RootState } from "../../../redux";
+import { AuthFields, validateAuth } from "../../../helpers/validate";
+import Input from "../../../elements/input";
 
 function SignInForm() {
   const [formValues, setFormValues] = useState({ login: "", password: "" });
