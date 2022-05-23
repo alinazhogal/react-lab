@@ -1,10 +1,10 @@
-import debounce from "@/helpers/debounce";
-import useIsMount from "@/helpers/useIsMount";
-import { RootState } from "@/redux";
-import { getFiltered } from "@/redux/actions/gamesAction";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
+import { getFiltered } from "../../redux/actions/gamesAction";
+import debounce from "../../helpers/debounce";
+import useIsMount from "../../helpers/useIsMount";
+import { RootState } from "../../redux";
 import arrow from "../../assets/images/arrow-down.svg";
 import styles from "./products.module.scss";
 
