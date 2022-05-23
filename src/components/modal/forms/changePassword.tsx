@@ -1,9 +1,9 @@
-import Input from "@/elements/input";
-import { AuthFields, validateAuth } from "@/helpers/validate";
-import { RootState } from "@/redux";
-import { changePassword } from "@/redux/actions/authActions";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux";
+import { changePassword } from "../../../redux/actions/authActions";
+import { AuthFields, validateAuth } from "../../../helpers/validate";
+import Input from "../../../elements/input";
 
 function ChangePasswordForm({ onClose }: { onClose: () => void }) {
   const [formValues, setFormValues] = useState<AuthFields>({ password: "", confirmPassword: "" });

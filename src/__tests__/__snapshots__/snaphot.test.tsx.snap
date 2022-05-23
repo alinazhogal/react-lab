@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <div
+    className="inputDiv"
+  >
+    <label
+      htmlFor="password"
+    >
+      Password
+    </label>
+    <input
+      id="password"
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={true}
+      type="password"
+      value=""
+    />
+    <span>
+      
+    </span>
+  </div>
+  <div
+    className="inputDiv"
+  >
+    <label
+      htmlFor="confirmPassword"
+    >
+      Repeat password
+    </label>
+    <input
+      id="confirmPassword"
+      name="confirmPassword"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={true}
+      type="password"
+      value=""
+    />
+    <span>
+      
+    </span>
+  </div>
+  <button
+    className="button-el"
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+`;

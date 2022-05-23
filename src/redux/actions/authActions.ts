@@ -1,6 +1,6 @@
-import api from "@/api";
-import { SavableKeys, saveItemToStorage } from "@/helpers/storage";
 import { AxiosError } from "axios";
+import { SavableKeys, saveItemToStorage } from "../../helpers/storage";
+import api from "../../api";
 import { ActionsType, AuthState, User } from "../types";
 
 export const logOut = () => ({
