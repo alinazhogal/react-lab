@@ -1,0 +1,236 @@
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 80px;
+  border-bottom: 1px solid #3d3c49;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1040px;
+    margin: 0 18px;
+
+    .logo {
+      font-weight: 800;
+      font-size: 20px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    nav {
+      width: 470px;
+
+      ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        li {
+          a {
+            border-bottom: 2px solid transparent;
+
+            &:hover {
+              color: $accent-color;
+              transition: 300ms ease-out;
+            }
+          }
+
+          .dropdown {
+            position: relative;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
+            border-top: 2px solid transparent;
+
+            .dropdownContent {
+              display: none;
+              position: absolute;
+              background-color: $basicColor;
+              min-width: 140px;
+              box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+              z-index: 1;
+              margin: 0 -16px;
+              border-radius: 10px;
+
+              .productLink {
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+              }
+            }
+          }
+        }
+
+        button {
+          border: none;
+          background: none;
+          color: #fff;
+          font-size: 16px;
+          font-family: "OpenSans-Regular", sans-serif;
+          cursor: pointer;
+          letter-spacing: 0.3px;
+        }
+
+        .navButton:hover {
+          color: $accent-color;
+          transition: 300ms ease-out;
+        }
+
+        .authButton {
+          display: flex;
+          align-items: center;
+
+          img {
+            margin-right: 6px;
+          }
+        }
+
+        @media screen and (max-width: 460px) {
+          .profileDesc {
+            display: none;
+          }
+        }
+
+        .dropbtn {
+          background-color: transparent;
+          color: white;
+          font-size: 16px;
+          border: none;
+        }
+
+        .arrow {
+          width: 12px;
+          height: 8px;
+          margin-left: 8px;
+          margin-bottom: 2px;
+          transition: 300ms ease-out;
+        }
+
+        .dropdown:hover .dropdownContent {
+          display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+          transition: 300ms ease-out;
+
+          .arrow {
+            transform: rotate(180deg);
+            transition: 300ms ease-out;
+          }
+        }
+
+        .active {
+          transition: none;
+          border-bottom: 2px solid $accent-color;
+        }
+      }
+    }
+    @media screen and (max-width: 620px) {
+      .logo {
+        font-size: 16px;
+      }
+
+      .navHome,
+      .navAbout,
+      .navProd {
+        display: none;
+      }
+
+      .menuLayout {
+        position: absolute;
+        z-index: 5;
+        width: 100vw;
+        height: 100vh;
+        top: 80px;
+        left: 0;
+        display: none;
+      }
+
+      .openLayout {
+        display: block;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      .mobileMenu {
+        position: absolute;
+        display: none;
+        top: 80px;
+        right: -220px;
+        margin: 0 auto;
+        width: 220px;
+        background-color: $basicColor;
+        flex-direction: column;
+        align-items: flex-start;
+        z-index: 10;
+        padding: 20px 30px;
+        border-radius: 12px 0 0 12px;
+        transition: 300ms ease-out;
+
+        a:first-child {
+          margin-bottom: 16px;
+        }
+
+        a {
+          margin-bottom: 8px;
+          font-size: 18px;
+        }
+
+        @media screen and (min-width: 460px) {
+          .profileMobile {
+            display: none;
+          }
+        }
+
+        .productsLinks {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          left: 12px;
+
+          a {
+            margin-bottom: 12px;
+          }
+        }
+      }
+
+      .open {
+        right: 0;
+        transition: 300ms ease-out;
+        display: flex;
+      }
+    }
+    @media screen and (max-width: 720px) {
+      nav {
+        width: 360px;
+      }
+
+      .navHome {
+        display: none;
+      }
+    }
+    @media screen and (max-width: 620px) {
+      nav {
+        width: 260px;
+      }
+    }
+    @media screen and (max-width: 460px) {
+      nav {
+        width: 200px;
+      }
+    }
+
+    @media screen and (min-width: 620px) {
+      .mobileNav {
+        display: none;
+      }
+
+      .menuLayout {
+        display: none;
+      }
+    }
+  }
+}

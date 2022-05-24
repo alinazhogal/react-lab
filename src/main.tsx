@@ -1,38 +1,46 @@
-import "./styles/main.scss";
-import { Component, StrictMode } from "react";
+import { Component, ErrorInfo, StrictMode } from "react";
 import ReactDom from "react-dom";
-import style from "./styles/main.module.css";
+import "./styles/main.scss";
+import { Provider } from "react-redux";
+import Button from "./elements/button";
+import { store } from "./redux";
+import Routes from "./routes";
 
-interface AppProps {
-  nothing: boolean;
-}
-
-interface AppState {
-  title: string;
-}
-
-class AppContainer extends Component<AppProps, AppState> {
-  ["constructor"]: typeof AppContainer;
-
-  constructor(props: AppProps) {
+class MainApp extends Component<unknown, { hasError: boolean }> {
+  constructor(props: unknown) {
     super(props);
-    // test class-dead-code
-    const goExlcude = true;
-    if (!goExlcude) {
-      console.warn("class-dead-code doesn't work");
-    }
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error(error, info);
+  }
+
+  redirect() {
+    window.location.assign("/home");
   }
 
   render() {
+    if (this.state.hasError)
+      return (
+        <div className="error">
+          <h3>Something went wrong</h3>
+          <Button onClick={this.redirect} title="Return to home page" />
+        </div>
+      );
+
     return (
       <StrictMode>
-        <div className="test-block" />
-        <div className={["test-block", style.background].join(" ")}>
-          <h2>Hello world</h2>
-        </div>
+        <Provider store={store}>
+          <Routes />
+        </Provider>
       </StrictMode>
     );
   }
 }
 
-ReactDom.render(<AppContainer nothing={false} />, document.getElementById("app"));
+ReactDom.render(<MainApp />, document.getElementById("app"));

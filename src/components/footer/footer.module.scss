@@ -1,0 +1,51 @@
+footer {
+  width: 100%;
+  padding: 0 18px;
+  display: flex;
+  justify-content: center;
+  background-color: #343334;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1040px;
+    height: auto;
+
+    span {
+      font-style: italic;
+    }
+
+    .gamesLinks {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      width: 400px;
+    }
+    @media screen and (max-width: 620px) {
+      justify-content: center;
+      flex-direction: column;
+
+      span {
+        margin: 20px 0;
+      }
+
+      .gamesLinks {
+        flex-wrap: wrap;
+        height: auto;
+        margin-bottom: 20px;
+      }
+    }
+    @media screen and (max-width: 460px) {
+      .gamesLinks {
+        flex-direction: column;
+        margin-bottom: 0;
+
+        a {
+          margin-bottom: 30px;
+        }
+      }
+    }
+  }
+}

@@ -3,29 +3,101 @@
 @import "fontface";
 
 body {
-  color: $basicColor;
+  background-color: $background;
   font-family: "OpenSans-Regular", sans-serif;
+  color: #fff;
+  overflow-y: auto;
 }
 
-h2 {
-  font-size: 50px;
-  display: block;
-  background-color: white;
+.no-scroll {
+  overflow-y: hidden;
 }
 
-::placeholder {
-  /*test for autoprefixer in postcss*/
-  color: antiquewhite;
-}
-
-.test-block {
-  border: 4px dotted black;
-  /* stylelint-disable-next-line plugin/no-unsupported-browser-features*/
+#app {
+  background-image: url(../assets/images/bg.webp);
+  background-size: auto auto;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.test-block + .test-block {
-  margin-top: 20px;
+* {
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  width: 100%;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h3 {
+    margin-bottom: 20px;
+    letter-spacing: 0.4px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.default-page {
+  height: 76vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.secondary-button {
+  padding: 12px 40px;
+  border-radius: 20px;
+  border: 2px solid $accent-color;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+  transition: 300ms ease-out;
+  font-size: 16px;
+
+  &:hover {
+    border: 2px solid #cb31a7;
+    background-color: #cb31a7;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.no-data {
+  margin: 20px 0 40px;
+}
+
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .section-content {
+    max-width: 940px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 20px;
+    width: 100%;
+  }
 }

@@ -25,6 +25,7 @@ module.exports = (env, argv) => {
     /** @type {import('webpack-dev-server').Configuration} */
     devServer: {
       // proxy config will be remove if target is empty
+      compress: true,
       proxy: {
         // requires for ignoring CORS issues
         "/api": { target: proxy, changeOrigin: true, withCredentials: true, secure: false },

@@ -1,0 +1,392 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders change password form correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <div>
+    <label
+      htmlFor="password"
+    >
+      Password
+    </label>
+    <input
+      id="password"
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={true}
+      type="password"
+      value=""
+    />
+    <span>
+      
+    </span>
+  </div>
+  <div>
+    <label
+      htmlFor="confirmPassword"
+    >
+      Repeat password
+    </label>
+    <input
+      id="confirmPassword"
+      name="confirmPassword"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={true}
+      type="password"
+      value=""
+    />
+    <span>
+      
+    </span>
+  </div>
+  <button
+    className="button-el"
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+`;
+
+exports[`renders filters correctly 1`] = `
+Array [
+  <div
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <h4>
+      Filters
+    </h4>
+    <img
+      alt="arrow"
+      className=""
+      src="test-file-stub"
+    />
+  </div>,
+  <div
+    className="undefined"
+  >
+    <h3 />
+    <div>
+      <h5>
+        Sort
+      </h5>
+      <div>
+        <span>
+          Criteria
+        </span>
+        <select
+          id="criteria"
+          name="sortCriteria"
+          onChange={[Function]}
+        >
+          <option
+            value="recent"
+          >
+            Recent
+          </option>
+          <option
+            value="name"
+          >
+            Name
+          </option>
+          <option
+            value="price"
+          >
+            Price
+          </option>
+        </select>
+      </div>
+      <div>
+        <span>
+          Type
+        </span>
+        <select
+          id="type"
+          name="sortType"
+          onChange={[Function]}
+        >
+          <option
+            value="asc"
+          >
+            Ascending
+          </option>
+          <option
+            value="desc"
+          >
+            Descending
+          </option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <h5>
+        Age
+      </h5>
+      <label
+        htmlFor="All ages"
+      >
+        <input
+          checked={true}
+          id="All ages"
+          name="age"
+          onChange={[Function]}
+          type="radio"
+          value="All ages"
+        />
+        All ages
+      </label>
+      <label
+        htmlFor="3"
+      >
+        <input
+          checked={false}
+          id="3"
+          name="age"
+          onChange={[Function]}
+          type="radio"
+          value="3"
+        />
+        3+
+      </label>
+      <label
+        htmlFor="6"
+      >
+        <input
+          checked={false}
+          id="6"
+          name="age"
+          onChange={[Function]}
+          type="radio"
+          value="6"
+        />
+        6+
+      </label>
+      <label
+        htmlFor="12"
+      >
+        <input
+          checked={false}
+          id="12"
+          name="age"
+          onChange={[Function]}
+          type="radio"
+          value="12"
+        />
+        12+
+      </label>
+      <label
+        htmlFor="18"
+      >
+        <input
+          checked={false}
+          id="18"
+          name="age"
+          onChange={[Function]}
+          type="radio"
+          value="18"
+        />
+        18+
+      </label>
+    </div>
+    <div>
+      <h5>
+        Genres
+      </h5>
+      <label
+        htmlFor="All genres"
+      >
+        <input
+          checked={true}
+          id="All genres"
+          name="genre"
+          onChange={[Function]}
+          type="radio"
+          value="All genres"
+        />
+        All genres
+      </label>
+      <label
+        htmlFor="Shooter"
+      >
+        <input
+          checked={false}
+          id="Shooter"
+          name="genre"
+          onChange={[Function]}
+          type="radio"
+          value="Shooter"
+        />
+        Shooter
+      </label>
+      <label
+        htmlFor="Arcade"
+      >
+        <input
+          checked={false}
+          id="Arcade"
+          name="genre"
+          onChange={[Function]}
+          type="radio"
+          value="Arcade"
+        />
+        Arcade
+      </label>
+      <label
+        htmlFor="Survive"
+      >
+        <input
+          checked={false}
+          id="Survive"
+          name="genre"
+          onChange={[Function]}
+          type="radio"
+          value="Survive"
+        />
+        Survive
+      </label>
+    </div>
+  </div>,
+]
+`;
+
+exports[`renders profile page correctly 1`] = `
+<section>
+  <div
+    className="section-content"
+  >
+    <h2>
+      Profile page
+    </h2>
+    <div>
+      <div>
+        <div>
+          <h4>
+            No picture
+          </h4>
+        </div>
+        <div
+          role="button"
+        >
+          <label
+            htmlFor="file"
+          >
+            Change photo
+            <input
+              accept="image/*"
+              id="file"
+              name="file"
+              onChange={[Function]}
+              type="file"
+            />
+          </label>
+        </div>
+        <button
+          className="button-el"
+          onClick={[Function]}
+          type="button"
+        >
+          Change password
+        </button>
+      </div>
+      <form
+        onSubmit={[Function]}
+      >
+        <div>
+          <label
+            htmlFor="username"
+          >
+            Username
+          </label>
+          <input
+            id="username"
+            name="username"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={true}
+            type="text"
+            value=""
+          />
+          <span>
+            
+          </span>
+        </div>
+        <div>
+          <label
+            htmlFor="phone"
+          >
+            Phone
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={true}
+            type="tel"
+            value=""
+          />
+          <span>
+            
+          </span>
+        </div>
+        <div>
+          <label
+            htmlFor="address"
+          >
+            Address
+          </label>
+          <input
+            id="address"
+            name="address"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={true}
+            type="text"
+            value=""
+          />
+          <span>
+            
+          </span>
+        </div>
+        <div>
+          <label
+            htmlFor="desc"
+          >
+            Profile description
+          </label>
+          <textarea
+            id="desc"
+            name="description"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={true}
+            value=""
+          />
+          <span>
+            
+          </span>
+        </div>
+        <button
+          className="button-el disabled"
+          disabled={true}
+          type="submit"
+        >
+          Save changes
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+`;

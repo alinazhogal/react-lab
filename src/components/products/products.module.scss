@@ -1,0 +1,145 @@
+section {
+  .productsPage {
+    max-width: 1240px;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    @media screen and (max-width: 630px) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .addCardSearch {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      button {
+        margin: 38px 15px 0;
+      }
+
+      .searchDiv {
+        @media screen and (max-width: 900px) {
+          width: 340px;
+        }
+        @media screen and (max-width: 630px) {
+          margin-top: 30px;
+        }
+      }
+    }
+
+    .filtersMobile {
+      display: flex;
+      width: 100vw;
+      height: 60px;
+      background-color: $accent-color;
+      align-items: center;
+      justify-content: center;
+
+      @media screen and (min-width: 630px) {
+        display: none;
+      }
+
+      h4 {
+        margin-right: 20px;
+      }
+
+      img {
+        transition: 300ms ease-out;
+      }
+
+      .arrowUp {
+        transform: rotate(180deg);
+      }
+    }
+
+    .filtersContainer {
+      margin-top: 30px;
+
+      h5 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgb(168, 164, 164);
+      }
+
+      h3 {
+        text-transform: uppercase;
+        font-weight: normal;
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+
+      @media screen and (max-width: 630px) {
+        margin: 0;
+        display: none;
+      }
+
+      .sortContainer {
+        height: 130px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .sort {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 240px;
+
+          select {
+            width: 140px;
+            height: 40px;
+            border: 2px solid rgb(197, 194, 194);
+            background-color: transparent;
+            color: #fff;
+            padding: 0 10px 0;
+            font-size: 14px;
+
+            option {
+              background-color: $basicColor;
+              line-height: 1.3;
+            }
+
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+      }
+
+      .filter {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        input {
+          margin-right: 3px;
+        }
+      }
+    }
+
+    .filtersOpen {
+      display: block;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      max-width: 930px;
+      width: 100%;
+      min-height: 650px;
+
+      .productsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  }
+}
