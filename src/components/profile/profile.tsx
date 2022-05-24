@@ -1,10 +1,10 @@
-import Button from "@/elements/button";
-import Input from "@/elements/input";
-import { ProfileFields, validateProfile } from "@/helpers/validate";
-import { RootState } from "@/redux";
-import { getProfileInfo, saveProfileInfo } from "@/redux/actions/authActions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Button from "../../elements/button";
+import Input from "../../elements/input";
+import { ProfileFields, validateProfile } from "../../helpers/validate";
+import { RootState } from "../../redux";
+import { getProfileInfo, saveProfileInfo } from "../../redux/actions/authActions";
 import ChangePasswordForm from "../modal/forms/changePassword";
 import Modal from "../modal/modal";
 import profile from "./profile.module.scss";

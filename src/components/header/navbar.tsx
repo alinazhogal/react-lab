@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { removeItemFromStorage, SavableKeys } from "@/helpers/storage";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "@/redux/actions/authActions";
 import { RootState } from "@/redux";
-import setSignInOpen from "@/redux/actions/modalActions";
-import { ActionsType } from "@/redux/types";
+import { logOut } from "../../redux/actions/authActions";
+import { removeItemFromStorage, SavableKeys } from "../../helpers/storage";
+import setSignInOpen from "../../redux/actions/modalActions";
+import { ActionsType } from "../../redux/types";
 import pageLinks from "../../routesLinks";
 import arrow from "../../assets/images/arrow-down.svg";
 import profile from "../../assets/images/account.svg";
@@ -61,7 +61,7 @@ function NavBar() {
               Products
               <img src={arrow} alt="arrow" className={header.arrow} />
             </PrivateLink>
-            <div className={header.dropdownContent}>
+            <div className={header.dropdownContent} data-testid="display-categories">
               <PrivateLink to={`${pageLinks.products}/pc`} passiveCn={header.productLink}>
                 PC
               </PrivateLink>

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Input from "@/elements/input";
-import { AuthFields, validateAuth } from "@/helpers/validate";
 import { useDispatch } from "react-redux";
-import { register } from "@/redux/actions/authActions";
+import { useNavigate } from "react-router-dom";
+import Input from "../../../elements/input";
+import { AuthFields, validateAuth } from "../../../helpers/validate";
+import { register } from "../../../redux/actions/authActions";
 
 function SignUpForm({ onClose }: { onClose: () => void }) {
   const [formValues, setFormValues] = useState({ login: "", password: "", confirmPassword: "" });

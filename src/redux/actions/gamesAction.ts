@@ -1,5 +1,5 @@
-import api from "@/api";
-import { Game, Platforms } from "@/components/home/games/games.types";
+import api from "../../api";
+import { Game, Platforms } from "../../components/home/games/games.types";
 import { ActionsType } from "../types";
 
 export interface GameCardValues {

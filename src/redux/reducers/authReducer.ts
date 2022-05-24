@@ -1,4 +1,4 @@
-import { getItemFromStorage, SavableKeys } from "@/helpers/storage";
+import { getItemFromStorage, SavableKeys } from "../../helpers/storage";
 import {
   ActionsType,
   AuthState,

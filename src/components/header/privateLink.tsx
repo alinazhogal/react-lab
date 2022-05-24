@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLinkProps, NavLink } from "react-router-dom";
-import { RootState } from "@/redux";
-import setSignInOpen from "@/redux/actions/modalActions";
+import { RootState } from "../../redux";
+import setSignInOpen from "../../redux/actions/modalActions";
 
 function PrivateLink({
   children,
